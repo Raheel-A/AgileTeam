@@ -79,11 +79,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)SDL\include;$(IncludePath);$(SolutionDir)SDL\include</IncludePath>
-    <LibraryPath>$(SolutionDir)SDL\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)SDL\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)SDL\include;$(IncludePath);$(SolutionDir)SDL\include</IncludePath>
-    <LibraryPath>$(SolutionDir)SDL\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)SDL\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
