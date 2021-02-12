@@ -70,12 +70,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)..\SDL\include;$(IncludePath);$(SolutionDir)SDL\include</IncludePath>
-    <LibraryPath>$(SolutionDir)..\SDL\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath);$(SolutionDir)SDL\include</IncludePath>
+    <LibraryPath>$(SolutionDir)\SDL\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)..\SDL\include;$(IncludePath);$(SolutionDir)SDL\include</IncludePath>
-    <LibraryPath>$(SolutionDir)..\SDL\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath);$(SolutionDir)SDL\include</IncludePath>
+    <LibraryPath>$(SolutionDir)\SDL\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)SDL\include;$(IncludePath);$(SolutionDir)SDL\include</IncludePath>
