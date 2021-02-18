@@ -1,7 +1,9 @@
+#include "SDL.h"
+#undef main
 
-
-int main(int argc, char* argv[])
+void main(void) 
 {
+	SDL_Init(SDL_INIT_EVERYTHING);
 
-	return 0;
+	SDL_Quit();
 }

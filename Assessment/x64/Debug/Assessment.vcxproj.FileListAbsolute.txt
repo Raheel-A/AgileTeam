@@ -1,2 +1,0 @@
-C:\Users\Hugo\Desktop\ConsoleSDLProject\Assessment\x64\Debug\Assessment.exe
-C:\Users\Hugo\Desktop\ConsoleSDLProject\Assessment\x64\Debug\Assessment.pdb
