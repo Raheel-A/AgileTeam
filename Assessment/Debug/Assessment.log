@@ -1,3 +1,0 @@
-﻿  main.cpp
-E:\STORAGE\UNI\AgileTeam\Assessment\main.cpp(5,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  Assessment.vcxproj -> E:\STORAGE\UNI\AgileTeam\Assessment\Debug\Assessment.exe
