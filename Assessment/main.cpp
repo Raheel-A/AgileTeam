@@ -4,14 +4,14 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
-
+#include "Input.h"
 #undef main
 
 using namespace std;
 
 void main(void) 
 {
-	if (SDL_Init(SDL_INIT_EVERYTHING))
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		cout << "Could not initialise SDL, SDL Error:" << SDL_GetError() << endl;
 	}
@@ -28,5 +28,12 @@ void main(void)
 		cout << "Could not initialise SDL_Mixer, SDL_Mixer Error:" << Mix_GetError() << endl;
 	}
 
+	Input* i = new Input;
+	bool quit = false;
+	while (!quit)
+	{
+		i->Update();
+		quit = i->KeyIsDown(KEY_ESC) ? true : false;
+	}
 	SDL_Quit();
 }
