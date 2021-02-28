@@ -4,12 +4,13 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
+#include "Renderer.h"
 
 #undef main
 
 using namespace std;
 
-void main(void) 
+int main(void) 
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 	{
@@ -27,6 +28,11 @@ void main(void)
 	{
 		cout << "Could not initialise SDL_Mixer, SDL_Mixer Error:" << Mix_GetError() << endl;
 	}
+
+	Renderer* a = new Renderer;
+	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+
+	getchar();
 
 	SDL_Quit();
 }
