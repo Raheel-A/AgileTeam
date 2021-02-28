@@ -8,6 +8,16 @@ Renderer::~Renderer()
 	SDL_DestroyRenderer(renderer);
 }
 
+/// <summary>
+/// Create the window
+/// </summary>
+/// <param name="title"> - Use a string for the tile on the top of the window</param>
+/// <param name="xpos"> - X position of the window on screen</param>
+/// <param name="ypos"> - Y position of the window on screen</param>
+/// <param name="width"> - With of the Window</param>
+/// <param name="height"> - Height of the Window</param>
+/// <param name="fullscreen"> - Bool to indicate if it is fullscreen</param>
+/// <returns></returns>
 bool Renderer::CreateWindow(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
 #pragma region Create Window
@@ -78,6 +88,9 @@ bool Renderer::CreateWindow(const char* title, int xpos, int ypos, int width, in
 #pragma endregion Create Window
 }
 
+/// <summary>
+/// Use to show the in game frame
+/// </summary>
 void Renderer::GameDraw()
 {
 
@@ -89,6 +102,10 @@ void Renderer::GameDraw()
 	SDL_RenderClear(renderer);
 }
 
+/// <summary>
+/// Use to show the UI
+/// </summary>
 void Renderer::UIDraw()
 {
+
 }
