@@ -1,6 +1,9 @@
+///Renderer
+
 /* Change Log
 28/02/2021 Mario - Creation of the renderer class and window
 */
+
 #pragma once
 #include <iostream>
 #include <conio.h>
