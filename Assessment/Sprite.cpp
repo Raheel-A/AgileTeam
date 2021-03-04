@@ -14,3 +14,11 @@ void Sprite::setPos(Vector2 newPos)
 {
     pos = newPos;
 }
+
+/// <summary>
+/// Returns sprite for map-loader - CW
+/// </summary>
+SDL_Texture* Sprite::GetSprite()
+{
+	return sprite;
+}

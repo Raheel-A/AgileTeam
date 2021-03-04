@@ -109,3 +109,67 @@ void Renderer::UIDraw()
 {
 
 }
+
+/// <summary>
+/// Use to draw a singular tile - CW
+/// </summary>
+void Renderer::DrawTile(Sprite* sprite, int w, int h)
+{
+	positionHolder = sprite->getPos();
+
+	//perhaps h&w can be set in sprite class too?
+	destinationRect.h = h;
+	destinationRect.w = w;
+	destinationRect.x = positionHolder.x;
+	destinationRect.y = positionHolder.y;
+
+	//draw assigned texture to renderer at desired location
+	SDL_RenderCopy(renderer, sprite->GetSprite(), NULL, &destinationRect);
+
+}
+
+/// <summary>
+/// Use to draw the level based on the level vector - CW
+/// THIS WILL TAKE IN THE ARRAY FROM LEVEL LOADING
+/// </summary>
+void Renderer::DrawLevel()
+{
+	const int blockMultiplier = 32; //this will change based on size of sprites
+	 //this relates to the enum from the level loading (e.g. x = grass tile) unsure whether we set this up?
+
+	//THESE VARS ARE JUST TO FILL THE FUNCTION - THE REAL VALUES WILL COME FROM LEVEL LOADING
+	//Represents the maximum amount of rows and columns to cycle through
+	int rowMin = 0; 
+	int rowMax = 10;
+	int columnMin = 0;
+	int columnMax = 10;
+	
+	//vector to go through each tile
+	for (int row = rowMin; row < rowMax; row++)
+	{
+		for (int column = columnMin; column < columnMax; column++)
+		{
+			//Commented in until we get the level loading stuff
+			//tileToDraw = levelVector[row][column];
+
+			switch (tileToDraw)
+			{
+			case 'x':
+			{
+				//This draws a texture from a preloaded list and uses the enum from earlier to find the correct texture, it then draws it at the 
+				// position (row*32), (column *32) and applies width and height
+
+				//Set pos of sprite (based on enum, 0 is placeholder)
+				spriteList[0]->setPos.x = (column * blockMultiplier);
+				spriteList[0]->setPos.y = (row * blockMultiplier);
+
+				//Draw tile, 0 is placeholder it will represent an enum for the desired tile
+				DrawTile(spriteList[0], blockMultiplier, blockMultiplier);
+			}
+			break;
+			default:
+				break;
+			}
+		}
+	}
+}
