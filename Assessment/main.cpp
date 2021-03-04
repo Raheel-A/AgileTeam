@@ -4,6 +4,8 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
+
+#include "Source/Player.h"
 #include "Input.h"
 #undef main
 
@@ -26,6 +28,18 @@ void main(void)
 	if (Mix_Init(MIX_INIT_MP3) != MIX_INIT_MP3)
 	{
 		cout << "Could not initialise SDL_Mixer, SDL_Mixer Error:" << Mix_GetError() << endl;
+	}
+
+	Player* p1 = new Player(0, 0, 10, 10);
+	Player* p2 = new Player(5, 5, 10, 10);
+
+	if (p1->CheckCollision(p1, p2))
+	{
+		cout << "Collision occured" << endl;
+	}
+	else
+	{
+		cout << "No collision" << endl;
 	}
 
 	Input* i = new Input;
