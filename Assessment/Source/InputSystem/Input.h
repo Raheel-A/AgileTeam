@@ -1,5 +1,5 @@
 #pragma once
-#include "SDL/include/SDL.h"
+#include "../../SDL/include/SDL.h"
 
 enum KEY_LIST {
 	KEY_ESC,
