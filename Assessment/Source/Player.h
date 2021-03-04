@@ -14,11 +14,12 @@ public:
 	void Init();
 	void Update(float delta);
 	void Draw();
+	void Move(int direct);
 
 	void OnCollision(Entity* collider);
 
 	int GetLives();
-
+	
 private:
 	int lives = 10;
 };

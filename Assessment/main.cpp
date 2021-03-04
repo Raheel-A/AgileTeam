@@ -6,7 +6,7 @@
 #include "SDL_mixer.h"
 
 #include "Source/Player.h"
-#include "Input.h"
+#include "Source/InputSystem/Input.h"
 
 #undef main
 
@@ -51,6 +51,28 @@ void main(void)
 	{
 		i->Update();
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
+
+		//Check input and move accordingly 
+		if (i->KeyIsDown(KEY_UP))
+		{
+			p1->Move(1);
+		}
+
+		if (i->KeyIsDown(KEY_LEFT))
+		{
+			p1->Move(2);
+		}
+
+		if (i->KeyIsDown(KEY_DOWN))
+		{
+			p1->Move(3);
+		}
+
+		if (i->KeyIsDown(KEY_RIGHT))
+		{
+			p1->Move(4);
+		}
+
 	}
 	SDL_Quit();
 }
