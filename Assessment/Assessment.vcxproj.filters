@@ -32,5 +32,13 @@
     <ClInclude Include="Source\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
