@@ -7,6 +7,7 @@
 
 #include "Source/Player.h"
 #include "Input.h"
+
 #undef main
 
 using namespace std;
@@ -30,6 +31,7 @@ void main(void)
 		cout << "Could not initialise SDL_Mixer, SDL_Mixer Error:" << Mix_GetError() << endl;
 	}
 
+	// Collision test
 	Player* p1 = new Player(0, 0, 10, 10);
 	Player* p2 = new Player(5, 5, 10, 10);
 
@@ -42,6 +44,7 @@ void main(void)
 		cout << "No collision" << endl;
 	}
 
+	// Input test
 	Input* i = new Input;
 	bool quit = false;
 	while (!quit)
