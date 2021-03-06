@@ -31,7 +31,11 @@ public:
 	//CW
 	void DrawTile(Sprite* sprite, int w, int h);
 	void DrawLevel();
-
+	//AP
+	void setViewPortX(int viewportx);
+	void setViewPortY(int viewporty);
+	int viewportX = 0;
+	int viewportY = 0;
 protected:
 
 	SDL_Window* window;

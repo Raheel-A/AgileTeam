@@ -173,3 +173,22 @@ void Renderer::DrawLevel()
 		}
 	}
 }
+
+void Renderer::setViewPortX(int viewportx)
+{
+	// with these you would then do setViewPortX(m_pot_x_pos - m_x_pos); when you move the character,in input perhaps, update the potential position //
+
+	if (viewportX + viewportx < 0)
+	{
+		viewportX = 0;
+	}
+	else
+	{
+		viewportX += viewportx;
+	}
+}
+
+void Renderer::setViewPortY(int viewporty)
+{
+	viewportY += viewporty;
+}
