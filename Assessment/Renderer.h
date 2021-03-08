@@ -32,6 +32,8 @@ public:
 	void DrawTile(Sprite* sprite, int w, int h);
 	void DrawLevel();
 
+
+
 protected:
 
 	SDL_Window* window;

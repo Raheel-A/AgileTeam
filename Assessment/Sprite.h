@@ -4,6 +4,8 @@
 */
 #pragma once
 #include "SDL.h"
+#include <map>
+#include "Animation.h"
 
 struct Vector2 { int x, y; };
 
@@ -16,8 +18,22 @@ public:
 
 	//CW
 	SDL_Texture* GetSprite();
+
+	//Animation
+	Sprite(SDL_Texture* text, bool isAnimated);
+	void PlayAnimation(const char* AnimName);
+	void SpriteUpdate();
+	bool animated = false;
+	SDL_Rect SourceRect, DestRect;
+	int frames = 0; //how many frames in the animation
+	int speed = 100; //delay between frames in milliseconds
+	int AnimIndex = 0;//if we dont animate our sprite then the initial y position of the sprite needs to be at 0
+	std::map < const char*, Animation> anims; //will be holding the animations
+	
+
 private:
-	Vector2 pos = { 0,0 };
+	Vector2 pos = { 0,0};
 	SDL_Texture* sprite;
+
 };
 
