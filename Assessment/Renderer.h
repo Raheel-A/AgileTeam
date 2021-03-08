@@ -20,6 +20,7 @@ class Renderer
 {
 public:
 
+
 	~Renderer();
 
 	static SDL_Renderer* renderer;
@@ -40,6 +41,7 @@ protected:
 
 	SDL_Window* window;
 	//CW
+	SDL_Rect viewport{0, 0, 1080, 1920};
 	SDL_Rect destinationRect{ NULL };
 	char tileToDraw = ' ';
 	vector <Sprite*> spriteList;

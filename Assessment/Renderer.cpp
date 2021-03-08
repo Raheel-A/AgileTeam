@@ -93,10 +93,11 @@ bool Renderer::CreateWindow(const char* title, int xpos, int ypos, int width, in
 /// </summary>
 void Renderer::GameDraw()
 {
-
-
 	//Draw on screen
 	SDL_RenderPresent(renderer);
+
+
+
 
 	//Clean window
 	SDL_RenderClear(renderer);
@@ -160,8 +161,10 @@ void Renderer::DrawLevel()
 				// position (row*32), (column *32) and applies width and height
 
 				//Set pos of sprite (based on enum, 0 is placeholder)
-				spriteList[0]->setPos.x = (column * blockMultiplier);
-				spriteList[0]->setPos.y = (row * blockMultiplier);
+				/*spriteList[0]->setPos.x = (column * blockMultiplier);
+				spriteList[0]->setPos.y = (row * blockMultiplier);*/
+				Vector2 pos = { column * blockMultiplier, row * blockMultiplier };
+				spriteList[0]->setPos(Vector2(pos));
 
 				//Draw tile, 0 is placeholder it will represent an enum for the desired tile
 				DrawTile(spriteList[0], blockMultiplier, blockMultiplier);
@@ -186,9 +189,15 @@ void Renderer::setViewPortX(int viewportx)
 	{
 		viewportX += viewportx;
 	}
+
+	viewport.x = viewportX;
+	SDL_RenderSetViewport(renderer, &viewport);
 }
 
 void Renderer::setViewPortY(int viewporty)
 {
 	viewportY += viewporty;
+
+	viewport.y = viewportY;
+	SDL_RenderSetViewport(renderer, &viewport);
 }

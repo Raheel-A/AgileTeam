@@ -146,11 +146,14 @@
   <ItemGroup>
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="rect.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
