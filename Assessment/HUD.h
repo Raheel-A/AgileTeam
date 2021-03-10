@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include <vector>
+#include "Text.h"
 
 using namespace std;
 
