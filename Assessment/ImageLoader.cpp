@@ -1,5 +1,9 @@
 #include "ImageLoader.h"
 
+/// <summary>
+/// constructor takes in the renderer 
+/// </summary>
+/// <param name="rend"></param>
 ImageLoader::ImageLoader(SDL_Renderer* rend)
 {
 	renderer = rend;
@@ -9,14 +13,18 @@ ImageLoader::~ImageLoader()
 {
 }
 
+/// <summary>
+/// load a image and creat a texture based on file path 
+/// </summary>
+/// <param name="path">file path to the image</param>
 void ImageLoader::LoadeImage(std::string path)
 {
 	surface = SDL_LoadBMP(path.c_str());
 
 	if (!image)
 	{
-	printf("faild to creat surface for file", path.c_str());
-	printf(SDL_GetError());
+		printf("faild to creat surface for file", path.c_str());
+		printf(SDL_GetError());
 	}
 	else
 	{
@@ -36,6 +44,10 @@ void ImageLoader::LoadeImage(std::string path)
 	}
 }
 
+/// <summary>
+/// returns the texutre
+/// </summary>
+/// <returns>teh texture that was created</returns>
 SDL_Texture* ImageLoader::GetImage()
 {
 	return image;
