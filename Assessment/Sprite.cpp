@@ -1,11 +1,16 @@
 #include "Sprite.h"
 #include "ImageLoader.h"
 
+// changed
+// san 10/03/21
 
 Sprite::Sprite(SDL_Texture* text)
 {
 	sprite = text;
 }
+
+
+//Animation
 Sprite::Sprite(SDL_Texture* text, bool isAnimated)
 {
 	animated = isAnimated;
@@ -23,6 +28,9 @@ Sprite::Sprite(SDL_Texture* text, bool isAnimated)
 	//PlayAnimation("Idle");// example
     sprite = text;
 }
+//Animation
+
+
 
 Vector2 Sprite::getPos()
 {
@@ -42,14 +50,16 @@ SDL_Texture* Sprite::GetSprite()
 	return sprite;
 }
 
-Sprite::PlayAnimation(const char* AnimName)
+
+
+//Animation
+void Sprite::PlayAnimation(const char* AnimName)
 {
 	//Finds animation put in and returns appropraite information
 	frames = anims[AnimName].Frames;
 	AnimIndex = anims[AnimName].Index;
 	speed = anims[AnimName].Speed;
 }
-
 void Sprite::SpriteUpdate()
 {
 	if (animated)
@@ -58,11 +68,18 @@ void Sprite::SpriteUpdate()
 	}
 
 	//follows the players position and scale
-	Srcrect.y = AnimIndex * SourceRect.h; //when not animated , animation index is zero
+	SourceRect.y = AnimIndex * SourceRect.h; //when not animated , animation index is zero
 	DestRect.x = 1; //PLAYERS POSITION x
 	DestRect.y = 1; //Players Position y
-	DestRect.w = 1//width * Scale; //
-	DestRect.h =1//heigh * Scale; //
+	DestRect.w = 1;//width * Scale; //
+	DestRect.h = 1;//heigh * Scale; //
 
 }
+
+void Sprite::Draw(SDL_Texture* text)
+{
+	SDL_Renderer* render;// need actual renderer
+	SDL_RenderCopyEx(/*RENDERER*/render, sprite, &SourceRect, &DestRect, NULL, NULL, SDL_FLIP_NONE); //can flip animation depending on direction
+}
+//Animation
 
