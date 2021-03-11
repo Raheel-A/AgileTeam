@@ -1,4 +1,5 @@
 #include "ImageLoader.h"
+#include <string>
 
 /// <summary>
 /// constructor takes in the renderer 
@@ -23,7 +24,8 @@ void ImageLoader::LoadeImage(std::string path)
 
 	if (!image)
 	{
-		printf("faild to creat surface for file", path.c_str());
+		std::string spath = "faild to creat surface for file" + path;
+		printf(spath.c_str());
 		printf(SDL_GetError());
 	}
 	else
@@ -38,7 +40,9 @@ void ImageLoader::LoadeImage(std::string path)
 		//a cheak to see if it was correctly built
 		if (!image)
 		{
-	   		printf("you faild again but this time the texture wasent created", path.c_str());
+			std::string spath = "you faild the texture wasent created" + path;
+	   		printf(spath.c_str());
+
 	   		printf(SDL_GetError());
 		}
 	}
