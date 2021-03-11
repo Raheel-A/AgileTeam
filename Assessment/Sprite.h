@@ -26,7 +26,8 @@ public:
 	Sprite(SDL_Texture* text, bool isAnimated);
 	void PlayAnimation(const char* AnimName);
 	void SpriteUpdate();
-	void Draw(SDL_Texture* text);
+	void Draw();
+	SDL_RendererFlip FlipMode = SDL_FLIP_NONE;
 	bool animated = false;
 	SDL_Rect SourceRect, DestRect;
 	int frames = 0; //how many frames in the animation

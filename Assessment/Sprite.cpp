@@ -76,10 +76,10 @@ void Sprite::SpriteUpdate()
 
 }
 
-void Sprite::Draw(SDL_Texture* text)
+void Sprite::Draw()
 {
 	SDL_Renderer* render;// need actual renderer
-	SDL_RenderCopyEx(/*RENDERER*/render, sprite, &SourceRect, &DestRect, NULL, NULL, SDL_FLIP_NONE); //can flip animation depending on direction
+	SDL_RenderCopyEx(/*RENDERER*/render, sprite, &SourceRect, &DestRect, NULL, NULL, FlipMode); //can flip animation depending on direction
 }
 //Animation
 
