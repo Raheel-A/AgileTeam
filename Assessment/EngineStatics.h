@@ -4,17 +4,20 @@
 class EngineStatics
 {
 private:
-	static float DeltaTime;
-	static float CurrentFPS;
-	static double ElapsedTime;
+	static float deltaTime;
+	static float currentFPS;
+	static double elapsedTime;
 
+	//Time Stuff
+	std::chrono::time_point<std::chrono::high_resolution_clock> thisFrameTime;
+	std::chrono::time_point<std::chrono::high_resolution_clock> lastFrameTime;
 
 
 public:
 	/// <summary>
-	/// This Gets DeltaTime, the time since last frame.
+	/// This Gets DeltaTime, the time since last frame in Milliseconds
 	/// </summary>
-	/// <returns>Deltatime as a float</returns>
+	/// <returns>Deltatime(ms) as a float</returns>
 	static float GetDeltaTime();
 
 	/// <summary>
@@ -32,6 +35,6 @@ public:
 	/// <summary>
 	/// Updates All Statics, shouldn't be used outside of the main loop
 	/// </summary>
-	static void UpdateStatics();
+	void UpdateStatics();
 };
 
