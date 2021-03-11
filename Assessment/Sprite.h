@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include <map>
 #include "Animation.h"
+#include "Renderer.h"
 
 // changed
 // san 10/03/21

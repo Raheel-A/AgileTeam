@@ -150,6 +150,7 @@
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="ImageLoader.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Sprite.h" />
