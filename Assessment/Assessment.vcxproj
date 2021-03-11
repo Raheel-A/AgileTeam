@@ -146,11 +146,14 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="Source\InputSystem\Input.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\InputSystem\Input.h" />
+    <ClInclude Include="Source\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

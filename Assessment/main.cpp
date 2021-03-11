@@ -5,13 +5,16 @@
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
 
+#include "Source/Player.h"
+#include "Input.h"
+
 #undef main
 
 using namespace std;
 
 void main(void) 
 {
-	if (SDL_Init(SDL_INIT_EVERYTHING))
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		cout << "Could not initialise SDL, SDL Error:" << SDL_GetError() << endl;
 	}
@@ -28,5 +31,26 @@ void main(void)
 		cout << "Could not initialise SDL_Mixer, SDL_Mixer Error:" << Mix_GetError() << endl;
 	}
 
+	// Collision test
+	Player* p1 = new Player(0, 0, 10, 10);
+	Player* p2 = new Player(5, 5, 10, 10);
+
+	if (p1->CheckCollision(p1, p2))
+	{
+		cout << "Collision occured" << endl;
+	}
+	else
+	{
+		cout << "No collision" << endl;
+	}
+
+	// Input test
+	Input* i = new Input;
+	bool quit = false;
+	while (!quit)
+	{
+		i->Update();
+		quit = i->KeyIsDown(KEY_ESC) ? true : false;
+	}
 	SDL_Quit();
 }
