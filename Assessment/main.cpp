@@ -4,6 +4,7 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
+#include "Renderer.h"
 
 #include "EngineStatics.h"
 
@@ -11,7 +12,7 @@
 
 using namespace std;
 
-void main(void) 
+int main(void) 
 {
 	bool running = true;
 
@@ -40,6 +41,11 @@ void main(void)
 	{
 		cout << "Update" << endl;
 	}
+
+	Renderer* a = new Renderer;
+	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+
+	getchar();
 
 	SDL_Quit();
 }
