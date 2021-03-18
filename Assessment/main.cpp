@@ -7,6 +7,8 @@
 #include "Renderer.h"
 
 #include "EngineStatics.h"
+#include "Source/Player.h"
+#include "Source/InputSystem/Input.h"
 
 #undef main
 
@@ -42,6 +44,36 @@ int main(void)
 		cout << "Update" << endl;
 	}
 
+	// Input test
+	Input* i = new Input;
+	bool quit = false;
+	while (!quit)
+	{
+		i->Update();
+		quit = i->KeyIsDown(KEY_ESC) ? true : false;
+
+		//Check input and move accordingly 
+		if (i->KeyIsDown(KEY_UP))
+		{
+			p1->Move(1);
+		}
+
+		if (i->KeyIsDown(KEY_LEFT))
+		{
+			p1->Move(2);
+		}
+
+		if (i->KeyIsDown(KEY_DOWN))
+		{
+			p1->Move(3);
+		}
+
+		if (i->KeyIsDown(KEY_RIGHT))
+		{
+			p1->Move(4);
+		}
+
+	}
 	Renderer* a = new Renderer;
 	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 

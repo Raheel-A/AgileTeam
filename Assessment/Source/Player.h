@@ -26,6 +26,7 @@ public:
 	void Init();
 	void Update(float delta);
 	void Draw();
+	void Move(int direct);
 
 	void OnCollision(Entity* collider);
 
@@ -34,6 +35,7 @@ public:
 	void PlayerAttack();
 
 	void PlayerDeath();
+	
 private:
 	int lives = 10;
 };
