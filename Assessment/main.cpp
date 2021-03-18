@@ -57,7 +57,7 @@ int main(void)
 	// Input test
 	Input* i = new Input;
 	bool quit = false;
-	while (!quit)
+	while (!quit && running)
 	{
 		i->Update();
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
