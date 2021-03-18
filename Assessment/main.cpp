@@ -39,11 +39,21 @@ int main(void)
 		running = false;
 	}
 
-	while (running)
+	// Collision test
+	Player* p1 = new Player(0, 0, 10, 10);
+	Player* p2 = new Player(5, 5, 10, 10);
+
+	if (p1->CheckCollision(p1, p2))
 	{
-		cout << "Update" << endl;
+		cout << "Collision occured" << endl;
+	}
+	else
+	{
+		cout << "No collision" << endl;
 	}
 
+	Renderer* a = new Renderer;
+	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 	// Input test
 	Input* i = new Input;
 	bool quit = false;
@@ -74,10 +84,9 @@ int main(void)
 		}
 
 	}
-	Renderer* a = new Renderer;
-	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+
+
 
 	getchar();
-
 	SDL_Quit();
 }

@@ -1,6 +1,12 @@
 #include "Renderer.h"
+#include "Sprite.h"
 
 SDL_Renderer* Renderer::renderer = nullptr;
+
+Renderer::Renderer()
+{
+
+}
 
 Renderer::~Renderer()
 {

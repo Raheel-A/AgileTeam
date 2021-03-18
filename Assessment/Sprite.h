@@ -7,11 +7,12 @@
 #include <map>
 #include "Animation.h"
 #include "Renderer.h"
+#include "Vector2.h"
 
 // changed
 // san 10/03/21
 
-struct Vector2 { int x, y; };
+//struct Vector2 { int x, y; };
 
 class Sprite
 {

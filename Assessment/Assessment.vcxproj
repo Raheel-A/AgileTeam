@@ -152,12 +152,13 @@
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\InputSystem\Input.cpp" />
     <ClCompile Include="Source\Player.cpp" />
-    <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Enemy.h" />
@@ -171,7 +172,6 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="ImageLoader.h" />
-    <ClInclude Include="rect.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>

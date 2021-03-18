@@ -9,18 +9,19 @@
 #include <iostream>
 #include <conio.h>
 #include <stdio.h>
-
 #include "SDL.h"
 #include <vector>
-#include "Sprite.h"
+#include "Vector2.h"
+
 
 using namespace std;
+class Sprite;
 
 class Renderer
 {
 public:
 
-
+	Renderer();
 	~Renderer();
 
 	static SDL_Renderer* renderer;
