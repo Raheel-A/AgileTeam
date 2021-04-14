@@ -93,7 +93,18 @@ void Player::GainHealth(int healthAmount)
 void Player::PlayerAttack()
 {
 	//Attack method
-	//If enemy in range statement - GetEnemies?  If so 'for' loop enemies
+	//If enemy in range statement - How do we Get Enemies?  Once this is decided then, 'for' loop enemies into an array
+	//Also do we damage all enemies in range?  Or a single target?  How do we decide what target that is?
+	//Furthermore do we have an attack speed?
+
+	//Temp holder
+	Enemy enemy;
+	
+	//Check if enemy is in range
+	if (CheckCollision(&enemy, attackRangeCollisionBox)) {
+		enemy.LoseHealth(m_attackPoints);
+	}
+
 
 }
 
