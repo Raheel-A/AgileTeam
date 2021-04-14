@@ -12,6 +12,13 @@ Player::Player(float x, float y, float width, float height) : Entity(x, y, width
 	y = y;
 	speed = 2.0f;
 
+	//Setup attack range box (JW)
+	attackRangeCollisionBox.x = x - attackRange;
+	attackRangeCollisionBox.y = y - attackRange;
+	attackRangeCollisionBox.w = width + (attackRange + attackRange);
+	attackRangeCollisionBox.h = height + (attackRange + attackRange);
+
+
 }
 
 Player::~Player()
@@ -49,6 +56,7 @@ void Player::Move(int direct)
 	{
 		x += speed;
 	}
+	UpdateAttackRangeCollider(); //(JW)
 }
 
 void Player::OnCollision(Entity* collider)
@@ -84,13 +92,21 @@ void Player::GainHealth(int healthAmount)
 
 void Player::PlayerAttack()
 {
-	//attack method
+	//Attack method
+
 }
 
 void Player::PlayerDeath()
 {
 	//death method
 	hasDied = true;
+}
+
+void Player::UpdateAttackRangeCollider()
+{
+	//Update the attack range collider (JW)
+	attackRangeCollisionBox.x = x - attackRange;
+	attackRangeCollisionBox.y = y - attackRange;
 }
 
 int Player::GetLives()

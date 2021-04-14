@@ -38,4 +38,10 @@ public:
 	
 private:
 	int lives = 10;
+
+	int attackRange;
+	SDL_Rect attackRangeCollisionBox;
+
+	void UpdateAttackRangeCollider();
+
 };
