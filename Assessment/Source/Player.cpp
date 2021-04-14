@@ -93,6 +93,7 @@ void Player::GainHealth(int healthAmount)
 void Player::PlayerAttack()
 {
 	//Attack method
+	//If enemy in range statement - GetEnemies?  If so 'for' loop enemies
 
 }
 
