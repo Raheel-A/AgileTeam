@@ -144,6 +144,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIBase.cpp" />
+    <ClCompile Include="AIMelee.cpp" />
     <ClCompile Include="EngineStatics.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="LevelNode.cpp" />
@@ -160,6 +162,8 @@
     <ClCompile Include="Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIBase.h" />
+    <ClInclude Include="AIMelee.h" />
     <ClInclude Include="LevelNode.h" />
     <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="SoundManager.h" />
