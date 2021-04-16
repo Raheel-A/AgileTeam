@@ -22,7 +22,7 @@ void ImageLoader::LoadeImage(std::string path)
 {
 	surface = SDL_LoadBMP(path.c_str());
 
-	if (!image)
+	if (!surface)
 	{
 		std::string spath = "faild to creat surface for file" + path;
 		printf(spath.c_str());
