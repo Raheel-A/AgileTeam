@@ -7,6 +7,8 @@ using namespace std;
 enum SFXList
 {
 	Shoot,
+	Footsteps,
+
 };
 
 class SoundManager

@@ -16,7 +16,6 @@ SoundManager::~SoundManager()
 	bgmMusic = NULL;
 
 	Mix_FreeChunk(sfxShoot);
-
 	sfxShoot = NULL;
 
 	Mix_Quit();
@@ -39,7 +38,7 @@ void SoundManager::LoadMusic(string path)
 	bgmMusic = Mix_LoadMUS(BGMpath);
 	if (bgmMusic == NULL)
 	{
-		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
+		printf("Failed to load music! SDL_mixer Error: %s\n", Mix_GetError());
 	}
 }
 
