@@ -99,14 +99,11 @@ bool Renderer::CreateWindow(const char* title, int xpos, int ypos, int width, in
 /// </summary>
 void Renderer::GameDraw()
 {
-	//Clean window
-	SDL_RenderClear(renderer);
-
-
-
-
 	//Draw on screen
 	SDL_RenderPresent(renderer);
+
+	//Clean window
+	SDL_RenderClear(renderer);
 }
 
 /// <summary>
