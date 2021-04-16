@@ -12,6 +12,9 @@
 #include "EngineStatics.h"
 #include "Source/Player.h"
 #include "Source/InputSystem/Input.h"
+#include "HUD.h"
+#include "SoundManager.h"
+#include "Menus.h"
 
 #undef main
 
@@ -39,7 +42,7 @@ void PathfinderTest()
 
 int main(void) 
 {
-	PathfinderTest();
+	//PathfinderTest();
 
 	bool running = true;
 
@@ -64,24 +67,22 @@ int main(void)
 		running = false;
 	}
 
-	// Collision test
-	Player* p1 = new Player(0, 0, 10, 10);
-	Player* p2 = new Player(5, 5, 10, 10);
+	Renderer* renderer = new Renderer;
+	renderer->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 
-	if (p1->CheckCollision(p1, p2))
-	{
-		cout << "Collision occured" << endl;
-	}
-	else
-	{
-		cout << "No collision" << endl;
-	}
-
-	Renderer* a = new Renderer;
-	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 	// Input test
 	Input* i = new Input;
+
+	Menus* UI = new Menus(renderer);
+
+	SoundManager* sManager = new SoundManager();
+	sManager->LoadMusic("Assets/music.wav");
+	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
+	sManager->PlayBGM(-1);
+
 	bool quit = false;
+
+
 	while (!quit && running)
 	{
 		i->Update();
@@ -90,27 +91,27 @@ int main(void)
 		//Check input and move accordingly 
 		if (i->KeyIsDown(KEY_UP))
 		{
-			p1->Move(1);
+			sManager->PlaySFX(SFXList::Shoot);
 		}
 
 		if (i->KeyIsDown(KEY_LEFT))
 		{
-			p1->Move(2);
+			UI->ChangeMenu(MenuState::InGame);
 		}
 
 		if (i->KeyIsDown(KEY_DOWN))
 		{
-			p1->Move(3);
+			UI->ChangeMenu(MenuState::Paused);
 		}
 
 		if (i->KeyIsDown(KEY_RIGHT))
 		{
-			p1->Move(4);
+			UI->ChangeMenu(MenuState::Start);
 		}
 
+		UI->DisplayMenu();
+		renderer->GameDraw();
 	}
-
-
 
 	getchar();
 	SDL_Quit();

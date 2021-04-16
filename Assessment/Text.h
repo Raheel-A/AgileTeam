@@ -1,11 +1,12 @@
 #pragma once
 #include <SDL_ttf.h>
 #include <string>
+#include "Renderer.h"
 
 class Text
 {
 public:
-	Text(const char* fontFile, SDL_Color col, int size, std::string text, int x, int y);
+	Text(SDL_Renderer* r, int size, std::string text, int x, int y);
 	~Text();
 
 	void UpdateText(std::string actualText);
@@ -13,15 +14,18 @@ public:
 
 	//Text Attributes
 	TTF_Font* font = nullptr;
-	SDL_Color fontColour = { 0, 255, 0, 255 }; //r g b a -- green
 	int fontSize = 0;
 	std::string fonttext = "";
 
 	//Rendering
-	//Renderer* renderer = nullptr;
 	SDL_Rect textRect;
 	SDL_Texture* fontTexture = nullptr;
 
 	void CreateTextTexture();
+	SDL_Texture* GetTexture() { return fontTexture; }
+private:
+	const char* fontPath = "Assets/font.TTF";
 
+	SDL_Color black = {0, 0, 0, 255};
+	SDL_Renderer* rend;
 };

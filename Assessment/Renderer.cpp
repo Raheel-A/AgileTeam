@@ -102,9 +102,6 @@ void Renderer::GameDraw()
 	//Draw on screen
 	SDL_RenderPresent(renderer);
 
-
-
-
 	//Clean window
 	SDL_RenderClear(renderer);
 }
@@ -112,9 +109,9 @@ void Renderer::GameDraw()
 /// <summary>
 /// Use to show the UI
 /// </summary>
-void Renderer::UIDraw()
+void Renderer::UIDraw(SDL_Rect dest, SDL_Texture* text)
 {
-
+	SDL_RenderCopy(renderer, text, NULL, &dest);
 }
 
 /// <summary>

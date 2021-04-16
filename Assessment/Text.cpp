@@ -2,11 +2,12 @@
 
 
 
-Text::Text(const char* fontFile, SDL_Color col, int size, std::string text, int x, int y)
+Text::Text(SDL_Renderer* r, int size, std::string text, int x, int y)
 {
-	font = TTF_OpenFont(fontFile, size);
+	rend = r;
 
-	fontColour = col;
+	font = TTF_OpenFont(fontPath, size);
+
 	fontSize = size;
 	fonttext = text;
 	textRect.x = x;
@@ -34,22 +35,20 @@ void Text::UpdateText(std::string actualText)
 void Text::UpdateText(std::string actualText, SDL_Color col)
 {
 	fonttext = actualText;
-	fontColour = col;
 
 	CreateTextTexture();
 }
 
 void Text::CreateTextTexture()
 {
-	SDL_Surface* surface = TTF_RenderText_Solid(font, fonttext.c_str(), fontColour);
+	SDL_Surface* surface = TTF_RenderText_Solid(font, fonttext.c_str(), black);
 
 	if (surface == NULL)
 	{
 		printf("Text Render Error: %s\n", TTF_GetError());
 	}
 
-	//----------------------NEED THE RENDERER FOR THIS LINE------------------------
-	fontTexture = SDL_CreateTextureFromSurface(Renderer::renderer, surface);
+	fontTexture = SDL_CreateTextureFromSurface(rend, surface);
 
 	if (fontTexture == NULL)
 	{
