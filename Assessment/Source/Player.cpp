@@ -93,7 +93,7 @@ void Player::PlayerAttack()
 	//Also do we damage all enemies in range?  Or a single target?  How do we decide what target that is?
 	//Furthermore do we have an attack speed?
 
-	//Temp holder
+	//Temp holder until decision made over how we store enemy list
 	Enemy enemy;
 	
 	//Check if enemy is in range
