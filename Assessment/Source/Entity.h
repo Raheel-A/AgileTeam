@@ -24,6 +24,11 @@ protected:
 
 	SDL_Rect collisionBox;
 
+	//stats
+	unsigned int healthPoints{ 100 };
+	unsigned int attackPoints{ 100 };
+	float movementSpeed{ 3.5f };
+
 	float speed;
 
 	bool collidable = true;

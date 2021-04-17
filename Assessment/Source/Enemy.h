@@ -9,12 +9,7 @@ class Enemy : public Entity
 {
 public:
 	//data
-	string m_enemyType;
-
-	//stats
-	unsigned int m_healthPoints{ 100 };
-	unsigned int m_attackPoints{ 100 };
-	float m_movementSpeed{ 3.5f };
+	string enemyType;
 
 	//methods
 	Enemy();

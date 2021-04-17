@@ -12,11 +12,6 @@ public:
 	Player(float x, float y, float width, float height);
 	~Player();
 
-	//stats
-	unsigned int m_healthPoints{ 100 };
-	unsigned int m_attackPoints{ 50 };
-	float m_movementSpeed{ 3.5f };
-
 	//checks
 	bool hasDied;
 
@@ -31,18 +26,13 @@ public:
 
 	void OnCollision(Entity* collider);
 
-	int GetLives();
-
 	void PlayerAttack();
 
 	void PlayerDeath();
 	
 private:
-	int lives = 10;
-
 	int attackRange;
 	SDL_Rect attackRangeCollisionBox;
 
 	void UpdateAttackRangeCollider();
-
 };
