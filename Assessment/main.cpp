@@ -84,7 +84,7 @@ int main(void)
 	bool quit = false;
 	while (!quit && running)
 	{
-		i->Update();
+		i->UpdateInstance();
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
 		//Check input and move accordingly 

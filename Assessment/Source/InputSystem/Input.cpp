@@ -13,7 +13,7 @@ Input::~Input()
 {
 }
 
-void Input::Update()
+void Input::UpdateInstance()
 {
     while (SDL_PollEvent(&inputEvent) != NULL)
     {
@@ -24,25 +24,25 @@ void Input::Update()
             switch (pressed)
             {
             case SDLK_ESCAPE:
-                keysPressed[KEY_ESC] = true;
+                keysPressed[KEY_LIST::KEY_ESC] = true;
                 break;
             case SDLK_w: case SDLK_UP:
-                keysPressed[KEY_UP] = true;
+                keysPressed[KEY_LIST::KEY_UP] = true;
                 break;
             case SDLK_a: case SDLK_LEFT:
-                keysPressed[KEY_LEFT] = true;
+                keysPressed[KEY_LIST::KEY_LEFT] = true;
                 break;
             case SDLK_s: case SDLK_DOWN:
-                keysPressed[KEY_DOWN] = true;
+                keysPressed[KEY_LIST::KEY_DOWN] = true;
                 break;
             case SDLK_d: case SDLK_RIGHT:
-                keysPressed[KEY_RIGHT] = true;
+                keysPressed[KEY_LIST::KEY_RIGHT] = true;
                 break;
             case SDLK_SPACE:
-                keysPressed[KEY_SPACE] = true;
+                keysPressed[KEY_LIST::KEY_SPACE] = true;
                 break;
             case SDLK_LSHIFT:
-                keysPressed[KEY_LSHIFT] = true;
+                keysPressed[KEY_LIST::KEY_LSHIFT] = true;
                 break;
             default:
                 break;
@@ -60,25 +60,102 @@ void Input::Update()
             switch (pressed)
             {
             case SDLK_ESCAPE:
-                keysPressed[KEY_ESC] = false;
+                keysPressed[KEY_LIST::KEY_ESC] = false;
                 break;
             case SDLK_w: case SDLK_UP:
-                keysPressed[KEY_UP] = false;
+                keysPressed[KEY_LIST::KEY_UP] = false;
                 break;
             case SDLK_a: case SDLK_LEFT:
-                keysPressed[KEY_LEFT] = false;
+                keysPressed[KEY_LIST::KEY_LEFT] = false;
                 break;
             case SDLK_s: case SDLK_DOWN:
-                keysPressed[KEY_DOWN] = false;
+                keysPressed[KEY_LIST::KEY_DOWN] = false;
                 break;
             case SDLK_d: case SDLK_RIGHT:
-                keysPressed[KEY_RIGHT] = false;
+                keysPressed[KEY_LIST::KEY_RIGHT] = false;
                 break;
             case SDLK_SPACE:
-                keysPressed[KEY_SPACE] = false;
+                keysPressed[KEY_LIST::KEY_SPACE] = false;
                 break;
             case SDLK_LSHIFT:
-                keysPressed[KEY_LSHIFT] = false;
+                keysPressed[KEY_LIST::KEY_LSHIFT] = false;
+                break;
+            default:
+                break;
+            }
+#ifdef DEBUG
+            std::cout << ("Key Pressed: %s", (char)pressed);
+#endif // _DEBUG
+        }
+    }
+}
+
+void Input::Update()
+{
+    while (SDL_PollEvent(&inputEvent) != NULL)
+    {
+        if (inputEvent.type == SDL_KEYDOWN)
+        {
+            SDL_Keycode pressed = inputEvent.key.keysym.sym;
+
+            switch (pressed)
+            {
+            case SDLK_ESCAPE:
+                keysPressed[KEY_LIST::KEY_ESC] = true;
+                break;
+            case SDLK_w: case SDLK_UP:
+                keysPressed[KEY_LIST::KEY_UP] = true;
+                break;
+            case SDLK_a: case SDLK_LEFT:
+                keysPressed[KEY_LIST::KEY_LEFT] = true;
+                break;
+            case SDLK_s: case SDLK_DOWN:
+                keysPressed[KEY_LIST::KEY_DOWN] = true;
+                break;
+            case SDLK_d: case SDLK_RIGHT:
+                keysPressed[KEY_LIST::KEY_RIGHT] = true;
+                break;
+            case SDLK_SPACE:
+                keysPressed[KEY_LIST::KEY_SPACE] = true;
+                break;
+            case SDLK_LSHIFT:
+                keysPressed[KEY_LIST::KEY_LSHIFT] = true;
+                break;
+            default:
+                break;
+            }
+
+#ifdef _DEBUG
+            std::cout << ("Key Pressed: %s", (char)pressed);
+#endif // _DEBUG
+
+        }
+        if (inputEvent.type == SDL_KEYUP)
+        {
+            SDL_Keycode pressed = inputEvent.key.keysym.sym;
+
+            switch (pressed)
+            {
+            case SDLK_ESCAPE:
+                keysPressed[KEY_LIST::KEY_ESC] = false;
+                break;
+            case SDLK_w: case SDLK_UP:
+                keysPressed[KEY_LIST::KEY_UP] = false;
+                break;
+            case SDLK_a: case SDLK_LEFT:
+                keysPressed[KEY_LIST::KEY_LEFT] = false;
+                break;
+            case SDLK_s: case SDLK_DOWN:
+                keysPressed[KEY_LIST::KEY_DOWN] = false;
+                break;
+            case SDLK_d: case SDLK_RIGHT:
+                keysPressed[KEY_LIST::KEY_RIGHT] = false;
+                break;
+            case SDLK_SPACE:
+                keysPressed[KEY_LIST::KEY_SPACE] = false;
+                break;
+            case SDLK_LSHIFT:
+                keysPressed[KEY_LIST::KEY_LSHIFT] = false;
                 break;
             default:
                 break;
