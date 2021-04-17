@@ -15,6 +15,7 @@ public:
 	virtual void Draw() = 0;
 
 	bool CheckCollision(Entity* entity1, Entity* entity2);
+	bool CheckCollision(Entity* entity1, SDL_Rect rect2);
 	virtual void OnCollision(Entity* collider) = 0;
 
 protected:
