@@ -101,17 +101,27 @@ bool Renderer::CreateWindow(const char* title, int xpos, int ypos, int width, in
 void Renderer::GameDraw()
 {
 	//Camera 
-	if (Input::KeyIsDown(KEY_RIGHT))
-	{
-		setViewPortX(1);
-	}
+
 	//Draw on screen
 	SDL_RenderPresent(renderer);
 
 	//Clean window
 	SDL_RenderClear(renderer);
 }
-
+/// <summary>
+/// Camera functioning with movement
+/// </summary>
+void Renderer::CameraFunctionality(float value, bool isHorizontal)
+{
+	if (isHorizontal)
+	{
+		setViewPortX(value);
+	}
+	else if (!isHorizontal)
+	{
+		setViewPortY(value);
+	}
+}
 /// <summary>
 /// Use to show the UI
 /// </summary>
@@ -196,7 +206,7 @@ void Renderer::DrawLevel()
 	}
 }
 
-void Renderer::setViewPortX(int viewportx)
+void Renderer::setViewPortX(float viewportx)
 {
 	// with these you would then do setViewPortX(m_pot_x_pos - m_x_pos); when you move the character,in input perhaps, update the potential position //
 
@@ -213,7 +223,7 @@ void Renderer::setViewPortX(int viewportx)
 	SDL_RenderSetViewport(renderer, &viewport);
 }
 
-void Renderer::setViewPortY(int viewporty)
+void Renderer::setViewPortY(float viewporty)
 {
 	viewportY += viewporty;
 

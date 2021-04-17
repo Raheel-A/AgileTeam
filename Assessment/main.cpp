@@ -64,6 +64,7 @@ int main(void)
 	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
 	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
 
+	Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 	
 
 	while (!quit)
@@ -71,6 +72,8 @@ int main(void)
 		
 		i->Update();
 		a->DrawLevel();
+		animExample->Draw();
+		animExample->SpriteUpdate();
 		a->GameDraw();
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
@@ -78,21 +81,25 @@ int main(void)
 		if (i->KeyIsDown(KEY_UP))
 		{
 			p1->Move(1);
+			a->CameraFunctionality(-0.5f, false);
 		}
 
 		if (i->KeyIsDown(KEY_LEFT))
 		{
 			p1->Move(2);
+			a->CameraFunctionality(-0.5f, true);
 		}
 
 		if (i->KeyIsDown(KEY_DOWN))
 		{
 			p1->Move(3);
+			a->CameraFunctionality(0.5f, false);
 		}
 
 		if (i->KeyIsDown(KEY_RIGHT))
 		{
 			p1->Move(4);
+			a->CameraFunctionality(0.5f, true);
 		}
 
 	}

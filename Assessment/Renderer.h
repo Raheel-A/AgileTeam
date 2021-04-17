@@ -51,10 +51,11 @@ public:
 	void DrawLevel();
 	vector <Sprite*> spriteList = {};
 	//AP
-	void setViewPortX(int viewportx);
-	void setViewPortY(int viewporty);
-	int viewportX = 0;
-	int viewportY = 0;
+	void CameraFunctionality( float value , bool isHorizontal);
+	void setViewPortX(float viewportx);
+	void setViewPortY(float viewporty);
+	float viewportX = 0.0f;
+	float viewportY = 0.0f;
 protected:
 
 	SDL_Window* window;

@@ -19,8 +19,9 @@ Sprite::Sprite(SDL_Texture* text, bool isAnimated)
 {
 	animated = isAnimated;
 	SourceRect.x = SourceRect.y = 0;
-	SourceRect.w = SourceRect.h = 32;
-	DestRect.w = DestRect.h = 64;
+	SourceRect.w = 16;
+	SourceRect.h = 32;
+	DestRect.w = DestRect.h = 128;
 
 	//Creating Animations
 	Animation Idle = Animation(0, 3, 100);// columns, row, speed
@@ -29,7 +30,7 @@ Sprite::Sprite(SDL_Texture* text, bool isAnimated)
 	anims.emplace("Idle", Idle);
 
 	//playing an animation
-	//PlayAnimation("Idle");// example
+	PlayAnimation("Idle");// example
     sprite = text;
 }
 //Animation
@@ -73,16 +74,16 @@ void Sprite::SpriteUpdate()
 
 	//follows the players position and scale
 	SourceRect.y = AnimIndex * SourceRect.h; //when not animated , animation index is zero
-	DestRect.x = 1; //PLAYERS POSITION x
-	DestRect.y = 1; //Players Position y
-	DestRect.w = 1;//width * Scale; //
-	DestRect.h = 1;//heigh * Scale; //
+	DestRect.x = 200; //PLAYERS POSITION x
+	DestRect.y = 200; //Players Position y
+	DestRect.w = 16 * 2;//width * Scale; //
+	DestRect.h = 32 * 2;//heigh * Scale; //
 
 }
 
 void Sprite::Draw()
 {
-	
+	//SDL_RenderCopy(Renderer::renderer, sprite, NULL, &DestRect);
 	SDL_RenderCopyEx(Renderer::renderer, sprite, &SourceRect, &DestRect, NULL, NULL, FlipMode); //can flip animation depending on direction
 }
 //Animation

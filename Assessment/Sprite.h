@@ -33,7 +33,7 @@ public:
 	SDL_RendererFlip FlipMode = SDL_FLIP_NONE;
 	bool animated = false;
 	SDL_Rect SourceRect, DestRect;
-	int frames = 0; //how many frames in the animation
+	int frames = 8; //how many frames in the animation
 	int speed = 100; //delay between frames in milliseconds
 	int AnimIndex = 0;//if we dont animate our sprite then the initial y position of the sprite needs to be at 0
 	std::map < const char*, Animation> anims; //will be holding the animations
