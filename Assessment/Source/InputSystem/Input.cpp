@@ -13,6 +13,10 @@ Input::~Input()
 {
 }
 
+bool Input::keysPressed[SIZEOF_KEY_LIST];
+
+SDL_Event Input::inputEvent;
+
 void Input::UpdateInstance()
 {
     while (SDL_PollEvent(&inputEvent) != NULL)
@@ -24,25 +28,25 @@ void Input::UpdateInstance()
             switch (pressed)
             {
             case SDLK_ESCAPE:
-                keysPressed[KEY_LIST::KEY_ESC] = true;
+                keysPressed[KEY_ESC] = true;
                 break;
             case SDLK_w: case SDLK_UP:
-                keysPressed[KEY_LIST::KEY_UP] = true;
+                keysPressed[KEY_UP] = true;
                 break;
             case SDLK_a: case SDLK_LEFT:
-                keysPressed[KEY_LIST::KEY_LEFT] = true;
+                keysPressed[KEY_LEFT] = true;
                 break;
             case SDLK_s: case SDLK_DOWN:
-                keysPressed[KEY_LIST::KEY_DOWN] = true;
+                keysPressed[KEY_DOWN] = true;
                 break;
             case SDLK_d: case SDLK_RIGHT:
-                keysPressed[KEY_LIST::KEY_RIGHT] = true;
+                keysPressed[KEY_RIGHT] = true;
                 break;
             case SDLK_SPACE:
-                keysPressed[KEY_LIST::KEY_SPACE] = true;
+                keysPressed[KEY_SPACE] = true;
                 break;
             case SDLK_LSHIFT:
-                keysPressed[KEY_LIST::KEY_LSHIFT] = true;
+                keysPressed[KEY_LSHIFT] = true;
                 break;
             default:
                 break;
@@ -60,25 +64,25 @@ void Input::UpdateInstance()
             switch (pressed)
             {
             case SDLK_ESCAPE:
-                keysPressed[KEY_LIST::KEY_ESC] = false;
+                keysPressed[KEY_ESC] = false;
                 break;
             case SDLK_w: case SDLK_UP:
-                keysPressed[KEY_LIST::KEY_UP] = false;
+                keysPressed[KEY_UP] = false;
                 break;
             case SDLK_a: case SDLK_LEFT:
-                keysPressed[KEY_LIST::KEY_LEFT] = false;
+                keysPressed[KEY_LEFT] = false;
                 break;
             case SDLK_s: case SDLK_DOWN:
-                keysPressed[KEY_LIST::KEY_DOWN] = false;
+                keysPressed[KEY_DOWN] = false;
                 break;
             case SDLK_d: case SDLK_RIGHT:
-                keysPressed[KEY_LIST::KEY_RIGHT] = false;
+                keysPressed[KEY_RIGHT] = false;
                 break;
             case SDLK_SPACE:
-                keysPressed[KEY_LIST::KEY_SPACE] = false;
+                keysPressed[KEY_SPACE] = false;
                 break;
             case SDLK_LSHIFT:
-                keysPressed[KEY_LIST::KEY_LSHIFT] = false;
+                keysPressed[KEY_LSHIFT] = false;
                 break;
             default:
                 break;
@@ -101,25 +105,25 @@ void Input::Update()
             switch (pressed)
             {
             case SDLK_ESCAPE:
-                keysPressed[KEY_LIST::KEY_ESC] = true;
+                keysPressed[KEY_ESC] = true;
                 break;
             case SDLK_w: case SDLK_UP:
-                keysPressed[KEY_LIST::KEY_UP] = true;
+                keysPressed[KEY_UP] = true;
                 break;
             case SDLK_a: case SDLK_LEFT:
-                keysPressed[KEY_LIST::KEY_LEFT] = true;
+                keysPressed[KEY_LEFT] = true;
                 break;
             case SDLK_s: case SDLK_DOWN:
-                keysPressed[KEY_LIST::KEY_DOWN] = true;
+                keysPressed[KEY_DOWN] = true;
                 break;
             case SDLK_d: case SDLK_RIGHT:
-                keysPressed[KEY_LIST::KEY_RIGHT] = true;
+                keysPressed[KEY_RIGHT] = true;
                 break;
             case SDLK_SPACE:
-                keysPressed[KEY_LIST::KEY_SPACE] = true;
+                keysPressed[KEY_SPACE] = true;
                 break;
             case SDLK_LSHIFT:
-                keysPressed[KEY_LIST::KEY_LSHIFT] = true;
+                keysPressed[KEY_LSHIFT] = true;
                 break;
             default:
                 break;
@@ -137,25 +141,25 @@ void Input::Update()
             switch (pressed)
             {
             case SDLK_ESCAPE:
-                keysPressed[KEY_LIST::KEY_ESC] = false;
+                keysPressed[KEY_ESC] = false;
                 break;
             case SDLK_w: case SDLK_UP:
-                keysPressed[KEY_LIST::KEY_UP] = false;
+                keysPressed[KEY_UP] = false;
                 break;
             case SDLK_a: case SDLK_LEFT:
-                keysPressed[KEY_LIST::KEY_LEFT] = false;
+                keysPressed[KEY_LEFT] = false;
                 break;
             case SDLK_s: case SDLK_DOWN:
-                keysPressed[KEY_LIST::KEY_DOWN] = false;
+                keysPressed[KEY_DOWN] = false;
                 break;
             case SDLK_d: case SDLK_RIGHT:
-                keysPressed[KEY_LIST::KEY_RIGHT] = false;
+                keysPressed[KEY_RIGHT] = false;
                 break;
             case SDLK_SPACE:
-                keysPressed[KEY_LIST::KEY_SPACE] = false;
+                keysPressed[KEY_SPACE] = false;
                 break;
             case SDLK_LSHIFT:
-                keysPressed[KEY_LIST::KEY_LSHIFT] = false;
+                keysPressed[KEY_LSHIFT] = false;
                 break;
             default:
                 break;
