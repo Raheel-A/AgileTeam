@@ -1,7 +1,7 @@
 #pragma once
 #include "../../SDL/include/SDL.h"
 
-enum KEY_LIST {
+enum class KEY_LIST {
 	KEY_ESC,
 	KEY_UP,
 	KEY_LEFT,
@@ -16,10 +16,13 @@ class Input
 public:
 	Input();
 	~Input();
-	void Update();
-	bool KeyIsDown(KEY_LIST key);
+	void UpdateInstance();
+	static void Update();
+	static bool KeyIsDown(KEY_LIST key);
+	
 private:
-	SDL_Event inputEvent;
-	bool keysPressed[SIZEOF_KEY_LIST];
+	static SDL_Event inputEvent;
+	static bool keysPressed[(int)KEY_LIST::SIZEOF_KEY_LIST];
+
 };
 

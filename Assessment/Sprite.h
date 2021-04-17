@@ -17,6 +17,7 @@
 class Sprite
 {
 public:
+	Sprite();
 	Sprite(SDL_Texture* text);
 	Vector2 getPos();
 	void setPos(Vector2 newPos);

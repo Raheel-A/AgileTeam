@@ -9,6 +9,8 @@
 #include "EngineStatics.h"
 #include "Source/Player.h"
 #include "Source/InputSystem/Input.h"
+#include "ImageLoader.h"
+#include "Sprite.h"
 
 #undef main
 
@@ -57,9 +59,19 @@ int main(void)
 	// Input test
 	Input* i = new Input;
 	bool quit = false;
+	ImageLoader* imageloader = new ImageLoader(a->renderer);
+	//render stuff
+	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
+	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
+
+	
+
 	while (!quit)
 	{
+		
 		i->Update();
+		a->DrawLevel();
+		a->GameDraw();
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
 		//Check input and move accordingly 

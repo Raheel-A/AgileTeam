@@ -18,7 +18,7 @@ ImageLoader::~ImageLoader()
 /// load a image and creat a texture based on file path 
 /// </summary>
 /// <param name="path">file path to the image</param>
-void ImageLoader::LoadeImage(std::string path)
+SDL_Texture* ImageLoader::LoadeImage(std::string path)
 {
 	surface = SDL_LoadBMP(path.c_str());
 
@@ -44,8 +44,9 @@ void ImageLoader::LoadeImage(std::string path)
 	   		printf(spath.c_str());
 
 	   		printf(SDL_GetError());
-		}
+		}	
 	}
+	return image;
 }
 
 /// <summary>

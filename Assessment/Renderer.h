@@ -16,6 +16,11 @@
 
 using namespace std;
 class Sprite;
+enum TILES
+{
+	BLOCK = 'A',
+	WALL = 'B',
+};
 
 class Renderer
 {
@@ -32,7 +37,19 @@ public:
 	void UIDraw();
 	//CW
 	void DrawTile(Sprite* sprite, int w, int h);
+	TILES tiles;
+	vector<string> level = { "BBBBBBBBBB" ,
+							 "BAAAAAAAAB",
+						     "BAAAAAAAAB",
+							 "BAAAAAAAAB",
+							 "BAAAAAAAAB" ,
+							 "BAAAAAAAAB" ,
+							 "BAAAAAAAAB" ,
+							 "BAAAAAAAAB" ,
+							 "BAAAAAAAAB" ,
+							 "BBBBBBBBBB" };
 	void DrawLevel();
+	vector <Sprite*> spriteList = {};
 	//AP
 	void setViewPortX(int viewportx);
 	void setViewPortY(int viewporty);
@@ -45,7 +62,7 @@ protected:
 	SDL_Rect viewport{0, 0, 1080, 1920};
 	SDL_Rect destinationRect{ NULL };
 	char tileToDraw = ' ';
-	vector <Sprite*> spriteList;
+	
 	Vector2 positionHolder;
 };
 

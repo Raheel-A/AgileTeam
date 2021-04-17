@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Sprite.h"
+#include "Source/InputSystem/Input.h"
 
 SDL_Renderer* Renderer::renderer = nullptr;
 
@@ -99,6 +100,11 @@ bool Renderer::CreateWindow(const char* title, int xpos, int ypos, int width, in
 /// </summary>
 void Renderer::GameDraw()
 {
+	//Camera 
+	if (Input::KeyIsDown(KEY_RIGHT))
+	{
+		setViewPortX(1);
+	}
 	//Draw on screen
 	SDL_RenderPresent(renderer);
 
@@ -154,11 +160,11 @@ void Renderer::DrawLevel()
 		for (int column = columnMin; column < columnMax; column++)
 		{
 			//Commented in until we get the level loading stuff
-			//tileToDraw = levelVector[row][column];
+			tileToDraw = level[row][column];
 
 			switch (tileToDraw)
 			{
-			case 'x':
+			case 'A':
 			{
 				//This draws a texture from a preloaded list and uses the enum from earlier to find the correct texture, it then draws it at the 
 				// position (row*32), (column *32) and applies width and height
@@ -171,6 +177,16 @@ void Renderer::DrawLevel()
 
 				//Draw tile, 0 is placeholder it will represent an enum for the desired tile
 				DrawTile(spriteList[0], blockMultiplier, blockMultiplier);
+			}
+			break;
+			case 'B':
+			{
+
+				Vector2 pos = { column * blockMultiplier, row * blockMultiplier };
+				spriteList[1]->setPos(Vector2(pos));
+
+				//Draw tile, 0 is placeholder it will represent an enum for the desired tile
+				DrawTile(spriteList[1], blockMultiplier, blockMultiplier);
 			}
 			break;
 			default:

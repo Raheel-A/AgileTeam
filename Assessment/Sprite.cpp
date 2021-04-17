@@ -4,6 +4,10 @@
 // changed
 // san 10/03/21
 
+Sprite::Sprite()
+{
+
+}
 Sprite::Sprite(SDL_Texture* text)
 {
 	sprite = text;

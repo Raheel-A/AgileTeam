@@ -60,7 +60,7 @@ void Input::Update()
             switch (pressed)
             {
             case SDLK_ESCAPE:
-                keysPressed[KEY_ESC] = false;
+                keysPressed[KEY_LIST::KEY_ESC] = false;
                 break;
             case SDLK_w: case SDLK_UP:
                 keysPressed[KEY_UP] = false;
