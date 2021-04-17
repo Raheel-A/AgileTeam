@@ -27,13 +27,13 @@ void Enemy::OnCollision(Entity* collider)
 void Enemy::LoseHealth(int healthAmount)
 {
 	//after losing health, the enemy won't die
-	if (m_healthPoints - healthAmount >= 0)
+	if (healthPoints - healthAmount >= 0)
 	{
-		m_healthPoints -= healthAmount;
+		healthPoints -= healthAmount;
 	}
 	else //if the damage the enemy takes makes their health points be 0 or lower, they have died
 	{
-		m_healthPoints = 0;
+		healthPoints = 0;
 		EnemyDeath();
 	}
 }
