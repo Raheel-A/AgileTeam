@@ -3,6 +3,8 @@
 /* Change Log
 28/02/2021 Mario - Creation of the renderer class and window
 04/03/2021 Chase - Creating map drawing functionality
+17/04/2021 Group 5 - Added assets and worked on game loop to ensure all of our functionality could be presented
+18/04/2021 Chase - Commented the code we completed yesterday as a group
 */
 
 #pragma once
@@ -18,7 +20,7 @@ using namespace std;
 class Sprite;
 enum TILES
 {
-	BLOCK = 'A',
+	GRASS = 'A',
 	WALL = 'B',
 };
 
@@ -38,6 +40,7 @@ public:
 	//CW
 	void DrawTile(Sprite* sprite, int w, int h);
 	TILES tiles;
+	//placeholder vector as awaiting the level loading from other teams
 	vector<string> level = { "BBBBBBBBBB" ,
 							 "BAAAAAAAAB",
 						     "BAAAAAAAAB",
@@ -48,7 +51,7 @@ public:
 							 "BAAAAAAAAB" ,
 							 "BAAAAAAAAB" ,
 							 "BBBBBBBBBB" };
-	void DrawLevel();
+	void DrawCurrentLevel();
 	vector <Sprite*> spriteList = {};
 	//AP
 	void CameraFunctionality( float value , bool isHorizontal);
@@ -63,6 +66,8 @@ protected:
 	SDL_Rect viewport{0, 0, 1080, 1920};
 	SDL_Rect destinationRect{ NULL };
 	char tileToDraw = ' ';
+	//stores the size of the tile based on level layout
+	const int blockSize = 32;
 	
 	Vector2 positionHolder;
 };

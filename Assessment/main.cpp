@@ -59,25 +59,28 @@ int main(void)
 	// Input test
 	Input* i = new Input;
 	bool quit = false;
+	//Create a new image loader
 	ImageLoader* imageloader = new ImageLoader(a->renderer);
-	//render stuff
+	//Load sprites into the sprite-list for level loading
 	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
 	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
-
+	//Create a seperate sprite for the player/enemy
 	Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 	
-
+	//main loop
 	while (!quit)
 	{
-		
 		i->Update();
-		a->DrawLevel();
+		//Draw the level, draw the animations and update them, then render everything else
+		a->DrawCurrentLevel();
 		animExample->Draw();
 		animExample->SpriteUpdate();
 		a->GameDraw();
+
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
 		//Check input and move accordingly 
+		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
 		if (i->KeyIsDown(KEY_UP))
 		{
 			p1->Move(1);
@@ -103,8 +106,6 @@ int main(void)
 		}
 
 	}
-
-
 
 	getchar();
 	SDL_Quit();
