@@ -26,15 +26,15 @@ int main(void)
 {
 	PathfinderTest();
 
-	Application* app = new Application();
+	Application* app_ptr = new Application();
 
-	if (app->initApp())
+	if (app_ptr->InitApp())
 	{
-		app->loopApp();
+		app_ptr->LoopApp();
 	}
 
-	delete app;
-	app = nullptr;
+	delete app_ptr;
+	app_ptr = nullptr;
 
 	return 0;
 

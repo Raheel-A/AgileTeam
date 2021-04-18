@@ -1,23 +1,29 @@
 #include "Application.h"
 
+/// <summary>
+/// Initalizes values
+/// </summary>
 Application::Application()
-	:m_renderer(nullptr), m_input(nullptr), m_quit(false)
+	:m_renderer_ptr(nullptr), m_input_ptr(nullptr), m_quit(false)
 {
 	std::cout << "Application Initialized" << std::endl;
 }
 
+/// <summary>
+/// Deletes objects and properly quits SDL
+/// </summary>
 Application::~Application()
 {
-	if (m_renderer != nullptr)
+	if (m_renderer_ptr != nullptr)
 	{
-		delete m_renderer;
-		m_renderer = nullptr;
+		delete m_renderer_ptr;
+		m_renderer_ptr = nullptr;
 	}
 
-	if (m_input != nullptr)
+	if (m_input_ptr != nullptr)
 	{
-		delete m_input;
-		m_input = nullptr;
+		delete m_input_ptr;
+		m_input_ptr = nullptr;
 	}
 
 	SDL_Quit();
@@ -25,7 +31,11 @@ Application::~Application()
 	std::cout << "Application Deleted" << std::endl;
 }
 
-bool Application::initApp()
+/// <summary>
+/// Sets up SDL and libraries and creates the approriate objects
+/// </summary>
+/// <returns>Returns success or failure or initalization</returns>
+bool Application::InitApp()
 {
 	//Init SDL + libraries
 
@@ -52,18 +62,21 @@ bool Application::initApp()
 
 	//Init objects
 
-	m_renderer = new Renderer();
+	m_renderer_ptr = new Renderer();
 
-	m_input = new Input();
+	m_input_ptr = new Input();
 
 	//Create SDL window
 	
-	m_renderer->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+	m_renderer_ptr->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 
 	return true;
 }
 
-void Application::loopApp()
+/// <summary>
+/// Main loop of the application
+/// </summary>
+void Application::LoopApp()
 {
 	// Collision test
 	Player* p1 = new Player(0, 0, 10, 10);
@@ -80,30 +93,29 @@ void Application::loopApp()
 
 	while (!m_quit)
 	{
-		m_input->Update();
-		m_quit = m_input->KeyIsDown(KEY_ESC) ? true : false;
+		m_input_ptr->Update();
+		m_quit = m_input_ptr->KeyIsDown(KEY_ESC) ? true : false;
 
 		//Check input and move accordingly 
-		if (m_input->KeyIsDown(KEY_UP))
+		if (m_input_ptr->KeyIsDown(KEY_UP))
 		{
 			p1->Move(1);
 		}
 
-		if (m_input->KeyIsDown(KEY_LEFT))
+		if (m_input_ptr->KeyIsDown(KEY_LEFT))
 		{
 			p1->Move(2);
 		}
 
-		if (m_input->KeyIsDown(KEY_DOWN))
+		if (m_input_ptr->KeyIsDown(KEY_DOWN))
 		{
 			p1->Move(3);
 		}
 
-		if (m_input->KeyIsDown(KEY_RIGHT))
+		if (m_input_ptr->KeyIsDown(KEY_RIGHT))
 		{
 			p1->Move(4);
 		}
 
 	}
-
 }

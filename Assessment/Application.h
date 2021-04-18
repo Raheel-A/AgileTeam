@@ -22,18 +22,16 @@ public:
 	Application();
 	~Application();
 
-	bool initApp();
-	void loopApp();
-
+	bool InitApp();
+	void LoopApp();
 
 private:
 
-	Renderer* m_renderer;
+	Renderer* m_renderer_ptr;
 
-	Input* m_input;
+	Input* m_input_ptr;
 
 	bool m_quit;
-
 
 };
 
