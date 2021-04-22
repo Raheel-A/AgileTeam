@@ -1,13 +1,14 @@
 #pragma once
-class Vector2
+
+struct Vector2
 {
-public:
-	Vector2() { x = 0; y = 0; };
-	Vector2(int x1, int y1) { x = x1; y = y1; };
-	~Vector2() {};
+	Vector2();
+	Vector2(int x, int y);
+	Vector2(float x, float y);
+	~Vector2();
 
-	int x;
-	int y;
+	Vector2 operator+ (const Vector2& rhs);
 
+	float x = 0.0f, y = 0.0f;
 };
 

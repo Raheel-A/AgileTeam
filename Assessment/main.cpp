@@ -1,10 +1,13 @@
 #include <iostream>
+#include <vector>
 
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
 #include "Renderer.h"
+#include "Pathfinder.h"
+#include "Vector2.h"
 
 #include "EngineStatics.h"
 #include "Source/Player.h"
@@ -16,8 +19,30 @@
 
 using namespace std;
 
+void PathfinderTest()
+{
+	// Initialise pathfinder
+	int levelWidth = 20, levelHeight = 10;
+	Pathfinder p{ levelWidth,levelHeight };
+	p.m_canTraverseDiagonally = false;
+	// Create a wall (for testing)
+	for (size_t i = 0; i < levelWidth - 1; i++)
+		p.SetNodeIsTraversible(Vector2{ (float)i, 2.5f }, false);
+
+	// Search for path
+	vector<Vector2> path = p.FindPath({ 0.5f, 0.5f }, { 1.5f, 9.3f });
+	p.PrintNodeMatrix(path);
+
+	// Output path coordinates list
+	/*for (size_t i = 0; i < path.size(); i++)
+		cout << '(' << path[i].x << ',' << path[i].y << '), ';*/
+	cout << endl;
+}
+
 int main(void) 
 {
+	PathfinderTest();
+
 	bool running = true;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)

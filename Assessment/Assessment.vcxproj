@@ -144,9 +144,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIBase.cpp" />
+    <ClCompile Include="AIMelee.cpp" />
     <ClCompile Include="EngineStatics.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="LevelNode.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pathfinder.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
@@ -155,10 +159,16 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIBase.h" />
+    <ClInclude Include="AIMelee.h" />
+    <ClInclude Include="LevelNode.h" />
+    <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Vector2Int.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Enemy.h" />
