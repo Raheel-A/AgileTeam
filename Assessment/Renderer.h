@@ -36,7 +36,7 @@ public:
 	bool CreateWindow(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
 
 	void GameDraw();
-	void UIDraw();
+	void UIDraw(SDL_Rect dest, SDL_Texture* text);
 	//CW
 	void DrawTile(Sprite* sprite, int w, int h);
 	TILES tiles;

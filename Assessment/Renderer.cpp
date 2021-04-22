@@ -124,9 +124,9 @@ void Renderer::CameraFunctionality(float value, bool isHorizontal)
 /// <summary>
 /// Use to show the UI - will be used by UI team
 /// </summary>
-void Renderer::UIDraw()
+void Renderer::UIDraw(SDL_Rect dest, SDL_Texture* text)
 {
-
+	SDL_RenderCopy(renderer, text, NULL, &dest);
 }
 
 /// <summary>
