@@ -85,10 +85,10 @@ int main(void)
 
 	bool quit = false;
 	//Create a new image loader
-	ImageLoader* imageloader = new ImageLoader(a->renderer);
+	ImageLoader* imageloader = new ImageLoader(renderer->renderer);
 	//Load sprites into the sprite-list for level loading
-	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
-	a->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
 	//Create a seperate sprite for the player/enemy
 	Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 	
@@ -97,10 +97,10 @@ int main(void)
 	{
 		i->Update();
 		//Draw the level, draw the animations and update them, then render everything else
-		a->DrawCurrentLevel();
+		renderer->DrawCurrentLevel();
 		animExample->Draw();
 		animExample->SpriteUpdate();
-		a->GameDraw();
+		renderer->GameDraw();
 
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
@@ -109,29 +109,25 @@ int main(void)
 		if (i->KeyIsDown(KEY_UP))
 		{
 			sManager->PlaySFX(SFXList::Shoot);
-			p1->Move(1);
-			a->CameraFunctionality(-0.5f, false);
+			renderer->CameraFunctionality(-0.5f, false);
 		}
 
 		if (i->KeyIsDown(KEY_LEFT))
 		{
 			UI->ChangeMenu(MenuState::InGame);
-			p1->Move(2);
-			a->CameraFunctionality(-0.5f, true);
+			renderer->CameraFunctionality(-0.5f, true);
 		}
 
 		if (i->KeyIsDown(KEY_DOWN))
 		{
 			UI->ChangeMenu(MenuState::Paused);
-			p1->Move(3);
-			a->CameraFunctionality(0.5f, false);
+			renderer->CameraFunctionality(0.5f, false);
 		}
 
 		if (i->KeyIsDown(KEY_RIGHT))
 		{
 			UI->ChangeMenu(MenuState::Start);
-			p1->Move(4);
-			a->CameraFunctionality(0.5f, true);
+			renderer->CameraFunctionality(0.5f, true);
 		}
 
 		UI->DisplayMenu();
