@@ -43,10 +43,23 @@ void PathfinderTest()
 	cout << endl;
 }
 
+void CollisionTest()
+{
+	Player* p1 = new Player(0, 0, 10, 10);
+	Player* p2 = new Player(5, 5, 10, 10);
+	if (p1->CheckCollision(p1, p2))
+	{
+		cout << "Collision occured" << endl;
+	}
+	else
+	{
+		cout << "No collision" << endl;
+	}
+}
+
+
 int main(void) 
 {
-	//PathfinderTest();
-
 	bool running = true;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -81,7 +94,7 @@ int main(void)
 	SoundManager* sManager = new SoundManager();
 	sManager->LoadMusic("Assets/music.wav");
 	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
-	sManager->PlayBGM(-1);
+	//sManager->PlayBGM(-1); //SHUSH
 
 	bool quit = false;
 	//Create a new image loader
