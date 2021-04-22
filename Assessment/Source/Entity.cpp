@@ -34,3 +34,19 @@ bool Entity::CheckCollision(Entity* entity1, Entity* entity2)
 
 	return false;
 }
+
+bool Entity::CheckCollision(Entity* entity, SDL_Rect rect)
+{
+	//Check for collision between entity and rect - for attack range colliders
+	if (entity->collisionBox.x < rect.x + rect.w && // Left e1 < right e2
+		entity->collisionBox.x + entity->collisionBox.w > rect.x && // Right e1 > left e2
+		entity->collisionBox.y < rect.y + rect.h && // Top e1 < bottom e2
+		entity->collisionBox.y + entity->collisionBox.h > rect.y)   // Bottom e1 > top e2
+	{
+		return true;
+	}
+
+	return false;
+}
+
+

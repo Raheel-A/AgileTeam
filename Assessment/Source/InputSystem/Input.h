@@ -16,10 +16,11 @@ class Input
 public:
 	Input();
 	~Input();
-	void Update();
-	bool KeyIsDown(KEY_LIST key);
+	void UpdateInstance();
+	static void Update();
+	static bool KeyIsDown(KEY_LIST key);
 private:
-	SDL_Event inputEvent;
-	bool keysPressed[SIZEOF_KEY_LIST];
+	static SDL_Event inputEvent;
+	static bool keysPressed[SIZEOF_KEY_LIST];
 };
 

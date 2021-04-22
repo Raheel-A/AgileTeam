@@ -15,6 +15,7 @@ public:
 	virtual void Draw() = 0;
 
 	bool CheckCollision(Entity* entity1, Entity* entity2);
+	bool CheckCollision(Entity* entity, SDL_Rect rect);
 	virtual void OnCollision(Entity* collider) = 0;
 
 protected:
@@ -22,6 +23,11 @@ protected:
 	float width, height;
 
 	SDL_Rect collisionBox;
+
+	//stats
+	unsigned int healthPoints{ 100 };
+	unsigned int attackPoints{ 100 };
+	float movementSpeed{ 3.5f };
 
 	float speed;
 

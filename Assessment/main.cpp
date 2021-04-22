@@ -95,7 +95,7 @@ int main(void)
 	//main loop
 	while (!quit)
 	{
-		i->Update();
+		i->UpdateInstance();
 		//Draw the level, draw the animations and update them, then render everything else
 		renderer->DrawCurrentLevel();
 		animExample->Draw();
