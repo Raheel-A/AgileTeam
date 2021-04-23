@@ -150,6 +150,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="LevelNode.cpp" />
+    <ClCompile Include="LevelData.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Pathfinder.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="AIBase.h" />
     <ClInclude Include="AIMelee.h" />
     <ClInclude Include="LevelNode.h" />
+    <ClInclude Include="LevelData.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="SoundManager.h" />
