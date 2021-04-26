@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Source/Entity.h"
+#include "EngineStatics.h"
 
 class LevelData
 {
@@ -13,11 +14,13 @@ private:
 	std::vector<std::vector<char>> backgroundTiles;
 
 	std::vector<Entity*> entityLoop;
+
+	std::string LevelName = "Sample Text";
 public:
 
 	/// <summary>
 	/// Gets a pointer to the background tiles vector.
-	/// Probably use GetTile instead?
+	/// Maybe use GetTile instead for safety?
 	/// </summary>
 	/// <returns>Pointer to background tiles vector</returns>
 	std::vector<std::string>* GetBackgroundTilesPtr;
@@ -29,6 +32,13 @@ public:
 	/// <param name="y"> Tile's Y Position </param>
 	/// <returns> tile as char </returns>
 	char GetTile(int x, int y);
+
+	/// <summary>
+	/// Gets Name Of Level
+	/// </summary>
+	/// <returns> Name as String </returns>
+	std::string GetLevelName();
+
 
 	void Update();
 
