@@ -54,16 +54,12 @@ public:
 	void DrawCurrentLevel();
 	vector <Sprite*> spriteList = {};
 	//AP
-	void CameraFunctionality( float value , bool isHorizontal);
-	void setViewPortX(float viewportx);
-	void setViewPortY(float viewporty);
-	float viewportX = 0.0f;
-	float viewportY = 0.0f;
+	
 protected:
 
 	SDL_Window* window;
 	//CW
-	SDL_Rect viewport{0, 0, 1080, 1920};
+	
 	SDL_Rect destinationRect{ NULL };
 	char tileToDraw = ' ';
 	//stores the size of the tile based on level layout

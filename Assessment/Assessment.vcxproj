@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="AIBase.cpp" />
     <ClCompile Include="AIMelee.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EngineStatics.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="AIBase.h" />
     <ClInclude Include="AIMelee.h" />

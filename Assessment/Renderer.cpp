@@ -109,18 +109,7 @@ void Renderer::GameDraw()
 /// <summary>
 /// Camera functioning with movement
 /// </summary>
-void Renderer::CameraFunctionality(float value, bool isHorizontal)
-{
-	//find the movement direction and then set the correct viewport from this
-	if (isHorizontal)
-	{
-		setViewPortX(value);
-	}
-	else if (!isHorizontal)
-	{
-		setViewPortY(value);
-	}
-}
+
 /// <summary>
 /// Use to show the UI - will be used by UI team
 /// </summary>
@@ -203,27 +192,4 @@ void Renderer::DrawCurrentLevel()
 	}
 }
 
-void Renderer::setViewPortX(float viewportx)
-{
-	// with these you would then do setViewPortX(m_pot_x_pos - m_x_pos); when you move the character,in input perhaps, update the potential position //
 
-	if (viewportX + viewportx < 0)
-	{
-		viewportX = 0;
-	}
-	else
-	{
-		viewportX += viewportx;
-	}
-
-	viewport.x = viewportX;
-	SDL_RenderSetViewport(renderer, &viewport);
-}
-
-void Renderer::setViewPortY(float viewporty)
-{
-	viewportY += viewporty;
-
-	viewport.y = viewportY;
-	SDL_RenderSetViewport(renderer, &viewport);
-}

@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h";
 #include "Enemy.h"
+#include "..\Camera.h"
 
 /// <summary>
 /// Entity that is controlled by the player and stores the health
@@ -34,6 +35,8 @@ public:
 private:
 	int attackRange;
 	SDL_Rect attackRangeCollisionBox;
+
+	Camera* p_Camera;
 
 	void UpdateAttackRangeCollider();
 };

@@ -178,7 +178,7 @@ int main(void)
 		//	renderer->CameraFunctionality(0.5f, true);
 		//}
 
-		UI->DisplayMenu();
+		//UI->DisplayMenu();
 		//renderer->GameDraw();
 	}
 

@@ -3,6 +3,7 @@
 
 Player::Player() : Player(0, 0, 10, 10)
 {
+	p_Camera = new Camera();
 }
 
 Player::Player(float x, float y, float width, float height) : Entity(x, y, width, height)
@@ -16,6 +17,8 @@ Player::Player(float x, float y, float width, float height) : Entity(x, y, width
 	attackRangeCollisionBox.y = y - attackRange;
 	attackRangeCollisionBox.w = width + (attackRange + attackRange);
 	attackRangeCollisionBox.h = height + (attackRange + attackRange);
+
+	p_Camera = new Camera();
 }
 
 Player::~Player()
@@ -24,6 +27,7 @@ Player::~Player()
 
 void Player::Init()
 {
+
 }
 
 void Player::Update(float delta)
@@ -61,6 +65,8 @@ void Player::Draw()
 		sprite->SpriteUpdate();
 		sprite->Draw();
 	}
+
+	p_Camera->CameraFunctionality(x, y);
 }
 
 void Player::Move(int direct)
