@@ -6,7 +6,7 @@ class ImageLoader
 public:
 	ImageLoader(SDL_Renderer* rend);
 	~ImageLoader();
-	void LoadeImage(std::string path);
+	SDL_Texture* LoadeImage(std::string path);
 	SDL_Texture* GetImage(); 
 private:
 	SDL_Surface* surface;

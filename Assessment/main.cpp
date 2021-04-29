@@ -12,6 +12,12 @@
 #include "EngineStatics.h"
 #include "Source/Player.h"
 #include "Source/InputSystem/Input.h"
+#include "HUD.h"
+#include "SoundManager.h"
+#include "Menus.h"
+
+#include "ImageLoader.h"
+#include "Sprite.h"
 
 #undef main
 
@@ -37,10 +43,23 @@ void PathfinderTest()
 	cout << endl;
 }
 
+void CollisionTest()
+{
+	Player* p1 = new Player(0, 0, 10, 10);
+	Player* p2 = new Player(5, 5, 10, 10);
+	if (p1->CheckCollision(p1, p2))
+	{
+		cout << "Collision occured" << endl;
+	}
+	else
+	{
+		cout << "No collision" << endl;
+	}
+}
+
+
 int main(void) 
 {
-	PathfinderTest();
-
 	bool running = true;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
@@ -64,53 +83,69 @@ int main(void)
 		running = false;
 	}
 
-	// Collision test
-	Player* p1 = new Player(0, 0, 10, 10);
-	Player* p2 = new Player(5, 5, 10, 10);
+	Renderer* renderer = new Renderer;
+	renderer->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 
-	if (p1->CheckCollision(p1, p2))
-	{
-		cout << "Collision occured" << endl;
-	}
-	else
-	{
-		cout << "No collision" << endl;
-	}
-
-	Renderer* a = new Renderer;
-	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 	// Input test
 	Input* i = new Input;
+
+	Menus* UI = new Menus(renderer);
+
+	SoundManager* sManager = new SoundManager();
+	sManager->LoadMusic("Assets/music.wav");
+	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
+	//sManager->PlayBGM(-1); //SHUSH
+
 	bool quit = false;
-	while (!quit && running)
+	//Create a new image loader
+	ImageLoader* imageloader = new ImageLoader(renderer->renderer);
+	//Load sprites into the sprite-list for level loading
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
+	//Create a seperate sprite for the player/enemy
+	Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
+	
+	//main loop
+	while (!quit)
 	{
 		i->UpdateInstance();
+		//Draw the level, draw the animations and update them, then render everything else
+		renderer->DrawCurrentLevel();
+		animExample->Draw();
+		animExample->SpriteUpdate();
+		renderer->GameDraw();
+
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
 		//Check input and move accordingly 
+		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
 		if (i->KeyIsDown(KEY_UP))
 		{
-			p1->Move(1);
+			sManager->PlaySFX(SFXList::Shoot);
+			renderer->CameraFunctionality(-0.5f, false);
 		}
 
 		if (i->KeyIsDown(KEY_LEFT))
 		{
-			p1->Move(2);
+			UI->ChangeMenu(MenuState::InGame);
+			renderer->CameraFunctionality(-0.5f, true);
 		}
 
 		if (i->KeyIsDown(KEY_DOWN))
 		{
-			p1->Move(3);
+			UI->ChangeMenu(MenuState::Paused);
+			renderer->CameraFunctionality(0.5f, false);
 		}
 
 		if (i->KeyIsDown(KEY_RIGHT))
 		{
-			p1->Move(4);
+			UI->ChangeMenu(MenuState::Start);
+			renderer->CameraFunctionality(0.5f, true);
 		}
 
+		UI->DisplayMenu();
+		renderer->GameDraw();
 	}
-
-
 
 	getchar();
 	SDL_Quit();

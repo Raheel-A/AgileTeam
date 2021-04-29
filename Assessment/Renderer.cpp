@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Sprite.h"
+#include "Source/InputSystem/Input.h"
 
 SDL_Renderer* Renderer::renderer = nullptr;
 
@@ -102,78 +103,97 @@ void Renderer::GameDraw()
 	//Draw on screen
 	SDL_RenderPresent(renderer);
 
-
-
-
 	//Clean window
 	SDL_RenderClear(renderer);
 }
-
 /// <summary>
-/// Use to show the UI
+/// Camera functioning with movement
 /// </summary>
-void Renderer::UIDraw()
+void Renderer::CameraFunctionality(float value, bool isHorizontal)
 {
-
+	//find the movement direction and then set the correct viewport from this
+	if (isHorizontal)
+	{
+		setViewPortX(value);
+	}
+	else if (!isHorizontal)
+	{
+		setViewPortY(value);
+	}
+}
+/// <summary>
+/// Use to show the UI - will be used by UI team
+/// </summary>
+void Renderer::UIDraw(SDL_Rect dest, SDL_Texture* text)
+{
+	SDL_RenderCopy(renderer, text, NULL, &dest);
 }
 
 /// <summary>
-/// Use to draw a singular tile - CW
+/// Use to draw a tile in the level - CW
 /// </summary>
 void Renderer::DrawTile(Sprite* sprite, int w, int h)
 {
+	//get the sprites position and stores it in a vector2
 	positionHolder = sprite->getPos();
 
-	//perhaps h&w can be set in sprite class too?
+	//set height and width to what is inputted due to different sprites being different sizes
 	destinationRect.h = h;
 	destinationRect.w = w;
+	//set x & y based on the sprites position
 	destinationRect.x = positionHolder.x;
 	destinationRect.y = positionHolder.y;
 
-	//draw assigned texture to renderer at desired location
+	//draw the sprite object at the newly created destination rect
 	SDL_RenderCopy(renderer, sprite->GetSprite(), NULL, &destinationRect);
 
 }
 
 /// <summary>
 /// Use to draw the level based on the level vector - CW
-/// THIS WILL TAKE IN THE ARRAY FROM LEVEL LOADING
+/// THIS WILL TAKE IN THE ARRAY FROM LEVEL LOADING - USING PLACEHOLDER VECTOR FOR NOW
 /// </summary>
-void Renderer::DrawLevel()
+void Renderer::DrawCurrentLevel()
 {
-	const int blockMultiplier = 32; //this will change based on size of sprites
-	 //this relates to the enum from the level loading (e.g. x = grass tile) unsure whether we set this up?
+	//THESE VARS ARE JUST PLACEHOLDER TO FILL THE FUNCTION - THE REAL VALUES WILL COME FROM LEVEL LOADING (Group 4)
 
-	//THESE VARS ARE JUST TO FILL THE FUNCTION - THE REAL VALUES WILL COME FROM LEVEL LOADING
-	//Represents the maximum amount of rows and columns to cycle through
-	int rowMin = 0; 
-	int rowMax = 10;
-	int columnMin = 0;
-	int columnMax = 10;
+	//Represents the min amount of rows and columns to cycle through, presumed to be 0
+	int minimumValue = 0; 
+	//these need to be seperate incase the level is not square, this is for max rows/columns that need to be cycled through
+	int rowSizeMax = 10; 
+	int columnSizeMax = 10;
 	
-	//vector to go through each tile
-	for (int row = rowMin; row < rowMax; row++)
+	//cycle through vector to assign each tile
+	for (int row = minimumValue; row < rowSizeMax; row++)
 	{
-		for (int column = columnMin; column < columnMax; column++)
+		for (int column = minimumValue; column < columnSizeMax; column++)
 		{
-			//Commented in until we get the level loading stuff
-			//tileToDraw = levelVector[row][column];
+			//the current tile is where the vector is at in x & y positions
+			char currentTile = level[row][column];
+			//create a vector to hold the current position in - blockSize is for how far apart the tiles are placed 
+			//(so column 3 will actually be at xpos 96 for eg; this is to account for block size/placement)
+			Vector2 pos = { column * blockSize, row * blockSize };
 
-			switch (tileToDraw)
+			//cycle through the tile at designated pos
+			switch (currentTile)
 			{
-			case 'x':
+			case GRASS:
 			{
 				//This draws a texture from a preloaded list and uses the enum from earlier to find the correct texture, it then draws it at the 
 				// position (row*32), (column *32) and applies width and height
 
 				//Set pos of sprite (based on enum, 0 is placeholder)
-				/*spriteList[0]->setPos.x = (column * blockMultiplier);
-				spriteList[0]->setPos.y = (row * blockMultiplier);*/
-				Vector2 pos = { column * blockMultiplier, row * blockMultiplier };
 				spriteList[0]->setPos(Vector2(pos));
 
 				//Draw tile, 0 is placeholder it will represent an enum for the desired tile
-				DrawTile(spriteList[0], blockMultiplier, blockMultiplier);
+				//blockSize could be substituted with different ints to change the size of the tile
+				DrawTile(spriteList[0], blockSize, blockSize);
+			}
+			break;
+			case WALL:
+			{
+				spriteList[1]->setPos(Vector2(pos));
+				DrawTile(spriteList[1], blockSize, blockSize);
 			}
 			break;
 			default:
@@ -183,7 +203,7 @@ void Renderer::DrawLevel()
 	}
 }
 
-void Renderer::setViewPortX(int viewportx)
+void Renderer::setViewPortX(float viewportx)
 {
 	// with these you would then do setViewPortX(m_pot_x_pos - m_x_pos); when you move the character,in input perhaps, update the potential position //
 
@@ -200,7 +220,7 @@ void Renderer::setViewPortX(int viewportx)
 	SDL_RenderSetViewport(renderer, &viewport);
 }
 
-void Renderer::setViewPortY(int viewporty)
+void Renderer::setViewPortY(float viewporty)
 {
 	viewportY += viewporty;
 
