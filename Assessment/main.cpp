@@ -103,48 +103,83 @@ int main(void)
 	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
 	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
 	//Create a seperate sprite for the player/enemy
-	Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
+	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
+
+
+
+	// Create a player and an enemy with a sprite
+	Player* player = new Player(32, 32, 10, 10);
+	player->LoadSprite(imageloader);
+
+	Enemy* enemy = new Enemy(160, 160, 10, 10);
+	enemy->LoadSprite(imageloader);
 	
+	vector<Entity*> entities;
+	entities.push_back(player);
+	entities.push_back(enemy);
+
+	Uint64 NOW = SDL_GetPerformanceCounter();
+	Uint64 LAST = 0;
+	double deltaTime = 0;
+
 	//main loop
 	while (!quit)
 	{
+		LAST = NOW;
+		NOW = SDL_GetPerformanceCounter();
+
+		deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+
 		i->UpdateInstance();
+
+		// Update all entities
+		for (int i = 0; i < entities.size(); i++)
+		{
+			entities[i]->Update(deltaTime);
+		}
+
+
 		//Draw the level, draw the animations and update them, then render everything else
 		renderer->DrawCurrentLevel();
-		animExample->Draw();
-		animExample->SpriteUpdate();
+
+		// Draw all entities
+		for (int i = 0; i < entities.size(); i++)
+		{
+			entities[i]->Draw();
+		}
+
 		renderer->GameDraw();
 
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
 		//Check input and move accordingly 
 		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-		if (i->KeyIsDown(KEY_UP))
-		{
-			sManager->PlaySFX(SFXList::Shoot);
-			renderer->CameraFunctionality(-0.5f, false);
-		}
+		//if (i->KeyIsDown(KEY_UP))
+		//{
+		//	sManager->PlaySFX(SFXList::Shoot);
+		//	renderer->CameraFunctionality(-0.5f, false);
+		//}
 
-		if (i->KeyIsDown(KEY_LEFT))
-		{
-			UI->ChangeMenu(MenuState::InGame);
-			renderer->CameraFunctionality(-0.5f, true);
-		}
+		//if (i->KeyIsDown(KEY_LEFT))
+		//{
+		//	UI->ChangeMenu(MenuState::InGame);
+		//	renderer->CameraFunctionality(-0.5f, true);
+		//}
 
-		if (i->KeyIsDown(KEY_DOWN))
-		{
-			UI->ChangeMenu(MenuState::Paused);
-			renderer->CameraFunctionality(0.5f, false);
-		}
+		//if (i->KeyIsDown(KEY_DOWN))
+		//{
+		//	UI->ChangeMenu(MenuState::Paused);
+		//	renderer->CameraFunctionality(0.5f, false);
+		//}
 
-		if (i->KeyIsDown(KEY_RIGHT))
-		{
-			UI->ChangeMenu(MenuState::Start);
-			renderer->CameraFunctionality(0.5f, true);
-		}
+		//if (i->KeyIsDown(KEY_RIGHT))
+		//{
+		//	UI->ChangeMenu(MenuState::Start);
+		//	renderer->CameraFunctionality(0.5f, true);
+		//}
 
 		UI->DisplayMenu();
-		renderer->GameDraw();
+		//renderer->GameDraw();
 	}
 
 	getchar();

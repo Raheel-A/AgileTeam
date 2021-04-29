@@ -18,6 +18,18 @@ void Enemy::Update(float delta)
 
 void Enemy::Draw()
 {
+	// TODO: This can probably moved to the Entity class
+	if (sprite != nullptr)
+	{
+		sprite->SpriteUpdate();
+		sprite->Draw();
+	}
+}
+
+void Enemy::LoadSprite(ImageLoader* imageLoader)
+{
+	sprite = new Sprite(imageLoader->LoadeImage("Assets/evil_pumpkin_dude.bmp"), true);
+	sprite->setPos(Vector2(x, y));
 }
 
 void Enemy::OnCollision(Entity* collider)

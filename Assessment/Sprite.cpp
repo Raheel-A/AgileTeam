@@ -74,8 +74,8 @@ void Sprite::SpriteUpdate()
 
 	//follows the players position and scale
 	SourceRect.y = AnimIndex * SourceRect.h; //when not animated , animation index is zero
-	DestRect.x = 200; //PLAYERS POSITION x
-	DestRect.y = 200; //Players Position y
+	DestRect.x = pos.x;//200; //PLAYERS POSITION x
+	DestRect.y = pos.y;//200; //Players Position y
 	DestRect.w = 16 * 2;//width * Scale; //
 	DestRect.h = 32 * 2;//heigh * Scale; //
 

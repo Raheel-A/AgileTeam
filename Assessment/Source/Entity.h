@@ -1,5 +1,8 @@
 #pragma once
 #include <SDL_rect.h>
+#include <SDL.h>
+#include "../Sprite.h"
+#include "../ImageLoader.h"
 
 /// <summary>
 /// Base class that any entity in the game derives from
@@ -10,9 +13,12 @@ public:
 	Entity(float x, float y, float width, float height);
 	~Entity();
 
+	Sprite* sprite;
+
 	virtual void Init() = 0;
 	virtual void Update(float delta) = 0;
 	virtual void Draw() = 0;
+	virtual void LoadSprite(ImageLoader* imageLoader) = 0;
 
 	bool CheckCollision(Entity* entity1, Entity* entity2);
 	bool CheckCollision(Entity* entity, SDL_Rect rect);

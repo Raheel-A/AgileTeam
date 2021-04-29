@@ -19,6 +19,7 @@ public:
 	void Init();
 	void Update(float delta);
 	void Draw();
+	void LoadSprite(ImageLoader* imageLoader);
 
 	void OnCollision(Entity* collider);
 
