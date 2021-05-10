@@ -1,7 +1,5 @@
 #include "LevelData.h"
 
-//Morgan
-
 char LevelData::GetTile(int x, int y)
 {
 	return backgroundTiles[x][y];
