@@ -97,11 +97,14 @@ int main(void)
 	//sManager->PlayBGM(-1); //SHUSH
 
 	bool quit = false;
+
 	//Create a new image loader
 	ImageLoader* imageloader = new ImageLoader(renderer->renderer);
+
 	//Load sprites into the sprite-list for level loading
 	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
 	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
+
 	//Create a seperate sprite for the player/enemy
 	Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 	
@@ -113,7 +116,7 @@ int main(void)
 		renderer->DrawCurrentLevel();
 		animExample->Draw();
 		animExample->SpriteUpdate();
-		renderer->GameDraw();
+		//renderer->GameDraw();
 
 		quit = i->KeyIsDown(KEY_ESC) ? true : false;
 
@@ -121,32 +124,29 @@ int main(void)
 		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
 		if (i->KeyIsDown(KEY_UP))
 		{
-			sManager->PlaySFX(SFXList::Shoot);
-			renderer->CameraFunctionality(-0.5f, false);
+			UI->ChangeStartSelection(StartScreenSelected::Play);
 		}
 
 		if (i->KeyIsDown(KEY_LEFT))
 		{
 			UI->ChangeMenu(MenuState::InGame);
-			renderer->CameraFunctionality(-0.5f, true);
 		}
 
 		if (i->KeyIsDown(KEY_DOWN))
 		{
-			UI->ChangeMenu(MenuState::Paused);
-			renderer->CameraFunctionality(0.5f, false);
+			UI->ChangeStartSelection(StartScreenSelected::Quit);
 		}
 
 		if (i->KeyIsDown(KEY_RIGHT))
 		{
 			UI->ChangeMenu(MenuState::Start);
-			renderer->CameraFunctionality(0.5f, true);
 		}
+
+		if (i->KeyIsDown(KEY_ENTER)) UI->SelectButton(quit);
 
 		UI->DisplayMenu();
 		renderer->GameDraw();
 	}
 
-	getchar();
 	SDL_Quit();
 }

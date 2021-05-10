@@ -2,6 +2,9 @@
 
 Menus::Menus(Renderer* r)
 {
+	selected = StartScreenSelected::Play;
+	pointerRect = pointerRectStart;
+
 	renderer = r;
 	sdl_rend = r->renderer;
 
@@ -18,6 +21,29 @@ Menus::~Menus()
 void Menus::ChangeMenu(MenuState newMenu)
 {
 	menustate = newMenu;
+}
+
+void Menus::ChangeStartSelection(StartScreenSelected newSelected)
+{
+	selected = newSelected;
+	MoveSelectedPointer();
+}
+
+void Menus::SelectButton(bool& fuckthisshit)
+{
+	switch (selected)
+	{
+	case StartScreenSelected::Play:
+		std::cout << "\nPLAY\n";
+
+		menustate = MenuState::InGame;
+		break;
+	case StartScreenSelected::Quit:
+		fuckthisshit = true;
+		break;
+	default:
+		break;
+	}
 }
 
 void Menus::CreatePauseMenu()
@@ -47,21 +73,40 @@ void Menus::CreatePauseMenu()
 
 void Menus::CreateStartMenu()
 {
+	//BG
 	imageLoader->LoadeImage(StartBGPath);
 	StartBackground = imageLoader->GetImage();
+
+	//Arrow
+	imageLoader->LoadeImage(arrowPath);
+	selectedArrow = imageLoader->GetImage();
 
 	//Title
 	start_Title = new Text(sdl_rend, pauseFontSize * 2, "TITLE", 300, 0);
 	startMenuTexts.push_back(start_Title);
+
 	//Start
 	start_Start = new Text(sdl_rend, pauseFontSize, "Start Game",280, 200);
 	startMenuTexts.push_back(start_Start);
-	//Settings
-	start_Settings = new Text(sdl_rend, pauseFontSize, "Settings", 310, 250);
-	startMenuTexts.push_back(start_Settings);
+
 	//Quit
-	start_Quit = new Text(sdl_rend, pauseFontSize, "Quit", 330, 300);
+	start_Quit = new Text(sdl_rend, pauseFontSize, "Quit", 310, 250);
 	startMenuTexts.push_back(start_Quit);
+}
+
+void Menus::MoveSelectedPointer()
+{
+	switch (selected)
+	{
+	case Play:
+		pointerRect = pointerRectStart;
+		break;
+	case Quit:
+		pointerRect = pointerRectQuit;
+		break;
+	default:
+		break;
+	}
 }
 
 void Menus::DisplayMenu()
@@ -70,12 +115,13 @@ void Menus::DisplayMenu()
 	{
 	case Start:
 		renderer->UIDraw(backgroundRect, StartBackground);
-
+		renderer->UIDraw(pointerRect, selectedArrow);
 		for (int i = 0; i < startMenuTexts.size(); i++)
 		{
 			renderer->UIDraw(startMenuTexts[i]->textRect, startMenuTexts[i]->GetTexture());
 		}
 		break;
+
 	case Paused:
 		renderer->UIDraw(backgroundRect, PauseBackground);
 
@@ -84,9 +130,11 @@ void Menus::DisplayMenu()
 			renderer->UIDraw(pauseMenuTexts[i]->textRect, pauseMenuTexts[i]->GetTexture());
 		}
 		break;
+
 	case InGame:
 		hud->DisplayHUD();
 		break;
+
 	default:
 		break;
 	}

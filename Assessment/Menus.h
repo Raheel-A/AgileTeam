@@ -8,6 +8,8 @@
 
 enum MenuState { Start, Paused, InGame };
 
+enum StartScreenSelected { Play, Quit };
+
 class Menus
 {
 public:
@@ -15,7 +17,11 @@ public:
 	~Menus();
 	
 	void ChangeMenu(MenuState newMenu);
+	void PrintSelection() { std::cout << selected; }
 	void DisplayMenu();
+
+	void ChangeStartSelection(StartScreenSelected newSelected);
+	void SelectButton(bool& fuckthisshit);
 private:
 	Renderer* renderer;
 	SDL_Renderer* sdl_rend;
@@ -42,8 +48,18 @@ private:
 	int pauseFontSize = 30;
 
 	//START MENU
+	StartScreenSelected selected;
+	const string arrowPath = "Assets/swordpointer.bmp";
+	SDL_Rect pointerRect;
+
+	SDL_Rect pointerRectStart{ 470, 210, 58, 15};
+	SDL_Rect pointerRectQuit{ 470, 260, 58, 15};
 	SDL_Texture* StartBackground;
+
+	void MoveSelectedPointer();
+
 	const string StartBGPath = "Assets/StartImage.bmp";
+	SDL_Texture* selectedArrow;
 
 	Text* start_Title;
 	Text* start_Start;

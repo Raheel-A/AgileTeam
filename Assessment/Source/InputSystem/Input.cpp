@@ -48,6 +48,9 @@ void Input::UpdateInstance()
             case SDLK_LSHIFT:
                 keysPressed[KEY_LSHIFT] = true;
                 break;
+            case SDLK_RETURN:
+                keysPressed[KEY_ENTER] = true;
+                break;
             default:
                 break;
             }
@@ -83,6 +86,9 @@ void Input::UpdateInstance()
                 break;
             case SDLK_LSHIFT:
                 keysPressed[KEY_LSHIFT] = false;
+                break;
+            case SDLK_RETURN:
+                keysPressed[KEY_ENTER] = false;
                 break;
             default:
                 break;
@@ -125,6 +131,9 @@ void Input::Update()
             case SDLK_LSHIFT:
                 keysPressed[KEY_LSHIFT] = true;
                 break;
+            case SDLK_RETURN:
+                keysPressed[KEY_ENTER] = true;
+                break;
             default:
                 break;
             }
@@ -160,6 +169,9 @@ void Input::Update()
                 break;
             case SDLK_LSHIFT:
                 keysPressed[KEY_LSHIFT] = false;
+                break;
+            case SDLK_RETURN:
+                keysPressed[KEY_ENTER] = false;
                 break;
             default:
                 break;
