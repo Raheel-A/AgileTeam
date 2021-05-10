@@ -61,6 +61,7 @@ void CollisionTest()
 int main() 
 {
 	bool running = true;
+	GameState gState = GameState::Start;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -97,11 +98,14 @@ int main()
 	//sManager->PlayBGM(-1); //SHUSH
 
 	bool quit = false;
+
 	//Create a new image loader
 	ImageLoader* imageloader = new ImageLoader(renderer->renderer);
+
 	//Load sprites into the sprite-list for level loading
 	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
 	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
+
 	//Create a seperate sprite for the player/enemy
 	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 
@@ -123,7 +127,7 @@ int main()
 	double deltaTime = 0;
 
 	//main loop
-	while (!quit)
+	while (gState != GameState::Quit)
 	{
 		LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
@@ -148,39 +152,59 @@ int main()
 			entities[i]->Draw();
 		}
 
-		renderer->GameDraw();
-
 		quit = i->KeyIsDown(KEY_ESC);
 		
 
-
-		
-		//Check input and move accordingly 
-		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-		if (i->KeyIsDown(KEY_UP))
+		if (gState == GameState::Start)
 		{
-			sManager->PlaySFX(SFXList::Shoot);
-			//renderer->CameraFunctionality(-0.5f, false);
+			//Check input and move accordingly 
+			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
+			if (i->KeyIsDown(KEY_UP))
+			{
+				UI->ChangeStartSelection(StartScreenSelected::PlayButton);
+			}
+
+			if (i->KeyIsDown(KEY_LEFT))
+			{
+				UI->ChangeMenu(GameState::InGame);;
+			}
+
+			if (i->KeyIsDown(KEY_DOWN))
+			{
+				UI->ChangeStartSelection(StartScreenSelected::QuitButton);
+			}
+
+			if (i->KeyIsDown(KEY_RIGHT))
+			{
+				UI->ChangeMenu(GameState::Start);
+			}
+
+			if (i->KeyIsDown(KEY_ENTER))
+			{
+				UI->SelectButton(gState);
+			}
+		}
+		else
+		{
+			renderer->DrawCurrentLevel();
+			// Update all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Update(deltaTime);
+			}
+
+			//Draw the level, draw the animations and update them, then render everything else
+			//renderer->DrawCurrentLevel();
+
+			// Draw all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Draw();
+			}
 		}
 
-		if (i->KeyIsDown(KEY_LEFT))
-		{
-			UI->ChangeMenu(MenuState::InGame);
-			//renderer->CameraFunctionality(-0.5f, true);
-		}
-
-		if (i->KeyIsDown(KEY_DOWN))
-		{
-			UI->ChangeMenu(MenuState::Paused);
-			//renderer->CameraFunctionality(0.5f, false);
-		}
-
-		if (i->KeyIsDown(KEY_RIGHT))
-		{
-			UI->ChangeMenu(MenuState::Start);
-			//renderer->CameraFunctionality(0.5f, true);
-		}
-
+		UI->DisplayMenu();
+		renderer->GameDraw();
 	}
 	
 	SDL_Quit();
