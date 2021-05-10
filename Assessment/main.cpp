@@ -157,6 +157,7 @@ int main()
 			if (i->KeyIsDown(KEY_RIGHT))
 			{
 				UI->ChangeMenu(MenuState::Start);
+				_isMenu = false;
 				//renderer->CameraFunctionality(0.5f, true);
 			}
 			UI->DisplayMenu();
