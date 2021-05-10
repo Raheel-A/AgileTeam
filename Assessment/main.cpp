@@ -105,6 +105,8 @@ int main()
 	//Create a seperate sprite for the player/enemy
 	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 
+	bool _isMenu = true;
+
 
 
 	// Create a player and an enemy with a sprite
@@ -132,54 +134,58 @@ int main()
 
 		i->UpdateInstance();
 
-		// Update all entities
-		for (int i = 0; i < entities.size(); i++)
+		if (_isMenu)
 		{
-			entities[i]->Update(deltaTime);
+			if (i->KeyIsDown(KEY_UP))
+			{
+				sManager->PlaySFX(SFXList::Shoot);
+				//renderer->CameraFunctionality(-0.5f, false);
+			}
+
+			if (i->KeyIsDown(KEY_LEFT))
+			{
+				UI->ChangeMenu(MenuState::InGame);
+				//renderer->CameraFunctionality(-0.5f, true);
+			}
+
+			if (i->KeyIsDown(KEY_DOWN))
+			{
+				UI->ChangeMenu(MenuState::Paused);
+				//renderer->CameraFunctionality(0.5f, false);
+			}
+
+			if (i->KeyIsDown(KEY_RIGHT))
+			{
+				UI->ChangeMenu(MenuState::Start);
+				//renderer->CameraFunctionality(0.5f, true);
+			}
+			UI->DisplayMenu();
 		}
-
-
-		//Draw the level, draw the animations and update them, then render everything else
-		renderer->DrawCurrentLevel();
-
-		// Draw all entities
-		for (int i = 0; i < entities.size(); i++)
+		else
 		{
-			entities[i]->Draw();
+			renderer->DrawCurrentLevel();
+			// Update all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Update(deltaTime);
+			}
+
+			//Draw the level, draw the animations and update them, then render everything else
+//renderer->DrawCurrentLevel();
+
+			// Draw all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Draw();
+			}
 		}
 
 		renderer->GameDraw();
 
 		quit = i->KeyIsDown(KEY_ESC);
 		
-
-
-		
 		//Check input and move accordingly 
 		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-		if (i->KeyIsDown(KEY_UP))
-		{
-			sManager->PlaySFX(SFXList::Shoot);
-			//renderer->CameraFunctionality(-0.5f, false);
-		}
-
-		if (i->KeyIsDown(KEY_LEFT))
-		{
-			UI->ChangeMenu(MenuState::InGame);
-			//renderer->CameraFunctionality(-0.5f, true);
-		}
-
-		if (i->KeyIsDown(KEY_DOWN))
-		{
-			UI->ChangeMenu(MenuState::Paused);
-			//renderer->CameraFunctionality(0.5f, false);
-		}
-
-		if (i->KeyIsDown(KEY_RIGHT))
-		{
-			UI->ChangeMenu(MenuState::Start);
-			//renderer->CameraFunctionality(0.5f, true);
-		}
 
 	}
 	
