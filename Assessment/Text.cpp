@@ -41,7 +41,7 @@ void Text::UpdateText(std::string actualText, SDL_Color col)
 
 void Text::CreateTextTexture()
 {
-	SDL_Surface* surface = TTF_RenderText_Solid(font, fonttext.c_str(), black);
+	SDL_Surface* surface = TTF_RenderText_Solid(font, fonttext.c_str(), white);
 
 	if (surface == NULL)
 	{
