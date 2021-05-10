@@ -61,6 +61,7 @@ void CollisionTest()
 int main(void) 
 {
 	bool running = true;
+	GameState gState = GameState::Start;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -109,40 +110,48 @@ int main(void)
 	Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 	
 	//main loop
-	while (!quit)
+	while (gState != GameState::Quit)
 	{
-		i->UpdateInstance();
-		//Draw the level, draw the animations and update them, then render everything else
-		renderer->DrawCurrentLevel();
-		animExample->Draw();
-		animExample->SpriteUpdate();
-		//renderer->GameDraw();
-
-		quit = i->KeyIsDown(KEY_ESC) ? true : false;
-
-		//Check input and move accordingly 
-		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-		if (i->KeyIsDown(KEY_UP))
+		if (gState == GameState::Start)
 		{
-			UI->ChangeStartSelection(StartScreenSelected::Play);
+			i->UpdateInstance();
+			//Draw the level, draw the animations and update them, then render everything else
+			//renderer->GameDraw();
+
+			quit = i->KeyIsDown(KEY_ESC) ? true : false;
+
+			//Check input and move accordingly 
+			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
+			if (i->KeyIsDown(KEY_UP))
+			{
+				UI->ChangeStartSelection(StartScreenSelected::PlayButton);
+			}
+
+			if (i->KeyIsDown(KEY_LEFT))
+			{
+				UI->ChangeMenu(GameState::InGame);
+			}
+
+			if (i->KeyIsDown(KEY_DOWN))
+			{
+				UI->ChangeStartSelection(StartScreenSelected::QuitButton);
+			}
+
+			if (i->KeyIsDown(KEY_RIGHT))
+			{
+				UI->ChangeMenu(GameState::Start);
+			}
+
+			if (i->KeyIsDown(KEY_ENTER)) UI->SelectButton(gState);
+
+		}
+		else
+		{
+			renderer->DrawCurrentLevel();
+			animExample->Draw();
+			animExample->SpriteUpdate();
 		}
 
-		if (i->KeyIsDown(KEY_LEFT))
-		{
-			UI->ChangeMenu(MenuState::InGame);
-		}
-
-		if (i->KeyIsDown(KEY_DOWN))
-		{
-			UI->ChangeStartSelection(StartScreenSelected::Quit);
-		}
-
-		if (i->KeyIsDown(KEY_RIGHT))
-		{
-			UI->ChangeMenu(MenuState::Start);
-		}
-
-		if (i->KeyIsDown(KEY_ENTER)) UI->SelectButton(quit);
 
 		UI->DisplayMenu();
 		renderer->GameDraw();

@@ -6,9 +6,9 @@
 #include "Renderer.h"
 #include "HUD.h"
 
-enum MenuState { Start, Paused, InGame };
+enum GameState { Start, Paused, InGame, Quit };
 
-enum StartScreenSelected { Play, Quit };
+enum StartScreenSelected { PlayButton, QuitButton };
 
 class Menus
 {
@@ -16,18 +16,18 @@ public:
 	Menus(Renderer* r);
 	~Menus();
 	
-	void ChangeMenu(MenuState newMenu);
+	void ChangeMenu(GameState newMenu);
 	void PrintSelection() { std::cout << selected; }
 	void DisplayMenu();
 
 	void ChangeStartSelection(StartScreenSelected newSelected);
-	void SelectButton(bool& fuckthisshit);
+	void SelectButton(GameState& gameState);
 private:
 	Renderer* renderer;
 	SDL_Renderer* sdl_rend;
 	ImageLoader* imageLoader;
 
-	MenuState menustate = MenuState::Start;
+	GameState menustate = GameState::Start;
 
 	void CreatePauseMenu();
 	void CreateStartMenu();
@@ -49,16 +49,16 @@ private:
 
 	//START MENU
 	StartScreenSelected selected;
-	const string arrowPath = "Assets/swordpointer.bmp";
+	const string arrowPath = "Assets/sebface.bmp";//"Assets/swordpointer.bmp";
 	SDL_Rect pointerRect;
 
-	SDL_Rect pointerRectStart{ 470, 210, 58, 15};
-	SDL_Rect pointerRectQuit{ 470, 260, 58, 15};
+	SDL_Rect pointerRectStart{ 190, 190, 58, 65};
+	SDL_Rect pointerRectQuit{ 190, 240, 58, 65};
 	SDL_Texture* StartBackground;
 
 	void MoveSelectedPointer();
 
-	const string StartBGPath = "Assets/StartImage.bmp";
+	const string StartBGPath = "Assets/jackolantern.bmp";
 	SDL_Texture* selectedArrow;
 
 	Text* start_Title;

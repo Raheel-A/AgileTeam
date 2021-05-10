@@ -2,7 +2,7 @@
 
 Menus::Menus(Renderer* r)
 {
-	selected = StartScreenSelected::Play;
+	selected = StartScreenSelected::PlayButton;
 	pointerRect = pointerRectStart;
 
 	renderer = r;
@@ -18,7 +18,7 @@ Menus::~Menus()
 {
 }
 
-void Menus::ChangeMenu(MenuState newMenu)
+void Menus::ChangeMenu(GameState newMenu)
 {
 	menustate = newMenu;
 }
@@ -29,17 +29,17 @@ void Menus::ChangeStartSelection(StartScreenSelected newSelected)
 	MoveSelectedPointer();
 }
 
-void Menus::SelectButton(bool& fuckthisshit)
+void Menus::SelectButton(GameState& gameState)
 {
 	switch (selected)
 	{
-	case StartScreenSelected::Play:
+	case StartScreenSelected::PlayButton:
 		std::cout << "\nPLAY\n";
-
-		menustate = MenuState::InGame;
+		gameState = GameState::InGame;
+		menustate = GameState::InGame;
 		break;
-	case StartScreenSelected::Quit:
-		fuckthisshit = true;
+	case StartScreenSelected::QuitButton:
+		gameState = GameState::Quit;
 		break;
 	default:
 		break;
@@ -82,15 +82,15 @@ void Menus::CreateStartMenu()
 	selectedArrow = imageLoader->GetImage();
 
 	//Title
-	start_Title = new Text(sdl_rend, pauseFontSize * 2, "TITLE", 300, 0);
+	start_Title = new Text(sdl_rend, pauseFontSize * 2, "Jack-o'-lantern 2", 100, 0);
 	startMenuTexts.push_back(start_Title);
 
 	//Start
-	start_Start = new Text(sdl_rend, pauseFontSize, "Start Game",280, 200);
+	start_Start = new Text(sdl_rend, pauseFontSize, "Start Game", 0, 200);//280, 200);
 	startMenuTexts.push_back(start_Start);
 
 	//Quit
-	start_Quit = new Text(sdl_rend, pauseFontSize, "Quit", 310, 250);
+	start_Quit = new Text(sdl_rend, pauseFontSize, "Quit", 0, 250);//310, 250);
 	startMenuTexts.push_back(start_Quit);
 }
 
@@ -98,10 +98,10 @@ void Menus::MoveSelectedPointer()
 {
 	switch (selected)
 	{
-	case Play:
+	case PlayButton:
 		pointerRect = pointerRectStart;
 		break;
-	case Quit:
+	case QuitButton:
 		pointerRect = pointerRectQuit;
 		break;
 	default:
