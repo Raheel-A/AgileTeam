@@ -23,6 +23,7 @@ public:
 	void Update(float delta);
 	void Draw();
 	void Move(int direct);
+	void LoadSprite(ImageLoader* imageLoader);
 
 	void OnCollision(Entity* collider);
 

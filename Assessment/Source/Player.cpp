@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "InputSystem/Input.h"
 
 Player::Player() : Player(0, 0, 10, 10)
 {
@@ -8,7 +9,7 @@ Player::Player(float x, float y, float width, float height) : Entity(x, y, width
 {
 	x = x;
 	y = y;
-	speed = 2.0f;
+	speed = 0.5f;
 
 	//Setup attack range box (JW)
 	attackRangeCollisionBox.x = x - attackRange;
@@ -27,11 +28,39 @@ void Player::Init()
 
 void Player::Update(float delta)
 {
+	if (Input::KeyIsDown(KEY_UP))
+	{
+		y -= speed * delta;
+	}
 
+	if (Input::KeyIsDown(KEY_LEFT))
+	{
+		x -= speed * delta;
+	}
+
+	if (Input::KeyIsDown(KEY_DOWN))
+	{
+		y += speed * delta;
+	}
+
+	if (Input::KeyIsDown(KEY_RIGHT))
+	{
+		x += speed * delta;
+	}
+
+	sprite->setPos(Vector2(x, y));
+
+	UpdateAttackRangeCollider(); //(JW)
 }
 
 void Player::Draw()
 {
+	// TODO: This can probably moved to the Entity class
+	if(sprite != nullptr)
+	{ 
+		sprite->SpriteUpdate();
+		sprite->Draw();
+	}
 }
 
 void Player::Move(int direct)
@@ -52,11 +81,16 @@ void Player::Move(int direct)
 	{
 		x += speed;
 	}
-	UpdateAttackRangeCollider(); //(JW)
 }
 
 void Player::OnCollision(Entity* collider)
 {
+}
+
+void Player::LoadSprite(ImageLoader* imageLoader)
+{
+	sprite = new Sprite(imageLoader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
+	sprite->setPos(Vector2(x, y));
 }
 
 void Player::LoseHealth(int healthAmount)
