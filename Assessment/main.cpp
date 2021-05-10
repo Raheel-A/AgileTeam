@@ -58,7 +58,7 @@ void CollisionTest()
 }
 
 
-int main(void) 
+int main() 
 {
 	bool running = true;
 
@@ -150,38 +150,39 @@ int main(void)
 
 		renderer->GameDraw();
 
-		quit = i->KeyIsDown(KEY_ESC) ? true : false;
+		quit = i->KeyIsDown(KEY_ESC);
+		
 
+
+		
 		//Check input and move accordingly 
 		//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-		//if (i->KeyIsDown(KEY_UP))
-		//{
-		//	sManager->PlaySFX(SFXList::Shoot);
-		//	renderer->CameraFunctionality(-0.5f, false);
-		//}
+		if (i->KeyIsDown(KEY_UP))
+		{
+			sManager->PlaySFX(SFXList::Shoot);
+			//renderer->CameraFunctionality(-0.5f, false);
+		}
 
-		//if (i->KeyIsDown(KEY_LEFT))
-		//{
-		//	UI->ChangeMenu(MenuState::InGame);
-		//	renderer->CameraFunctionality(-0.5f, true);
-		//}
+		if (i->KeyIsDown(KEY_LEFT))
+		{
+			UI->ChangeMenu(MenuState::InGame);
+			//renderer->CameraFunctionality(-0.5f, true);
+		}
 
-		//if (i->KeyIsDown(KEY_DOWN))
-		//{
-		//	UI->ChangeMenu(MenuState::Paused);
-		//	renderer->CameraFunctionality(0.5f, false);
-		//}
+		if (i->KeyIsDown(KEY_DOWN))
+		{
+			UI->ChangeMenu(MenuState::Paused);
+			//renderer->CameraFunctionality(0.5f, false);
+		}
 
-		//if (i->KeyIsDown(KEY_RIGHT))
-		//{
-		//	UI->ChangeMenu(MenuState::Start);
-		//	renderer->CameraFunctionality(0.5f, true);
-		//}
+		if (i->KeyIsDown(KEY_RIGHT))
+		{
+			UI->ChangeMenu(MenuState::Start);
+			//renderer->CameraFunctionality(0.5f, true);
+		}
 
-		UI->DisplayMenu();
-		//renderer->GameDraw();
 	}
-
-	getchar();
+	
 	SDL_Quit();
+	return 0;
 }
