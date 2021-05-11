@@ -93,8 +93,17 @@ int main()
 	Menus* UI = new Menus(renderer);
 
 	SoundManager* sManager = new SoundManager();
-	sManager->LoadMusic("Assets/music.wav");
+	sManager->LoadMusic(music::Menu,"Assets/music.wav");
+	sManager->LoadMusic(music::BGM,"Assets/Music2.wav");
+	sManager->LoadSFXs(SFXList::Walk, "Assets/Walk.wav");
 	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
+	sManager->LoadSFXs(SFXList::UIpositive, "Assets/UIPositive.wav");
+	sManager->LoadSFXs(SFXList::UInegative, "Assets/UIpop.wav");
+	sManager->LoadSFXs(SFXList::MenuPop, "Assets/MenuPop.flac");
+	sManager->LoadSFXs(SFXList::Die, "Assets/Die.wav");
+	sManager->LoadSFXs(SFXList::Life, "Assets/Life.wav");
+	sManager->LoadSFXs(SFXList::Damage, "Assets/Damage.wav");
+	sManager->LoadSFXs(SFXList::Score, "Assets/Score.wav");
 	//sManager->PlayBGM(-1); //SHUSH
 
 	bool quit = false;
