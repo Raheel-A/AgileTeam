@@ -102,6 +102,8 @@ void Input::UpdateInstance()
 
 void Input::Update()
 {
+    SetKeyHold();
+
     while (SDL_PollEvent(&inputEvent) != NULL)
     {
         if (inputEvent.type == SDL_KEYDOWN)
@@ -183,7 +185,27 @@ void Input::Update()
     }
 }
 
-bool Input::KeyIsDown(KEY_LIST key)
+bool Input::KeyPressed(KEY_LIST key)
 {
-    return keysPressed[key];
+    if (!keysHeld[key])
+    {
+        return keysPressed[key];
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Input::KeyHeld(KEY_LIST key)
+{
+    return keysHeld[key];
+}
+
+void Input::SetKeyHold()
+{
+    for (int i = 0; i < SIZEOF_KEY_LIST; i++)
+    {
+        keysHeld[i] = keysPressed[i];
+    }
 }

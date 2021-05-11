@@ -19,9 +19,12 @@ public:
 	~Input();
 	void UpdateInstance();
 	static void Update();
-	static bool KeyIsDown(KEY_LIST key);
+	static bool KeyPressed(KEY_LIST key);
+	static bool KeyHeld(KEY_LIST key);
+	static void SetKeyHold();
 private:
 	static SDL_Event inputEvent;
 	static bool keysPressed[SIZEOF_KEY_LIST];
+	static bool keysHeld[SIZEOF_KEY_LIST];
 };
 
