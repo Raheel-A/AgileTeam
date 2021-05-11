@@ -2,12 +2,16 @@
 #include <string>
 
 #include "Entity.h";
+#include "Player.h";
 
 using namespace std;
 
 class Enemy : public Entity
 {
 public:
+	//classes
+	Player* player;
+
 	//data
 	string m_enemyType;
 
@@ -29,7 +33,7 @@ public:
 
 	void LoseHealth(int healthAmount);
 
-	void AttackPlayer();
+	void AttackPlayer(int damageAmount);
 
 	void EnemyDeath();
 

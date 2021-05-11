@@ -82,9 +82,12 @@ void Player::GainHealth(int healthAmount)
 	}
 }
 
-void Player::PlayerAttack()
+void Player::PlayerAttack(int damageAmount, Enemy* enemy)
 {
+	//animation stuff?
+
 	//attack method
+	enemy->LoseHealth(damageAmount);
 }
 
 void Player::PlayerDeath()

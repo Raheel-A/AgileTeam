@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h";
+#include "Enemy.h";
 
 /// <summary>
 /// Entity that is controlled by the player and stores the health
@@ -10,6 +11,9 @@ public:
 	Player();
 	Player(float x, float y, float width, float height);
 	~Player();
+
+	//classes
+	Enemy* enemy;
 
 	//stats
 	unsigned int m_healthPoints{ 100 };
@@ -32,7 +36,7 @@ public:
 
 	int GetLives();
 
-	void PlayerAttack();
+	void PlayerAttack(int damageAmount, Enemy* enemy);
 
 	void PlayerDeath();
 	

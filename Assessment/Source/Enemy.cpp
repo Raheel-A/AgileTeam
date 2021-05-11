@@ -38,9 +38,10 @@ void Enemy::LoseHealth(int healthAmount)
 	}
 }
 
-void Enemy::AttackPlayer()
+void Enemy::AttackPlayer(int damageAmount)
 {
 	//call Player's lose health, among others
+	player->LoseHealth(damageAmount);
 }
 
 void Enemy::EnemyDeath()
