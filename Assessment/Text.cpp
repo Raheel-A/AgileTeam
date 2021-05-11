@@ -31,7 +31,6 @@ void Text::UpdateText(std::string actualText)
 
 	CreateTextTexture();
 	SDL_QueryTexture(fontTexture, NULL, NULL, &textRect.w, &textRect.h);
-
 }
 
 void Text::UpdateText(std::string actualText, SDL_Color col)
@@ -45,6 +44,11 @@ void Text::UpdateText(std::string actualText, SDL_Color col)
 
 void Text::CreateTextTexture()
 {
+	if (fontTexture)
+	{
+		SDL_DestroyTexture(fontTexture);
+	}
+
 	SDL_Surface* surface = TTF_RenderText_Solid(font, fonttext.c_str(), white);
 
 	if (surface == NULL)
