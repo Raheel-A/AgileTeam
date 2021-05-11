@@ -93,7 +93,7 @@ int main()
 	Menus* UI = new Menus(renderer);
 
 	SoundManager* sManager = new SoundManager();
-	sManager->LoadMusic("Assets/music.wav");
+	//sManager->LoadMusic("Assets/music.wav");
 	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
 	//sManager->PlayBGM(-1); //SHUSH
 
@@ -137,29 +137,24 @@ int main()
 
 		i->UpdateInstance();
 
-		quit = i->KeyIsDown(KEY_ESC);
+		quit = i->KeyPressed(KEY_ESC);
 		
 
 		if (gState == GameState::GAMESTATE_START)
 		{
 			//Check input and move accordingly 
 			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-			if (i->KeyIsDown(KEY_UP))
+			if (i->KeyPressed(KEY_UP))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_PLAY);
 			}
 
-			if (i->KeyIsDown(KEY_DOWN))
+			if (i->KeyPressed(KEY_DOWN))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_QUIT);
 			}
 
-			if (i->KeyIsDown(KEY_RIGHT))
-			{
-				UI->ChangeMenu(GameState::GAMESTATE_START);
-			}
-
-			if (i->KeyIsDown(KEY_ENTER))
+			if (i->KeyPressed(KEY_ENTER))
 			{
 				UI->SelectButton(gState);
 			}
@@ -183,19 +178,19 @@ int main()
 				entities[i]->Draw();
 			}
 
-			if (i->KeyIsDown(KEY_LEFT))
+			if (i->KeyPressed(KEY_LEFT))
 			{
-				UI->hud->ChangeHealth(-1);
-				UI->hud->ChangeGold(-5);
+				UI->hud->ChangeHealth(sManager , -1);
+				UI->hud->ChangeGold(sManager , -5);
 			}
 
-			if (i->KeyIsDown(KEY_RIGHT))
+			if (i->KeyPressed(KEY_RIGHT))
 			{
-				UI->hud->ChangeHealth(1);
-				UI->hud->ChangeGold(5);
+				UI->hud->ChangeHealth(sManager, 1);
+				UI->hud->ChangeGold(sManager, 5);
 			}
 
-			if (i->KeyIsDown(KEY_SPACE))
+			if (i->KeyPressed(KEY_SPACE))
 			{
 				UI->PauseGame(gState);
 			}
@@ -210,17 +205,17 @@ int main()
 				entities[i]->Draw();
 			}
 
-			if (i->KeyIsDown(KEY_UP))
+			if (i->KeyPressed(KEY_UP))
 			{
 				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_RESUME);
 			}
 
-			if (i->KeyIsDown(KEY_DOWN))
+			if (i->KeyPressed(KEY_DOWN))
 			{
 				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_QUIT);
 			}
 
-			if (i->KeyIsDown(KEY_ENTER))
+			if (i->KeyPressed(KEY_ENTER))
 			{
 				UI->SelectButton(gState);
 			}
