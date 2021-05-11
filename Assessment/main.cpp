@@ -93,9 +93,19 @@ int main()
 	Menus* UI = new Menus(renderer);
 
 	SoundManager* sManager = new SoundManager();
-	sManager->LoadMusic("Assets/music.wav");
+	sManager->LoadMusic(music::Menu,"Assets/music.wav");
+	sManager->LoadMusic(music::BGM,"Assets/Music2.wav");
+	sManager->LoadSFXs(SFXList::Walk, "Assets/Walk.wav");
 	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
-	//sManager->PlayBGM(-1); //SHUSH
+	sManager->LoadSFXs(SFXList::UIpositive, "Assets/UIPositive.wav");
+	sManager->LoadSFXs(SFXList::UInegative, "Assets/UIpop.wav");
+	sManager->LoadSFXs(SFXList::MenuPop, "Assets/MenuPop.wav");
+	sManager->LoadSFXs(SFXList::Die, "Assets/Die.wav");
+	sManager->LoadSFXs(SFXList::Life, "Assets/Life.wav");
+	sManager->LoadSFXs(SFXList::Damage, "Assets/Damage.wav");
+	sManager->LoadSFXs(SFXList::Score, "Assets/Score.wav");
+	//sManager->PlayBGM(music::Menu,-1); //SHUSH
+	//sManager->PlayBGM(music::BGM,-1); //SHUSH
 
 	bool quit = false;
 
@@ -110,8 +120,6 @@ int main()
 	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 
 	bool _isMenu = true;
-
-
 
 	// Create a player and an enemy with a sprite
 	Player* player = new Player(32, 32, 10, 10);
@@ -143,11 +151,13 @@ int main()
 
 		if (gState == GameState::Start)
 		{
+
 			//Check input and move accordingly 
 			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
 			if (i->KeyPressed(KEY_UP))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::PlayButton);
+				sManager->PlaySFX(SFXList::UInegative);
 			}
 
 			if (i->KeyPressed(KEY_LEFT))
@@ -158,6 +168,7 @@ int main()
 			if (i->KeyPressed(KEY_DOWN))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::QuitButton);
+				sManager->PlaySFX(SFXList::UInegative);
 			}
 
 			if (i->KeyPressed(KEY_RIGHT))
@@ -168,6 +179,7 @@ int main()
 			if (i->KeyPressed(KEY_ENTER))
 			{
 				UI->SelectButton(gState);
+				sManager->PlaySFX(SFXList::UIpositive);
 			}
 		}
 		else
@@ -190,14 +202,14 @@ int main()
 
 			if (i->KeyPressed(KEY_LEFT))
 			{
-				UI->hud->ChangeHealth(-1);
-				UI->hud->ChangeGold(-5);
+				UI->hud->ChangeHealth(sManager,-1);
+				UI->hud->ChangeGold(sManager,-5);
 			}
 
 			if (i->KeyPressed(KEY_RIGHT))
 			{
-				UI->hud->ChangeHealth(1);
-				UI->hud->ChangeGold(5);
+				UI->hud->ChangeHealth(sManager,1);
+				UI->hud->ChangeGold(sManager,5);
 			}
 		}
 

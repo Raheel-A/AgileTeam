@@ -4,6 +4,7 @@
 #include "Text.h"
 #include "ImageLoader.h"
 #include "Renderer.h"
+#include "SoundManager.h"
 
 using namespace std;
 
@@ -24,8 +25,8 @@ public:
 
 	vector<Text*> activeTexts; 		//vector of texts to add to and access?
 	vector<SDL_Texture*> activeImages;		//vector of imagesto add to and access?
-	void ChangeHealth(int change);
-	void ChangeGold(int change);
+	void ChangeHealth(SoundManager* sfxMan,int change);
+	void ChangeGold(SoundManager* sfxMan,int change);
 private:
 	void DisplayHealth();
 

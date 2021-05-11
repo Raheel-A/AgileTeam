@@ -137,8 +137,17 @@ void HUD::DisplayHealth()
 	}
 }
 
-void HUD::ChangeHealth(int change)
+void HUD::ChangeHealth(SoundManager* sfxMan,int change)
 {
+	if (change>0)
+	{
+		sfxMan->PlaySFX(SFXList::Life);
+	}
+	else
+	{
+		sfxMan->PlaySFX(SFXList::Damage);
+	}
+
 	lives += change;
 
 	if (lives > 3)
@@ -148,12 +157,16 @@ void HUD::ChangeHealth(int change)
 	else if (lives < 0)
 	{
 		lives = 0;
+		sfxMan->PlaySFX(SFXList::Die);
 	}
 }
 
-void HUD::ChangeGold(int change)
+void HUD::ChangeGold(SoundManager* sfxMan,int change)
 {
+	
+	sfxMan->PlaySFX(SFXList::Score);
 	gold += change;
+	
 
 	money = "Gold: " + to_string(gold);
 
