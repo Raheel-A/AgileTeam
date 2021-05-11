@@ -138,34 +138,34 @@ int main()
 
 		i->UpdateInstance();
 
-		quit = i->KeyIsDown(KEY_ESC);
+		quit = i->KeyPressed(KEY_ESC);
 		
 
 		if (gState == GameState::Start)
 		{
 			//Check input and move accordingly 
 			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-			if (i->KeyIsDown(KEY_UP))
+			if (i->KeyPressed(KEY_UP))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::PlayButton);
 			}
 
-			if (i->KeyIsDown(KEY_LEFT))
+			if (i->KeyPressed(KEY_LEFT))
 			{
 				UI->ChangeMenu(GameState::InGame);;
 			}
 
-			if (i->KeyIsDown(KEY_DOWN))
+			if (i->KeyPressed(KEY_DOWN))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::QuitButton);
 			}
 
-			if (i->KeyIsDown(KEY_RIGHT))
+			if (i->KeyPressed(KEY_RIGHT))
 			{
 				UI->ChangeMenu(GameState::Start);
 			}
 
-			if (i->KeyIsDown(KEY_ENTER))
+			if (i->KeyPressed(KEY_ENTER))
 			{
 				UI->SelectButton(gState);
 			}
@@ -188,13 +188,13 @@ int main()
 				entities[i]->Draw();
 			}
 
-			if (i->KeyIsDown(KEY_LEFT))
+			if (i->KeyPressed(KEY_LEFT))
 			{
 				UI->hud->ChangeHealth(-1);
 				UI->hud->ChangeGold(-5);
 			}
 
-			if (i->KeyIsDown(KEY_RIGHT))
+			if (i->KeyPressed(KEY_RIGHT))
 			{
 				UI->hud->ChangeHealth(1);
 				UI->hud->ChangeGold(5);

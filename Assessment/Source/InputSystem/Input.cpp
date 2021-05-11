@@ -6,6 +6,7 @@ Input::Input()
     for (int i = 0; i < SIZEOF_KEY_LIST; i++)
     {
         keysPressed[i] = false;
+        keysHeld[i] = false;
     }
 }
 
@@ -14,6 +15,7 @@ Input::~Input()
 }
 
 bool Input::keysPressed[SIZEOF_KEY_LIST];
+bool Input::keysHeld[SIZEOF_KEY_LIST];
 
 SDL_Event Input::inputEvent;
 
