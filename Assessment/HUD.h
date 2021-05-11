@@ -37,6 +37,7 @@ private:
 	
 	SDL_Texture* heartIcon;
 	SDL_Texture* blankHeart;
+	SDL_Texture* banner;
 
 	int heartSize = 30;
 	int lives = 3;
@@ -45,9 +46,11 @@ private:
 	SDL_Rect livesRect1 { 750, 0, heartSize, heartSize};
 	SDL_Rect livesRect2 { 700, 0, heartSize, heartSize};
 	SDL_Rect livesRect3 { 650, 0, heartSize, heartSize};
+	SDL_Rect bannerRect{ 0, 0, 800, 57 };
 
 	const string heartImagePath = "Assets/heart.bmp";
 	const string blankHeartPath = "Assets/blankheart.bmp";
+	const string bannerPath = "Assets/hudbanner.bmp";
 
 	Text* moneyText;
 	Text* healthText;

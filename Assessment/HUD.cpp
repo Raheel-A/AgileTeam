@@ -22,7 +22,6 @@ void HUD::CreateHUD(SDL_Renderer* r)
 	imageLoader = new ImageLoader(r);
 
 	//create textures
-
 	//health icons
 	imageLoader->LoadeImage(heartImagePath);
 	heartIcon = imageLoader->GetImage();
@@ -31,7 +30,10 @@ void HUD::CreateHUD(SDL_Renderer* r)
 	imageLoader->LoadeImage(blankHeartPath);
 	blankHeart = imageLoader->GetImage();
 	AddImage(blankHeart); //1
-
+	//banner
+	imageLoader->LoadeImage(bannerPath);
+	banner = imageLoader->GetImage();
+	AddImage(banner);	//2
 	//create text
 	moneyText = new Text(sdl_rend, 30, money, 0, 0);
 	AddText(moneyText); //0
@@ -63,6 +65,7 @@ void HUD::AddImage(SDL_Texture* texture)
 /// </summary>
 void HUD::DisplayHUD()
 {
+	renderer->UIDraw(bannerRect, activeImages[2]);
 	DisplayHealth();
 
 	for (int i = 0; i < activeTexts.size(); i++)
