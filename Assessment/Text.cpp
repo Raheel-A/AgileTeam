@@ -30,6 +30,8 @@ void Text::UpdateText(std::string actualText)
 	fonttext = actualText;
 
 	CreateTextTexture();
+	SDL_QueryTexture(fontTexture, NULL, NULL, &textRect.w, &textRect.h);
+
 }
 
 void Text::UpdateText(std::string actualText, SDL_Color col)
@@ -37,6 +39,8 @@ void Text::UpdateText(std::string actualText, SDL_Color col)
 	fonttext = actualText;
 
 	CreateTextTexture();
+	SDL_QueryTexture(fontTexture, NULL, NULL, &textRect.w, &textRect.h);
+
 }
 
 void Text::CreateTextTexture()

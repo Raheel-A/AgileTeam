@@ -24,19 +24,24 @@ public:
 
 	vector<Text*> activeTexts; 		//vector of texts to add to and access?
 	vector<SDL_Texture*> activeImages;		//vector of imagesto add to and access?
+	void ChangeHealth(int change);
+	void ChangeGold(int change);
 private:
+	void DisplayHealth();
+
 	Renderer* renderer;
 	SDL_Renderer* sdl_rend;
 
 	ImageLoader* imageLoader;
 	
 	SDL_Texture* weaponIcon;
-	SDL_Texture* heartIcon1;
-	SDL_Texture* heartIcon2;
-	SDL_Texture* heartIcon3;
+	SDL_Texture* heartIcon;
+	SDL_Texture* blankHeart;
 	SDL_Texture* background;
 
 	int heartSize = 30;
+	int lives = 3;
+	int gold = 0;
 
 	SDL_Rect weaponRect { 0, 515, 125, 125 };
 	SDL_Rect livesRect1 { 750, 0, heartSize, heartSize};
@@ -46,13 +51,14 @@ private:
 
 	const string weaponIconPath = "Assets/sword.bmp";
 	const string heartImagePath = "Assets/heart.bmp";
+	const string blankHeartPath = "Assets/blankheart.bmp";
 	const string backgroundPath = "Assets/HUDImage.bmp";
 
 	Text* moneyText;
 	Text* healthText;
 	Text* weaponText;
 
-	string money = "Gold: 500";
+	string money = "Gold: " + to_string(gold);
 	string health = "Lives: ";
 	string weaponName = "Diamond Sword";
 };

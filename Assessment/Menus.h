@@ -17,11 +17,13 @@ public:
 	~Menus();
 	
 	void ChangeMenu(GameState newMenu);
-	void PrintSelection() { std::cout << selected; }
+	//void PrintSelection() { std::cout << selected; }
 	void DisplayMenu();
 
 	void ChangeStartSelection(StartScreenSelected newSelected);
 	void SelectButton(GameState& gameState);
+	//HUD
+	HUD* hud;
 private:
 	Renderer* renderer;
 	SDL_Renderer* sdl_rend;
@@ -68,7 +70,5 @@ private:
 	vector<Text*> startMenuTexts;
 	int startFontSize = 30;
 
-	//HUD
-	HUD* hud;
 };
 

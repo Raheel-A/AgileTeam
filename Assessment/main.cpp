@@ -187,6 +187,18 @@ int main()
 			{
 				entities[i]->Draw();
 			}
+
+			if (i->KeyIsDown(KEY_LEFT))
+			{
+				UI->hud->ChangeHealth(-1);
+				UI->hud->ChangeGold(-5);
+			}
+
+			if (i->KeyIsDown(KEY_RIGHT))
+			{
+				UI->hud->ChangeHealth(1);
+				UI->hud->ChangeGold(5);
+			}
 		}
 
 		UI->DisplayMenu();
