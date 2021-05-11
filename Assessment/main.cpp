@@ -61,7 +61,7 @@ void CollisionTest()
 int main() 
 {
 	bool running = true;
-	GameState gState = GameState::Start;
+	GameState gState = GameState::GAMESTATE_START;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -112,7 +112,6 @@ int main()
 	bool _isMenu = true;
 
 
-
 	// Create a player and an enemy with a sprite
 	Player* player = new Player(32, 32, 10, 10);
 	player->LoadSprite(imageloader);
@@ -129,7 +128,7 @@ int main()
 	double deltaTime = 0;
 
 	//main loop
-	while (gState != GameState::Quit)
+	while (gState != GameState::GAMESTATE_QUIT)
 	{
 		LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
@@ -141,28 +140,23 @@ int main()
 		quit = i->KeyIsDown(KEY_ESC);
 		
 
-		if (gState == GameState::Start)
+		if (gState == GameState::GAMESTATE_START)
 		{
 			//Check input and move accordingly 
 			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
 			if (i->KeyIsDown(KEY_UP))
 			{
-				UI->ChangeStartSelection(StartScreenSelected::PlayButton);
-			}
-
-			if (i->KeyIsDown(KEY_LEFT))
-			{
-				UI->ChangeMenu(GameState::InGame);;
+				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_PLAY);
 			}
 
 			if (i->KeyIsDown(KEY_DOWN))
 			{
-				UI->ChangeStartSelection(StartScreenSelected::QuitButton);
+				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_QUIT);
 			}
 
 			if (i->KeyIsDown(KEY_RIGHT))
 			{
-				UI->ChangeMenu(GameState::Start);
+				UI->ChangeMenu(GameState::GAMESTATE_START);
 			}
 
 			if (i->KeyIsDown(KEY_ENTER))
@@ -170,9 +164,10 @@ int main()
 				UI->SelectButton(gState);
 			}
 		}
-		else
+		else if (gState == GameState::GAMESTATE_INGAME)
 		{
 			renderer->DrawCurrentLevel();
+
 			// Update all entities
 			for (int i = 0; i < entities.size(); i++)
 			{
@@ -198,6 +193,36 @@ int main()
 			{
 				UI->hud->ChangeHealth(1);
 				UI->hud->ChangeGold(5);
+			}
+
+			if (i->KeyIsDown(KEY_SPACE))
+			{
+				UI->PauseGame(gState);
+			}
+		}
+		else if (gState == GameState::GAMESTATE_PAUSED)
+		{
+			renderer->DrawCurrentLevel();
+
+			// Draw all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Draw();
+			}
+
+			if (i->KeyIsDown(KEY_UP))
+			{
+				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_RESUME);
+			}
+
+			if (i->KeyIsDown(KEY_DOWN))
+			{
+				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_QUIT);
+			}
+
+			if (i->KeyIsDown(KEY_ENTER))
+			{
+				UI->SelectButton(gState);
 			}
 		}
 
