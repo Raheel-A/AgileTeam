@@ -26,11 +26,11 @@ void HUD::CreateHUD(SDL_Renderer* r)
 	//health icons
 	imageLoader->LoadeImage(heartImagePath);
 	heartIcon = imageLoader->GetImage();
-	AddImage(heartIcon); //1
+	AddImage(heartIcon); //0
 
 	imageLoader->LoadeImage(blankHeartPath);
 	blankHeart = imageLoader->GetImage();
-	AddImage(blankHeart); //2
+	AddImage(blankHeart); //1
 
 	//create text
 	moneyText = new Text(sdl_rend, 30, money, 0, 0);
@@ -96,25 +96,25 @@ void HUD::DisplayHealth()
 {
 	switch (lives)
 	{
-	case 3: //1 = normal | 2 = blank
+	case 3: //0 = normal | 1 = blank
+		renderer->UIDraw(livesRect1, activeImages[0]);
+		renderer->UIDraw(livesRect2, activeImages[0]);
+		renderer->UIDraw(livesRect3, activeImages[0]);
+		break;
+	case 2:
+		renderer->UIDraw(livesRect1, activeImages[1]);
+		renderer->UIDraw(livesRect2, activeImages[0]);
+		renderer->UIDraw(livesRect3, activeImages[0]);
+		break;
+	case 1:
+		renderer->UIDraw(livesRect1, activeImages[1]);
+		renderer->UIDraw(livesRect2, activeImages[1]);
+		renderer->UIDraw(livesRect3, activeImages[0]);
+		break;
+	case 0:
 		renderer->UIDraw(livesRect1, activeImages[1]);
 		renderer->UIDraw(livesRect2, activeImages[1]);
 		renderer->UIDraw(livesRect3, activeImages[1]);
-		break;
-	case 2:
-		renderer->UIDraw(livesRect1, activeImages[2]);
-		renderer->UIDraw(livesRect2, activeImages[1]);
-		renderer->UIDraw(livesRect3, activeImages[1]);
-		break;
-	case 1:
-		renderer->UIDraw(livesRect1, activeImages[2]);
-		renderer->UIDraw(livesRect2, activeImages[2]);
-		renderer->UIDraw(livesRect3, activeImages[1]);
-		break;
-	case 0:
-		renderer->UIDraw(livesRect1, activeImages[2]);
-		renderer->UIDraw(livesRect2, activeImages[2]);
-		renderer->UIDraw(livesRect3, activeImages[2]);
 		break;
 	default:
 		break;
