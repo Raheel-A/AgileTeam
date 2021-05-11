@@ -21,6 +21,8 @@ SDL_Event Input::inputEvent;
 
 void Input::UpdateInstance()
 {
+    SetKeyHold();
+
     while (SDL_PollEvent(&inputEvent) != NULL)
     {
         if (inputEvent.type == SDL_KEYDOWN)

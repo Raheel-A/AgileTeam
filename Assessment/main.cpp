@@ -93,7 +93,7 @@ int main()
 	Menus* UI = new Menus(renderer);
 
 	SoundManager* sManager = new SoundManager();
-	//sManager->LoadMusic("Assets/music.wav");
+	sManager->LoadMusic(music::Menu, "Assets/music.wav");
 	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
 	//sManager->PlayBGM(-1); //SHUSH
 

@@ -23,11 +23,6 @@ void HUD::CreateHUD(SDL_Renderer* r)
 
 	//create textures
 
-	//weapon icon
-	imageLoader->LoadeImage(weaponIconPath);
-	weaponIcon = imageLoader->GetImage();
-	AddImage(weaponIcon); //0
-
 	//health icons
 	imageLoader->LoadeImage(heartImagePath);
 	heartIcon = imageLoader->GetImage();
@@ -43,9 +38,6 @@ void HUD::CreateHUD(SDL_Renderer* r)
 
 	healthText = new Text(sdl_rend, 30, health, 530, 0);
 	AddText(healthText); //1
-
-	weaponText = new Text(sdl_rend, 20, weaponName, 0, 490);
-	AddText(weaponText); //2
 }
 /// <summary>
 /// add a text to the hud vector ready for it to be displayed
@@ -71,8 +63,6 @@ void HUD::AddImage(SDL_Texture* texture)
 /// </summary>
 void HUD::DisplayHUD()
 {
-	renderer->UIDraw(weaponRect, activeImages[0]);
-
 	DisplayHealth();
 
 	for (int i = 0; i < activeTexts.size(); i++)
@@ -106,20 +96,20 @@ void HUD::DisplayHealth()
 {
 	switch (lives)
 	{
-	case 3:
+	case 3: //1 = normal | 2 = blank
 		renderer->UIDraw(livesRect1, activeImages[1]);
 		renderer->UIDraw(livesRect2, activeImages[1]);
 		renderer->UIDraw(livesRect3, activeImages[1]);
 		break;
 	case 2:
-		renderer->UIDraw(livesRect1, activeImages[1]);
+		renderer->UIDraw(livesRect1, activeImages[2]);
 		renderer->UIDraw(livesRect2, activeImages[1]);
-		renderer->UIDraw(livesRect3, activeImages[2]);
+		renderer->UIDraw(livesRect3, activeImages[1]);
 		break;
 	case 1:
-		renderer->UIDraw(livesRect1, activeImages[1]);
+		renderer->UIDraw(livesRect1, activeImages[2]);
 		renderer->UIDraw(livesRect2, activeImages[2]);
-		renderer->UIDraw(livesRect3, activeImages[2]);
+		renderer->UIDraw(livesRect3, activeImages[1]);
 		break;
 	case 0:
 		renderer->UIDraw(livesRect1, activeImages[2]);

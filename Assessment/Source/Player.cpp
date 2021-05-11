@@ -28,22 +28,22 @@ void Player::Init()
 
 void Player::Update(float delta)
 {
-	if (Input::KeyPressed(KEY_UP))
+	if (Input::KeyHeld(KEY_UP))
 	{
 		y -= speed * delta;
 	}
 
-	if (Input::KeyPressed(KEY_LEFT))
+	if (Input::KeyHeld(KEY_LEFT))
 	{
 		x -= speed * delta;
 	}
 
-	if (Input::KeyPressed(KEY_DOWN))
+	if (Input::KeyHeld(KEY_DOWN))
 	{
 		y += speed * delta;
 	}
 
-	if (Input::KeyPressed(KEY_RIGHT))
+	if (Input::KeyHeld(KEY_RIGHT))
 	{
 		x += speed * delta;
 	}
