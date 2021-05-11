@@ -31,15 +31,12 @@ enum TILES
 	MOUNTAIN = 'h',
 	GRASS = ':',
 	TREES = 'M',
-	DOOR = 'D',
-	FENCE = 'F',
 	WALL = 'W',
 	FLOOR = 'f',
 	PIT = 'b',
+	DOOR = 'D',
+	FENCE = 'F',
 	POT = 'p',
-	ENEMYSPAWN = 'e',
-	BOSSSPAWN = 'E',
-	PLAYERSPAWN = 'm',
 };
 
 class Renderer

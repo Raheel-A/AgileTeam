@@ -25,8 +25,8 @@ public:
 
 	vector<Text*> activeTexts; 		//vector of texts to add to and access?
 	vector<SDL_Texture*> activeImages;		//vector of imagesto add to and access?
-	void ChangeHealth(SoundManager* sfxMan,int change);
-	void ChangeGold(SoundManager* sfxMan,int change);
+	void ChangeHealth(SoundManager* sfxMan, int change);
+	void ChangeGold(SoundManager* sfxMan, int change);
 private:
 	void DisplayHealth();
 
@@ -34,20 +34,23 @@ private:
 	SDL_Renderer* sdl_rend;
 
 	ImageLoader* imageLoader;
-	
+
 	SDL_Texture* heartIcon;
 	SDL_Texture* blankHeart;
+	SDL_Texture* banner;
 
 	int heartSize = 30;
 	int lives = 3;
 	int gold = 0;
 
-	SDL_Rect livesRect1 { 750, 0, heartSize, heartSize};
-	SDL_Rect livesRect2 { 700, 0, heartSize, heartSize};
-	SDL_Rect livesRect3 { 650, 0, heartSize, heartSize};
+	SDL_Rect livesRect1{ 750, 0, heartSize, heartSize };
+	SDL_Rect livesRect2{ 700, 0, heartSize, heartSize };
+	SDL_Rect livesRect3{ 650, 0, heartSize, heartSize };
+	SDL_Rect bannerRect{ 0, 0, 800, 57 };
 
 	const string heartImagePath = "Assets/heart.bmp";
 	const string blankHeartPath = "Assets/blankheart.bmp";
+	const string bannerPath = "Assets/hudbanner.bmp";
 
 	Text* moneyText;
 	Text* healthText;
@@ -55,4 +58,3 @@ private:
 	string money = "Gold: " + to_string(gold);
 	string health = "Lives: ";
 };
-

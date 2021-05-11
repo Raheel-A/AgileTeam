@@ -106,6 +106,7 @@ void Renderer::GameDraw()
 	//Draw on screen
 	SDL_RenderPresent(renderer);
 
+	SDL_SetRenderDrawColor(renderer, 0, 165, 253, 255);
 	//Clean window
 	SDL_RenderClear(renderer);
 }
@@ -159,8 +160,6 @@ void Renderer::DrawTile(Sprite* sprite, int w, int h)
 /// </summary>
 void Renderer::DrawCurrentLevel(LevelData* level, Player* player)
 {
-	/*CameraFunctionality(player->GetX()*10, true);
-	CameraFunctionality(player->GetY()*10, false);*/
 	viewportX = player->GetX() - (SCREENWIDTH/2);
 	viewportY = player->GetY() - (SCREENHEIGHT/2);
 
@@ -219,49 +218,37 @@ void Renderer::DrawCurrentLevel(LevelData* level, Player* player)
 				DrawTile(spriteList[1], blockSize, blockSize);
 				break;
 			case GRASS:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
+				spriteList[2]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[2], blockSize, blockSize);
 				break;
 			case TREES:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
-				break;
-			case DOOR:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
-				break;
-			case FENCE:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
+				spriteList[3]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[3], blockSize, blockSize);
 				break;
 			case WALL:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
+				spriteList[4]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[4], blockSize, blockSize);
 				break;
 			case FLOOR:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
+				spriteList[5]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[5], blockSize, blockSize);
 				break;
 			case PIT:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
+				spriteList[6]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[6], blockSize, blockSize);
+				break;
+			/*case DOOR:
+				spriteList[7]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[7], blockSize, blockSize);
+				break;
+			case FENCE:
+				spriteList[8]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[8], blockSize, blockSize);
 				break;
 			case POT:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
-				break;
-			case ENEMYSPAWN:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
-				break;
-			case BOSSSPAWN:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
-				break;
-			case PLAYERSPAWN:
-				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
-				DrawTile(spriteList[0], blockSize, blockSize);
-				break;
+				spriteList[9]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[9], blockSize, blockSize);
+				break;*/
 			default:
 				break;
 			}

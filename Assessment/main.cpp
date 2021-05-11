@@ -114,8 +114,13 @@ int main()
 	ImageLoader* imageloader = new ImageLoader(renderer->renderer);
 
 	//Load sprites into the sprite-list for level loading
-	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/floorSprite.bmp")));
-	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/wallSprite.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/path.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/moutainwithgrass.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/grass.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/tree2.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/Stone-wall.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/Stone-Floor.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/pit.bmp")));
 
 	//Create a seperate sprite for the player/enemy
 	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
