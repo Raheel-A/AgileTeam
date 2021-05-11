@@ -2,8 +2,11 @@
 
 Menus::Menus(Renderer* r)
 {
-	selected = StartScreenSelected::PlayButton;
-	pointerRect = pointerRectStart;
+	selected = StartScreenSelected::STARTSCREEN_PLAY;
+	pauseSelected = PauseScreenSelected::PAUSE_RESUME;
+
+	startMenuPointerRect = pointerRectStart;
+	pauseMenuPointerRect = pausePointerRectPlay;
 
 	renderer = r;
 	sdl_rend = r->renderer;
@@ -29,27 +32,50 @@ void Menus::ChangeStartSelection(StartScreenSelected newSelected)
 	MoveSelectedPointer();
 }
 
+void Menus::ChangePauseSelected(PauseScreenSelected newSelected)
+{
+	pauseSelected = newSelected;
+	MoveSelectedPointer();
+}
 void Menus::SelectButton(GameState& gameState)
 {
-	switch (selected)
+	if (menustate == GameState::GAMESTATE_START)
 	{
-	case StartScreenSelected::PlayButton:
-		std::cout << "\nPLAY\n";
-		gameState = GameState::InGame;
-		menustate = GameState::InGame;
-		break;
-	case StartScreenSelected::QuitButton:
-		gameState = GameState::Quit;
-		break;
-	default:
-		break;
+		switch (selected)
+		{
+		case StartScreenSelected::STARTSCREEN_PLAY:
+			menustate = GameState::GAMESTATE_INGAME;
+			break;
+		case StartScreenSelected::STARTSCREEN_QUIT:
+			menustate = GameState::GAMESTATE_QUIT;
+			break;
+		default:
+			break;
+		}
+		gameState = menustate;
+	}
+	else if (menustate == GameState::GAMESTATE_PAUSED)
+	{
+		switch (pauseSelected)
+		{
+		case PAUSE_RESUME:
+			menustate = GameState::GAMESTATE_INGAME;
+			break;
+		case PAUSE_QUIT:
+			menustate = GameState::GAMESTATE_START;
+			break;
+		default:
+			break;
+		}
+		gameState = menustate;
 	}
 }
 
 void Menus::CreatePauseMenu()
 {
-	imageLoader->LoadeImage(PauseBGPath);
-	PauseBackground = imageLoader->GetImage();
+	//overlay
+	imageLoader->LoadeImage(pauseOverlayPath);
+	pauseOverlay = imageLoader->GetImage();
 
 	//Title
 	pause_Title = new Text(sdl_rend, pauseFontSize * 2, "PAUSED", 300, 0);
@@ -57,17 +83,8 @@ void Menus::CreatePauseMenu()
 	//Resume
 	pause_Resume = new Text(sdl_rend, pauseFontSize, "Resume", 350, 200);
 	pauseMenuTexts.push_back(pause_Resume);
-	//Save
-	pause_Save = new Text(sdl_rend, pauseFontSize, "Save", 350, 250);
-	pauseMenuTexts.push_back(pause_Save);
-	//Load
-	pause_Load = new Text(sdl_rend, pauseFontSize, "Load", 350, 300);
-	pauseMenuTexts.push_back(pause_Load);
-	//Settings
-	pause_Settings = new Text(sdl_rend, pauseFontSize, "Settings", 350, 350);
-	pauseMenuTexts.push_back(pause_Settings);
 	//Quit
-	pause_Quit = new Text(sdl_rend, pauseFontSize, "Quit", 350, 400);
+	pause_Quit = new Text(sdl_rend, pauseFontSize, "Quit", 350, 250);
 	pauseMenuTexts.push_back(pause_Quit);
 }
 
@@ -96,16 +113,33 @@ void Menus::CreateStartMenu()
 
 void Menus::MoveSelectedPointer()
 {
-	switch (selected)
+	if (menustate == GameState::GAMESTATE_START)
 	{
-	case PlayButton:
-		pointerRect = pointerRectStart;
-		break;
-	case QuitButton:
-		pointerRect = pointerRectQuit;
-		break;
-	default:
-		break;
+		switch (selected)
+		{
+		case STARTSCREEN_PLAY:
+			startMenuPointerRect = pointerRectStart;
+			break;
+		case STARTSCREEN_QUIT:
+			startMenuPointerRect = pointerRectQuit;
+			break;
+		default:
+			break;
+		}
+	}
+	else if (menustate == GameState::GAMESTATE_PAUSED)
+	{
+		switch (pauseSelected)
+		{
+		case PAUSE_RESUME:
+			pauseMenuPointerRect = pausePointerRectPlay;
+			break;
+		case PAUSE_QUIT:
+			pauseMenuPointerRect = pausePointerRectQuit;
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -113,17 +147,18 @@ void Menus::DisplayMenu()
 {
 	switch (menustate)
 	{
-	case Start:
+	case GAMESTATE_START:
 		renderer->UIDraw(backgroundRect, StartBackground);
-		renderer->UIDraw(pointerRect, selectedArrow);
+		renderer->UIDraw(startMenuPointerRect, selectedArrow);
 		for (int i = 0; i < startMenuTexts.size(); i++)
 		{
 			renderer->UIDraw(startMenuTexts[i]->textRect, startMenuTexts[i]->GetTexture());
 		}
 		break;
 
-	case Paused:
-		renderer->UIDraw(backgroundRect, PauseBackground);
+	case GAMESTATE_PAUSED:
+		renderer->UIDraw(backgroundRect, pauseOverlay);
+		renderer->UIDraw(pauseMenuPointerRect, selectedArrow);
 
 		for (int i = 0; i < pauseMenuTexts.size(); i++)
 		{
@@ -131,11 +166,23 @@ void Menus::DisplayMenu()
 		}
 		break;
 
-	case InGame:
+	case GAMESTATE_INGAME:
 		hud->DisplayHUD();
 		break;
 
 	default:
 		break;
 	}
+}
+
+void Menus::PauseGame(GameState& gameState)
+{
+	menustate = GameState::GAMESTATE_PAUSED;
+	gameState = menustate;
+}
+
+void Menus::UnpauseGame(GameState& gameState)
+{
+	menustate = GameState::GAMESTATE_INGAME;
+	gameState = menustate;
 }

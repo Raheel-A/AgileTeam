@@ -38,7 +38,6 @@ private:
 	SDL_Texture* weaponIcon;
 	SDL_Texture* heartIcon;
 	SDL_Texture* blankHeart;
-	SDL_Texture* background;
 
 	int heartSize = 30;
 	int lives = 3;
@@ -48,12 +47,10 @@ private:
 	SDL_Rect livesRect1 { 750, 0, heartSize, heartSize};
 	SDL_Rect livesRect2 { 700, 0, heartSize, heartSize};
 	SDL_Rect livesRect3 { 650, 0, heartSize, heartSize};
-	SDL_Rect backgroundRect{ 0,0, 800, 640 };
 
 	const string weaponIconPath = "Assets/sword.bmp";
 	const string heartImagePath = "Assets/heart.bmp";
 	const string blankHeartPath = "Assets/blankheart.bmp";
-	const string backgroundPath = "Assets/HUDImage.bmp";
 
 	Text* moneyText;
 	Text* healthText;

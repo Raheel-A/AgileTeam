@@ -23,24 +23,19 @@ void HUD::CreateHUD(SDL_Renderer* r)
 
 	//create textures
 
-	//background
-	imageLoader->LoadeImage(backgroundPath);
-	background = imageLoader->GetImage();
-	AddImage(background); //0
-
 	//weapon icon
 	imageLoader->LoadeImage(weaponIconPath);
 	weaponIcon = imageLoader->GetImage();
-	AddImage(weaponIcon); //1
+	AddImage(weaponIcon); //0
 
 	//health icons
 	imageLoader->LoadeImage(heartImagePath);
 	heartIcon = imageLoader->GetImage();
-	AddImage(heartIcon); //2
+	AddImage(heartIcon); //1
 
 	imageLoader->LoadeImage(blankHeartPath);
 	blankHeart = imageLoader->GetImage();
-	AddImage(blankHeart); //3
+	AddImage(blankHeart); //2
 
 	//create text
 	moneyText = new Text(sdl_rend, 30, money, 0, 0);
@@ -76,8 +71,7 @@ void HUD::AddImage(SDL_Texture* texture)
 /// </summary>
 void HUD::DisplayHUD()
 {
-	renderer->UIDraw(backgroundRect, activeImages[0]);
-	renderer->UIDraw(weaponRect, activeImages[1]);
+	renderer->UIDraw(weaponRect, activeImages[0]);
 
 	DisplayHealth();
 
@@ -113,24 +107,24 @@ void HUD::DisplayHealth()
 	switch (lives)
 	{
 	case 3:
-		renderer->UIDraw(livesRect1, activeImages[2]);
+		renderer->UIDraw(livesRect1, activeImages[1]);
+		renderer->UIDraw(livesRect2, activeImages[1]);
+		renderer->UIDraw(livesRect3, activeImages[1]);
+		break;
+	case 2:
+		renderer->UIDraw(livesRect1, activeImages[1]);
+		renderer->UIDraw(livesRect2, activeImages[1]);
+		renderer->UIDraw(livesRect3, activeImages[2]);
+		break;
+	case 1:
+		renderer->UIDraw(livesRect1, activeImages[1]);
 		renderer->UIDraw(livesRect2, activeImages[2]);
 		renderer->UIDraw(livesRect3, activeImages[2]);
 		break;
-	case 2:
+	case 0:
 		renderer->UIDraw(livesRect1, activeImages[2]);
 		renderer->UIDraw(livesRect2, activeImages[2]);
-		renderer->UIDraw(livesRect3, activeImages[3]);
-		break;
-	case 1:
-		renderer->UIDraw(livesRect1, activeImages[2]);
-		renderer->UIDraw(livesRect2, activeImages[3]);
-		renderer->UIDraw(livesRect3, activeImages[3]);
-		break;
-	case 0:
-		renderer->UIDraw(livesRect1, activeImages[3]);
-		renderer->UIDraw(livesRect2, activeImages[3]);
-		renderer->UIDraw(livesRect3, activeImages[3]);
+		renderer->UIDraw(livesRect3, activeImages[2]);
 		break;
 	default:
 		break;

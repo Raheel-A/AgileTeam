@@ -49,7 +49,7 @@ void Text::CreateTextTexture()
 		SDL_DestroyTexture(fontTexture);
 	}
 
-	SDL_Surface* surface = TTF_RenderText_Solid(font, fonttext.c_str(), white);
+	SDL_Surface* surface = TTF_RenderText_Solid(font, fonttext.c_str(), black);
 
 	if (surface == NULL)
 	{

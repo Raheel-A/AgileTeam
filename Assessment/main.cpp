@@ -61,7 +61,7 @@ void CollisionTest()
 int main() 
 {
 	bool running = true;
-	GameState gState = GameState::Start;
+	GameState gState = GameState::GAMESTATE_START;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -93,19 +93,9 @@ int main()
 	Menus* UI = new Menus(renderer);
 
 	SoundManager* sManager = new SoundManager();
-	sManager->LoadMusic(music::Menu,"Assets/music.wav");
-	sManager->LoadMusic(music::BGM,"Assets/Music2.wav");
-	sManager->LoadSFXs(SFXList::Walk, "Assets/Walk.wav");
+	sManager->LoadMusic("Assets/music.wav");
 	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
-	sManager->LoadSFXs(SFXList::UIpositive, "Assets/UIPositive.wav");
-	sManager->LoadSFXs(SFXList::UInegative, "Assets/UIpop.wav");
-	sManager->LoadSFXs(SFXList::MenuPop, "Assets/MenuPop.wav");
-	sManager->LoadSFXs(SFXList::Die, "Assets/Die.wav");
-	sManager->LoadSFXs(SFXList::Life, "Assets/Life.wav");
-	sManager->LoadSFXs(SFXList::Damage, "Assets/Damage.wav");
-	sManager->LoadSFXs(SFXList::Score, "Assets/Score.wav");
-	//sManager->PlayBGM(music::Menu,-1); //SHUSH
-	//sManager->PlayBGM(music::BGM,-1); //SHUSH
+	//sManager->PlayBGM(-1); //SHUSH
 
 	bool quit = false;
 
@@ -120,6 +110,7 @@ int main()
 	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 
 	bool _isMenu = true;
+
 
 	// Create a player and an enemy with a sprite
 	Player* player = new Player(32, 32, 10, 10);
@@ -137,7 +128,7 @@ int main()
 	double deltaTime = 0;
 
 	//main loop
-	while (gState != GameState::Quit)
+	while (gState != GameState::GAMESTATE_QUIT)
 	{
 		LAST = NOW;
 		NOW = SDL_GetPerformanceCounter();
@@ -146,45 +137,37 @@ int main()
 
 		i->UpdateInstance();
 
-		quit = i->KeyPressed(KEY_ESC);
+		quit = i->KeyIsDown(KEY_ESC);
 		
 
-		if (gState == GameState::Start)
+		if (gState == GameState::GAMESTATE_START)
 		{
-
 			//Check input and move accordingly 
 			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
-			if (i->KeyPressed(KEY_UP))
+			if (i->KeyIsDown(KEY_UP))
 			{
-				UI->ChangeStartSelection(StartScreenSelected::PlayButton);
-				sManager->PlaySFX(SFXList::UInegative);
+				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_PLAY);
 			}
 
-			if (i->KeyPressed(KEY_LEFT))
+			if (i->KeyIsDown(KEY_DOWN))
 			{
-				UI->ChangeMenu(GameState::InGame);;
+				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_QUIT);
 			}
 
-			if (i->KeyPressed(KEY_DOWN))
+			if (i->KeyIsDown(KEY_RIGHT))
 			{
-				UI->ChangeStartSelection(StartScreenSelected::QuitButton);
-				sManager->PlaySFX(SFXList::UInegative);
+				UI->ChangeMenu(GameState::GAMESTATE_START);
 			}
 
-			if (i->KeyPressed(KEY_RIGHT))
-			{
-				UI->ChangeMenu(GameState::Start);
-			}
-
-			if (i->KeyPressed(KEY_ENTER))
+			if (i->KeyIsDown(KEY_ENTER))
 			{
 				UI->SelectButton(gState);
-				sManager->PlaySFX(SFXList::UIpositive);
 			}
 		}
-		else
+		else if (gState == GameState::GAMESTATE_INGAME)
 		{
 			renderer->DrawCurrentLevel();
+
 			// Update all entities
 			for (int i = 0; i < entities.size(); i++)
 			{
@@ -200,16 +183,46 @@ int main()
 				entities[i]->Draw();
 			}
 
-			if (i->KeyPressed(KEY_LEFT))
+			if (i->KeyIsDown(KEY_LEFT))
 			{
-				UI->hud->ChangeHealth(sManager,-1);
-				UI->hud->ChangeGold(sManager,-5);
+				UI->hud->ChangeHealth(-1);
+				UI->hud->ChangeGold(-5);
 			}
 
-			if (i->KeyPressed(KEY_RIGHT))
+			if (i->KeyIsDown(KEY_RIGHT))
 			{
-				UI->hud->ChangeHealth(sManager,1);
-				UI->hud->ChangeGold(sManager,5);
+				UI->hud->ChangeHealth(1);
+				UI->hud->ChangeGold(5);
+			}
+
+			if (i->KeyIsDown(KEY_SPACE))
+			{
+				UI->PauseGame(gState);
+			}
+		}
+		else if (gState == GameState::GAMESTATE_PAUSED)
+		{
+			renderer->DrawCurrentLevel();
+
+			// Draw all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Draw();
+			}
+
+			if (i->KeyIsDown(KEY_UP))
+			{
+				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_RESUME);
+			}
+
+			if (i->KeyIsDown(KEY_DOWN))
+			{
+				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_QUIT);
+			}
+
+			if (i->KeyIsDown(KEY_ENTER))
+			{
+				UI->SelectButton(gState);
 			}
 		}
 
