@@ -157,16 +157,19 @@ int main()
 			if (i->KeyPressed(KEY_UP))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_PLAY);
+				sManager->PlaySFX(SFXList::UInegative);
 			}
 
 			if (i->KeyPressed(KEY_DOWN))
 			{
 				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_QUIT);
+				sManager->PlaySFX(SFXList::UInegative);
 			}
 
 			if (i->KeyPressed(KEY_ENTER))
 			{
 				UI->SelectButton(gState);
+				sManager->PlaySFX(SFXList::UIpositive);
 			}
 		}
 		else if (gState == GameState::GAMESTATE_INGAME)
