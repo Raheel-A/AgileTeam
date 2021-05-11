@@ -2,6 +2,27 @@
 
 //Morgan
 
+LevelData LevelLoader::LoadLevel(string levelName)
+{
+	this->levelName = levelName + ".txt";
+	PopulateLevelArray();
+	
+	vector<vector<char>> tiles;
+
+	for (int y = 0; y < LevelArray.size(); y++)
+	{
+		vector<char> currentRow;
+		for (int x = 0; x < LevelArray[0].size(); x++)
+		{
+			currentRow.push_back(LevelArray[y][x]);
+		}
+		tiles.push_back(currentRow);
+	}
+
+	LevelData levelData{levelName, (int)LevelArray.size(), (int)LevelArray[0].size(), tiles};
+	return levelData;
+}
+
 /// <summary>
 /// Populates the LevelArray Vector
 /// </summary>
@@ -11,21 +32,23 @@ void LevelLoader::PopulateLevelArray()
 	string line;
 
 	//load file
-	ifstream infile("Level.txt");
+	ifstream infile(levelName);
 
 	//check if file open
 	if (infile.is_open())
 	{
-		
 		do
 		{
 			getline(infile, line);
-			if (line == levelHeader)
+			if (line == LevelHeader)
 			{
-				while (line != levelHeader_End && !infile.eof())
+				while (line != LevelHeader_End && !infile.eof())
 				{
 					getline(infile, line);
-					LevelArray.push_back(line);
+					if (line != LevelHeader_End)
+					{
+						LevelArray.push_back(line);
+					}
 				}
 			}
 		} while (!infile.eof());

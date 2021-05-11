@@ -4,10 +4,10 @@
 #include "Source/Entity.h"
 #include "EngineStatics.h"
 
-class LevelData
+struct LevelData
 {
 public:
-	LevelData();
+	LevelData(std::string name, int width, int height, std::vector<std::vector<char>> tiles);
 	~LevelData();
 
 private:
@@ -16,6 +16,10 @@ private:
 	std::vector<Entity*> entityLoop;
 
 	std::string LevelName = "Sample Text";
+	
+	int levelWidth = 10;
+	int levelHeight = 10;
+
 public:
 
 	/// <summary>
@@ -39,6 +43,9 @@ public:
 	/// <returns> Name as String </returns>
 	std::string GetLevelName();
 
+	int GetWidth();
+	int GetHeight();
+	std::vector<std::vector<char>> GetLevelTiles();
 
 	void Update();
 
