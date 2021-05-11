@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Sprite.h"
+#include "LevelData.h"
 #include "Source/InputSystem/Input.h"
 
 SDL_Renderer* Renderer::renderer = nullptr;
@@ -153,15 +154,16 @@ void Renderer::DrawTile(Sprite* sprite, int w, int h)
 /// Use to draw the level based on the level vector - CW
 /// THIS WILL TAKE IN THE ARRAY FROM LEVEL LOADING - USING PLACEHOLDER VECTOR FOR NOW
 /// </summary>
-void Renderer::DrawCurrentLevel()
+void Renderer::DrawCurrentLevel(LevelData* level)
 {
 	//THESE VARS ARE JUST PLACEHOLDER TO FILL THE FUNCTION - THE REAL VALUES WILL COME FROM LEVEL LOADING (Group 4)
 
 	//Represents the min amount of rows and columns to cycle through, presumed to be 0
 	int minimumValue = 0; 
 	//these need to be seperate incase the level is not square, this is for max rows/columns that need to be cycled through
-	int rowSizeMax = 10; 
-	int columnSizeMax = 10;
+	int rowSizeMax = level->GetWidth(); 
+	int columnSizeMax = level->GetHeight();
+	vector<vector<char>> levelTiles = level->GetLevelTiles();
 	
 	//cycle through vector to assign each tile
 	for (int row = minimumValue; row < rowSizeMax; row++)
@@ -169,36 +171,95 @@ void Renderer::DrawCurrentLevel()
 		for (int column = minimumValue; column < columnSizeMax; column++)
 		{
 			//the current tile is where the vector is at in x & y positions
-			char currentTile = level[row][column];
+			char currentTile = levelTiles[row][column];
 			//create a vector to hold the current position in - blockSize is for how far apart the tiles are placed 
 			//(so column 3 will actually be at xpos 96 for eg; this is to account for block size/placement)
 			Vector2 pos = { column * blockSize, row * blockSize };
 
 			//cycle through the tile at designated pos
+			//switch (currentTile)
+			//{
+			//case GRASS:
+			//{
+			//	//This draws a texture from a preloaded list and uses the enum from earlier to find the correct texture, it then draws it at the 
+			//	// position (row*32), (column *32) and applies width and height
+
+			//	//Set pos of sprite (based on enum, 0 is placeholder)
+			//	spriteList[0]->setPos(Vector2(pos));
+
+			//	//Draw tile, 0 is placeholder it will represent an enum for the desired tile
+			//	//blockSize could be substituted with different ints to change the size of the tile
+			//	DrawTile(spriteList[0], blockSize, blockSize);
+			//}
+			//break;
+			//case WALL:
+			//{
+			//	spriteList[1]->setPos(Vector2(pos));
+			//	DrawTile(spriteList[1], blockSize, blockSize);
+			//}
+			//break;
+			//default:
+			//	break;
+			//}
+
 			switch (currentTile)
 			{
-			case GRASS:
-			{
-				//This draws a texture from a preloaded list and uses the enum from earlier to find the correct texture, it then draws it at the 
-				// position (row*32), (column *32) and applies width and height
-
-				//Set pos of sprite (based on enum, 0 is placeholder)
+			case PATH:
 				spriteList[0]->setPos(Vector2(pos));
-
-				//Draw tile, 0 is placeholder it will represent an enum for the desired tile
-				//blockSize could be substituted with different ints to change the size of the tile
 				DrawTile(spriteList[0], blockSize, blockSize);
-			}
-			break;
+				break;
+			case MOUNTAIN:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case GRASS:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case TREES:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case DOOR:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case FENCE:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
 			case WALL:
-			{
-				spriteList[1]->setPos(Vector2(pos));
-				DrawTile(spriteList[1], blockSize, blockSize);
-			}
-			break;
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case FLOOR:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case PIT:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case POT:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case ENEMYSPAWN:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case BOSSSPAWN:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
+			case PLAYERSPAWN:
+				spriteList[0]->setPos(Vector2(pos));
+				DrawTile(spriteList[0], blockSize, blockSize);
+				break;
 			default:
 				break;
 			}
+
 		}
 	}
 }

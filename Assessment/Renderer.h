@@ -18,10 +18,24 @@
 
 using namespace std;
 class Sprite;
+class LevelData;
 enum TILES
 {
-	GRASS = 'A',
-	WALL = 'B',
+	/*GRASS = 'A',
+	WALL = 'B',*/
+	PATH = ' ',
+	MOUNTAIN = 'h',
+	GRASS = ':',
+	TREES = 'M',
+	DOOR = 'D',
+	FENCE = 'F',
+	WALL = 'W',
+	FLOOR = 'f',
+	PIT = 'b',
+	POT = 'p',
+	ENEMYSPAWN = 'e',
+	BOSSSPAWN = 'E',
+	PLAYERSPAWN = 'm',
 };
 
 class Renderer
@@ -41,7 +55,7 @@ public:
 	void DrawTile(Sprite* sprite, int w, int h);
 	TILES tiles;
 	//placeholder vector as awaiting the level loading from other teams
-	vector<string> level = { "BBBBBBBBBB" ,
+	/*vector<string> level = { "BBBBBBBBBB" ,
 							 "BAAAAAAAAB",
 						     "BAAAAAAAAB",
 							 "BAAAAAAAAB",
@@ -50,8 +64,8 @@ public:
 							 "BAAAAAAAAB" ,
 							 "BAAAAAAAAB" ,
 							 "BAAAAAAAAB" ,
-							 "BBBBBBBBBB" };
-	void DrawCurrentLevel();
+							 "BBBBBBBBBB" };*/
+	void DrawCurrentLevel(LevelData* data);
 	vector <Sprite*> spriteList = {};
 	//AP
 	void CameraFunctionality( float value , bool isHorizontal);
