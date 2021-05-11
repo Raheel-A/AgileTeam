@@ -16,12 +16,12 @@ void Enemy::Update(float delta)
 {
 }
 
-void Enemy::Draw()
+void Enemy::Draw(int cameraX, int cameraY)
 {
 	// TODO: This can probably moved to the Entity class
 	if (sprite != nullptr)
 	{
-		sprite->SpriteUpdate();
+		sprite->SpriteUpdate(cameraX, cameraY);
 		sprite->Draw();
 	}
 }

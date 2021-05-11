@@ -21,7 +21,7 @@ public:
 
 	void Init();
 	void Update(float delta);
-	void Draw();
+	void Draw(int cameraX, int cameraY);
 	void Move(int direct);
 	void LoadSprite(ImageLoader* imageLoader);
 

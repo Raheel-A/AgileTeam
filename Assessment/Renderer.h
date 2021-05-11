@@ -16,8 +16,12 @@
 #include "Vector2.h"
 
 
+const int SCREENWIDTH = 800;
+const int SCREENHEIGHT = 640;
+
 using namespace std;
 class Sprite;
+class Player;
 class LevelData;
 enum TILES
 {
@@ -54,18 +58,7 @@ public:
 	//CW
 	void DrawTile(Sprite* sprite, int w, int h);
 	TILES tiles;
-	//placeholder vector as awaiting the level loading from other teams
-	/*vector<string> level = { "BBBBBBBBBB" ,
-							 "BAAAAAAAAB",
-						     "BAAAAAAAAB",
-							 "BAAAAAAAAB",
-							 "BAAAAAAAAB" ,
-							 "BAAAAAAAAB" ,
-							 "BAAAAAAAAB" ,
-							 "BAAAAAAAAB" ,
-							 "BAAAAAAAAB" ,
-							 "BBBBBBBBBB" };*/
-	void DrawCurrentLevel(LevelData* data);
+	void DrawCurrentLevel(LevelData* data, Player* player);
 	vector <Sprite*> spriteList = {};
 	//AP
 	void CameraFunctionality( float value , bool isHorizontal);

@@ -65,7 +65,7 @@ void Sprite::PlayAnimation(const char* AnimName)
 	AnimIndex = anims[AnimName].Index;
 	speed = anims[AnimName].Speed;
 }
-void Sprite::SpriteUpdate()
+void Sprite::SpriteUpdate(int cameraX, int cameraY)
 {
 	if (animated)
 	{
@@ -74,8 +74,8 @@ void Sprite::SpriteUpdate()
 
 	//follows the players position and scale
 	SourceRect.y = AnimIndex * SourceRect.h; //when not animated , animation index is zero
-	DestRect.x = pos.x;//200; //PLAYERS POSITION x
-	DestRect.y = pos.y;//200; //Players Position y
+	DestRect.x = pos.x - cameraX;//200; //PLAYERS POSITION x
+	DestRect.y = pos.y - cameraY;//200; //Players Position y
 	DestRect.w = 16 * 2;//width * Scale; //
 	DestRect.h = 32 * 2;//heigh * Scale; //
 

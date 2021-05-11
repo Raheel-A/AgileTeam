@@ -53,12 +53,12 @@ void Player::Update(float delta)
 	UpdateAttackRangeCollider(); //(JW)
 }
 
-void Player::Draw()
+void Player::Draw(int cameraX, int cameraY)
 {
 	// TODO: This can probably moved to the Entity class
 	if(sprite != nullptr)
 	{ 
-		sprite->SpriteUpdate();
+		sprite->SpriteUpdate(cameraX, cameraY);
 		sprite->Draw();
 	}
 }

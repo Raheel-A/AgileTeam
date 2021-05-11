@@ -49,4 +49,14 @@ bool Entity::CheckCollision(Entity* entity, SDL_Rect rect)
 	return false;
 }
 
+int Entity::GetX()
+{
+	return x;
+}
+
+int Entity::GetY()
+{
+	return y;
+}
+
 

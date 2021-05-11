@@ -28,7 +28,7 @@ public:
 	//Animation
 	Sprite(SDL_Texture* text, bool isAnimated);
 	void PlayAnimation(const char* AnimName);
-	void SpriteUpdate();
+	void SpriteUpdate(int cameraX, int cameraY);
 	void Draw();
 	SDL_RendererFlip FlipMode = SDL_FLIP_NONE;
 	bool animated = false;

@@ -18,7 +18,7 @@ public:
 
 	void Init();
 	void Update(float delta);
-	void Draw();
+	void Draw(int cameraX, int cameraY);
 	void LoadSprite(ImageLoader* imageLoader);
 
 	void OnCollision(Entity* collider);

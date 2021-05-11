@@ -17,12 +17,15 @@ public:
 
 	virtual void Init() = 0;
 	virtual void Update(float delta) = 0;
-	virtual void Draw() = 0;
+	virtual void Draw(int cameraX, int cameraY) = 0;
 	virtual void LoadSprite(ImageLoader* imageLoader) = 0;
 
 	bool CheckCollision(Entity* entity1, Entity* entity2);
 	bool CheckCollision(Entity* entity, SDL_Rect rect);
 	virtual void OnCollision(Entity* collider) = 0;
+
+	int GetX();
+	int GetY();
 
 protected:
 	float x, y, z;

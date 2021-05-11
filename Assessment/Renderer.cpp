@@ -1,4 +1,6 @@
+#pragma once
 #include "Renderer.h"
+#include "Source/Player.h"
 #include "Sprite.h"
 #include "LevelData.h"
 #include "Source/InputSystem/Input.h"
@@ -107,6 +109,7 @@ void Renderer::GameDraw()
 	//Clean window
 	SDL_RenderClear(renderer);
 }
+
 /// <summary>
 /// Camera functioning with movement
 /// </summary>
@@ -122,6 +125,7 @@ void Renderer::CameraFunctionality(float value, bool isHorizontal)
 		setViewPortY(value);
 	}
 }
+
 /// <summary>
 /// Use to show the UI - will be used by UI team
 /// </summary>
@@ -147,16 +151,18 @@ void Renderer::DrawTile(Sprite* sprite, int w, int h)
 
 	//draw the sprite object at the newly created destination rect
 	SDL_RenderCopy(renderer, sprite->GetSprite(), NULL, &destinationRect);
-
 }
 
 /// <summary>
 /// Use to draw the level based on the level vector - CW
 /// THIS WILL TAKE IN THE ARRAY FROM LEVEL LOADING - USING PLACEHOLDER VECTOR FOR NOW
 /// </summary>
-void Renderer::DrawCurrentLevel(LevelData* level)
+void Renderer::DrawCurrentLevel(LevelData* level, Player* player)
 {
-	//THESE VARS ARE JUST PLACEHOLDER TO FILL THE FUNCTION - THE REAL VALUES WILL COME FROM LEVEL LOADING (Group 4)
+	/*CameraFunctionality(player->GetX()*10, true);
+	CameraFunctionality(player->GetY()*10, false);*/
+	viewportX = player->GetX() - (SCREENWIDTH/2);
+	viewportY = player->GetY() - (SCREENHEIGHT/2);
 
 	//Represents the min amount of rows and columns to cycle through, presumed to be 0
 	int minimumValue = 0; 
@@ -185,7 +191,7 @@ void Renderer::DrawCurrentLevel(LevelData* level)
 			//	// position (row*32), (column *32) and applies width and height
 
 			//	//Set pos of sprite (based on enum, 0 is placeholder)
-			//	spriteList[0]->setPos(Vector2(pos));
+			//	spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 
 			//	//Draw tile, 0 is placeholder it will represent an enum for the desired tile
 			//	//blockSize could be substituted with different ints to change the size of the tile
@@ -194,7 +200,7 @@ void Renderer::DrawCurrentLevel(LevelData* level)
 			//break;
 			//case WALL:
 			//{
-			//	spriteList[1]->setPos(Vector2(pos));
+			//	spriteList[1]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 			//	DrawTile(spriteList[1], blockSize, blockSize);
 			//}
 			//break;
@@ -205,55 +211,55 @@ void Renderer::DrawCurrentLevel(LevelData* level)
 			switch (currentTile)
 			{
 			case PATH:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case MOUNTAIN:
-				spriteList[0]->setPos(Vector2(pos));
-				DrawTile(spriteList[0], blockSize, blockSize);
+				spriteList[1]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
+				DrawTile(spriteList[1], blockSize, blockSize);
 				break;
 			case GRASS:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case TREES:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case DOOR:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case FENCE:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case WALL:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case FLOOR:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case PIT:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case POT:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case ENEMYSPAWN:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case BOSSSPAWN:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			case PLAYERSPAWN:
-				spriteList[0]->setPos(Vector2(pos));
+				spriteList[0]->setPos(Vector2(pos) - Vector2(viewportX, viewportY));
 				DrawTile(spriteList[0], blockSize, blockSize);
 				break;
 			default:
@@ -274,7 +280,7 @@ void Renderer::setViewPortX(float viewportx)
 	}
 	else
 	{
-		viewportX += viewportx;
+		viewportX = viewportx;
 	}
 
 	viewport.x = viewportX;
@@ -283,7 +289,7 @@ void Renderer::setViewPortX(float viewportx)
 
 void Renderer::setViewPortY(float viewporty)
 {
-	viewportY += viewporty;
+	viewportY = viewporty;
 
 	viewport.y = viewportY;
 	SDL_RenderSetViewport(renderer, &viewport);

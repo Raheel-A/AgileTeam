@@ -19,6 +19,8 @@
 #include "ImageLoader.h"
 #include "Sprite.h"
 
+#include "LevelLoader.h"
+
 #undef main
 
 using namespace std;
@@ -57,7 +59,6 @@ void CollisionTest()
 	}
 }
 
-
 int main() 
 {
 	bool running = true;
@@ -85,7 +86,7 @@ int main()
 	}
 
 	Renderer* renderer = new Renderer;
-	renderer->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+	renderer->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, false);
 
 	// Input test
 	Input* i = new Input;
@@ -119,11 +120,14 @@ int main()
 	//Create a seperate sprite for the player/enemy
 	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
 
+	LevelLoader levelLoader;
+	LevelData loadedLevel = levelLoader.LoadLevel("Level");
+
 	bool _isMenu = true;
 
 
 	// Create a player and an enemy with a sprite
-	Player* player = new Player(32, 32, 10, 10);
+	Player* player = new Player(0, 0, 10, 10);
 	player->LoadSprite(imageloader);
 
 	Enemy* enemy = new Enemy(160, 160, 10, 10);
@@ -174,7 +178,7 @@ int main()
 		}
 		else if (gState == GameState::GAMESTATE_INGAME)
 		{
-			renderer->DrawCurrentLevel();
+			renderer->DrawCurrentLevel(&loadedLevel, player);
 
 			// Update all entities
 			for (int i = 0; i < entities.size(); i++)
@@ -188,7 +192,7 @@ int main()
 			// Draw all entities
 			for (int i = 0; i < entities.size(); i++)
 			{
-				entities[i]->Draw();
+				entities[i]->Draw(renderer->viewportX, renderer->viewportY);
 			}
 
 			if (i->KeyPressed(KEY_LEFT))
@@ -210,12 +214,12 @@ int main()
 		}
 		else if (gState == GameState::GAMESTATE_PAUSED)
 		{
-			renderer->DrawCurrentLevel();
+			renderer->DrawCurrentLevel(&loadedLevel, player);
 
 			// Draw all entities
 			for (int i = 0; i < entities.size(); i++)
 			{
-				entities[i]->Draw();
+				entities[i]->Draw(renderer->viewportX, renderer->viewportY);
 			}
 
 			if (i->KeyPressed(KEY_UP))
