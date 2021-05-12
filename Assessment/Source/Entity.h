@@ -9,6 +9,9 @@
 /// </summary>
 class Entity
 {
+protected:
+	friend class AIBase;
+	friend class AIMelee;
 public:
 	Entity(float x, float y, float width, float height);
 	~Entity();

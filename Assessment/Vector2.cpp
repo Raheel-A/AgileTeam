@@ -14,3 +14,8 @@ Vector2 Vector2::operator-(const Vector2& rhs)
 {
 	return Vector2(x - rhs.x, y - rhs.y);
 }
+
+Vector2 Vector2::operator*(const float scalar)
+{
+	return Vector2(x * scalar, y * scalar);
+}

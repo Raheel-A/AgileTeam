@@ -9,6 +9,7 @@ struct Vector2
 
 	Vector2 operator+ (const Vector2& rhs);
 	Vector2 operator- (const Vector2& rhs);
+	Vector2 operator* (const float scalar);
 
 	float x = 0.0f, y = 0.0f;
 };

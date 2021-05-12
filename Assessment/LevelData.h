@@ -46,6 +46,8 @@ public:
 	int GetWidth();
 	int GetHeight();
 	std::vector<std::vector<char>> GetLevelTiles();
+	std::vector<Entity*> GetEntities();
+	void AddEntity(Entity* e);
 
 	void Update();
 

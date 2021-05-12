@@ -3,7 +3,7 @@
 class AIMelee : public AIBase
 {
 public:
-	void Attack(SampleEntity& target);
+	void Attack(Entity& target);
 private:
 };
 

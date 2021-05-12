@@ -138,9 +138,8 @@ int main()
 	Enemy* enemy = new Enemy(160, 160, 10, 10);
 	enemy->LoadSprite(imageloader);
 	
-	vector<Entity*> entities;
-	entities.push_back(player);
-	entities.push_back(enemy);
+	loadedLevel.AddEntity(player);
+	loadedLevel.AddEntity(enemy);
 
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
@@ -157,7 +156,8 @@ int main()
 		i->UpdateInstance();
 
 		quit = i->KeyPressed(KEY_ESC);
-		
+	
+		vector<Entity*> entities = loadedLevel.GetEntities();
 
 		if (gState == GameState::GAMESTATE_START)
 		{

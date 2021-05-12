@@ -3,10 +3,13 @@
 
 #include "Entity.h";
 
-using namespace std;
+class AIMelee;
 
+using namespace std;
 class Enemy : public Entity
 {
+protected:
+	friend class AIMelee;
 public:
 	//data
 	string enemyType;
@@ -31,6 +34,6 @@ public:
 
 
 private:
-
+	AIMelee* ai;
 };
 

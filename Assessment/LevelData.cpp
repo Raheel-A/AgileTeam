@@ -37,6 +37,16 @@ std::vector<std::vector<char>> LevelData::GetLevelTiles()
 	return backgroundTiles;
 }
 
+std::vector<Entity*> LevelData::GetEntities()
+{
+	return entityLoop;
+}
+
+void LevelData::AddEntity(Entity* e)
+{
+	entityLoop.push_back(e);
+}
+
 void LevelData::Update()
 {
 	for (int i = 0; i < entityLoop.size(); i++)

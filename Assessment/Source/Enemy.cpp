@@ -1,3 +1,5 @@
+#include "../AIMelee.h"
+#include "Player.h"
 #include "Enemy.h"
 
 Enemy::Enemy() : Enemy(0, 0, 10, 10)
@@ -6,6 +8,7 @@ Enemy::Enemy() : Enemy(0, 0, 10, 10)
 
 Enemy::Enemy(float x, float y, float width, float height) : Entity(x, y, width, height)
 {
+	ai = new AIMelee();
 }
 
 void Enemy::Init()
@@ -14,6 +17,7 @@ void Enemy::Init()
 
 void Enemy::Update(float delta)
 {
+	ai->Update(delta);
 }
 
 void Enemy::Draw(int cameraX, int cameraY)
@@ -33,7 +37,7 @@ void Enemy::LoadSprite(ImageLoader* imageLoader)
 }
 
 void Enemy::OnCollision(Entity* collider)
-{
+{	
 }
 
 void Enemy::LoseHealth(int healthAmount)
@@ -62,4 +66,5 @@ void Enemy::EnemyDeath()
 
 Enemy::~Enemy()
 {
+	delete ai;
 }
