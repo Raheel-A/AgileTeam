@@ -234,7 +234,7 @@ int main()
 		UI->DisplayMenu();
 		renderer->GameDraw();
 	}
-	
+	// Seb smells like fish
 	SDL_Quit();
 	return 0;
 }

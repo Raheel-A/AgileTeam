@@ -9,7 +9,7 @@ Player::Player(float x, float y, float width, float height) : Entity(x, y, width
 {
 	x = x;
 	y = y;
-	speed = 0.5f;
+	speed = 0.25f;
 
 	//Setup attack range box (JW)
 	attackRangeCollisionBox.x = x - attackRange;
@@ -36,6 +36,7 @@ void Player::Update(float delta)
 	if (Input::KeyHeld(KEY_LEFT))
 	{
 		x -= speed * delta;
+		sprite->FlipMode = SDL_FLIP_HORIZONTAL; // intellisense is a lie
 	}
 
 	if (Input::KeyHeld(KEY_DOWN))
@@ -46,6 +47,7 @@ void Player::Update(float delta)
 	if (Input::KeyHeld(KEY_RIGHT))
 	{
 		x += speed * delta;
+		sprite->FlipMode = SDL_FLIP_NONE;
 	}
 
 	sprite->setPos(Vector2(x, y));
