@@ -10,6 +10,7 @@ enum KEY_LIST {
 	KEY_SPACE,
 	KEY_LSHIFT,
 	KEY_ENTER,
+	KEY_P,
 	SIZEOF_KEY_LIST
 };
 class Input

@@ -200,19 +200,7 @@ int main()
 				entities[i]->Draw(renderer->viewportX, renderer->viewportY);
 			}
 
-			if (i->KeyPressed(KEY_LEFT))
-			{
-				UI->hud->ChangeHealth(sManager , -1);
-				UI->hud->ChangeGold(sManager , -5);
-			}
-
-			if (i->KeyPressed(KEY_RIGHT))
-			{
-				UI->hud->ChangeHealth(sManager, 1);
-				UI->hud->ChangeGold(sManager, 5);
-			}
-
-			if (i->KeyPressed(KEY_SPACE))
+			if (i->KeyPressed(KEY_P))
 			{
 				UI->PauseGame(gState);
 			}

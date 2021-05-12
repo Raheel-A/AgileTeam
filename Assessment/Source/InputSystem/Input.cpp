@@ -46,6 +46,9 @@ void Input::UpdateInstance()
             case SDLK_d: case SDLK_RIGHT:
                 keysPressed[KEY_RIGHT] = true;
                 break;
+            case SDLK_p:
+                keysPressed[KEY_P] = true;
+                break;
             case SDLK_SPACE:
                 keysPressed[KEY_SPACE] = true;
                 break;
@@ -84,6 +87,9 @@ void Input::UpdateInstance()
                 break;
             case SDLK_d: case SDLK_RIGHT:
                 keysPressed[KEY_RIGHT] = false;
+                break;
+            case SDLK_p:
+                keysPressed[KEY_P] = false;
                 break;
             case SDLK_SPACE:
                 keysPressed[KEY_SPACE] = false;
@@ -131,6 +137,9 @@ void Input::Update()
             case SDLK_d: case SDLK_RIGHT:
                 keysPressed[KEY_RIGHT] = true;
                 break;
+            case SDLK_p:
+                keysPressed[KEY_P] = true;
+                break;
             case SDLK_SPACE:
                 keysPressed[KEY_SPACE] = true;
                 break;
@@ -169,6 +178,9 @@ void Input::Update()
                 break;
             case SDLK_d: case SDLK_RIGHT:
                 keysPressed[KEY_RIGHT] = false;
+                break;
+            case SDLK_p:
+                keysPressed[KEY_P] = false;
                 break;
             case SDLK_SPACE:
                 keysPressed[KEY_SPACE] = false;
