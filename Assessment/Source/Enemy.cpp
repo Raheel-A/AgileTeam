@@ -1,4 +1,5 @@
 #include "../AIMelee.h"
+#include "../Renderer.h"
 #include "Player.h"
 #include "Enemy.h"
 
@@ -9,7 +10,8 @@ Enemy::Enemy() : Enemy(0, 0, 10, 10)
 Enemy::Enemy(float x, float y, float width, float height) : Entity(x, y, width, height)
 {
 	entityType = EntityTypes::ENEMY;
-	ai = new AIMelee();
+	ai = new AIMelee(this);
+	speed = Renderer::GetBlockSize() * 6;
 }
 
 void Enemy::Init()
@@ -19,6 +21,7 @@ void Enemy::Init()
 void Enemy::Update(float delta)
 {
 	ai->Update(delta);
+	UpdateCollisionBox();
 }
 
 void Enemy::Draw(int cameraX, int cameraY)

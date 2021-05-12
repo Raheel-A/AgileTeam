@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "../Renderer.h"
 #include "InputSystem/Input.h"
 
 Player::Player() : Player(0, 0, 10, 10)
@@ -9,7 +10,7 @@ Player::Player(float x, float y, float width, float height) : Entity(x, y, width
 {
 	x = x;
 	y = y;
-	speed = 0.25f;
+	speed = Renderer::GetBlockSize() * 7;
 
 	//Setup attack range box (JW)
 	attackRangeCollisionBox.x = x - attackRange;
@@ -60,7 +61,7 @@ void Player::Update(float delta)
 	}
 
 	//Check new position for collision with the tilemap
-	char charToCheck = levelData->GetTile(GetPlayerPositionInTileMap(newPosition));
+	char charToCheck = levelData->GetTile(GetPositionInTileMap(newPosition));
 	if (TILES::MOUNTAIN == charToCheck || 
 		TILES::DOOR == charToCheck || 
 		TILES::FENCE == charToCheck || 
@@ -87,7 +88,7 @@ void Player::Update(float delta)
 			switch (entities[i]->GetEntityType())
 			{
 			case EntityTypes::ENEMY:
-				std::cout << "We collided with an enemy" << std::endl;
+				OnCollision(entities[i]);
 				break;
 			default:
 				break;
@@ -99,6 +100,7 @@ void Player::Update(float delta)
 	sprite->setPos(Vector2(x, y));
 
 	UpdateAttackRangeCollider(); //(JW)
+	UpdateCollisionBox();
 }
 
 void Player::Draw(int cameraX, int cameraY)
@@ -133,6 +135,7 @@ void Player::Move(int direct)
 
 void Player::OnCollision(Entity* collider)
 {
+	std::cout << "We collided with an enemy" << std::endl;
 }
 
 void Player::LoadSprite(ImageLoader* imageLoader)
@@ -199,15 +202,4 @@ void Player::UpdateAttackRangeCollider()
 	//Update the attack range collider (JW)
 	attackRangeCollisionBox.x = x - attackRange;
 	attackRangeCollisionBox.y = y - attackRange;
-}
-
-Vector2 Player::GetPlayerPositionInTileMap(Vector2 position)
-{
-	int blockSize = Renderer::GetBlockSize();
-
-	int xIndex = floor((position.x + (blockSize / 2)) / blockSize);
-	int yIndex = floor((position.y + (blockSize * 1.5)) / blockSize);
-
-	return Vector2(yIndex, xIndex);
-
 }

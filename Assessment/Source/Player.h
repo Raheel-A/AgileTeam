@@ -36,5 +36,4 @@ private:
 	SDL_Rect attackRangeCollisionBox;
 
 	void UpdateAttackRangeCollider();
-	Vector2 GetPlayerPositionInTileMap(Vector2 position);
 };

@@ -1,3 +1,4 @@
+#include <math.h>
 #include "Vector2.h"
 
 Vector2::Vector2() {}
@@ -18,4 +19,10 @@ Vector2 Vector2::operator-(const Vector2& rhs)
 Vector2 Vector2::operator*(const float scalar)
 {
 	return Vector2(x * scalar, y * scalar);
+}
+
+Vector2 Vector2::Normalised()
+{
+	float mag = sqrt(x * x + y * y);
+	return Vector2(x / mag, y / mag);
 }

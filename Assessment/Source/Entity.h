@@ -47,7 +47,6 @@ protected:
 	//stats
 	unsigned int healthPoints{ 100 };
 	unsigned int attackPoints{ 100 };
-	float movementSpeed{ 3.5f };
 
 	float speed;
 
@@ -57,6 +56,8 @@ protected:
 
 	EntityTypes entityType = EntityTypes::NONE;
 
-private:
 	void UpdateCollisionBox();
+	Vector2 GetPositionInTileMap(Vector2 position);
+	Vector2 GetPositionInPixelSpace(Vector2 position);
+private:
 };

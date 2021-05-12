@@ -55,7 +55,5 @@ public:
 
 	void Update();
 
-	std::vector<Entity*> GetEntities();
-
 };
 

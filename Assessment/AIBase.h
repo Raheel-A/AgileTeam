@@ -8,6 +8,8 @@ class LevelData;
 class AIBase
 {
 public:
+	AIBase(Entity* owner);
+
 	bool isEnabled = true;
 
 	void Update(float deltaTime);

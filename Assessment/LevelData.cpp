@@ -60,8 +60,3 @@ void LevelData::Update()
 		entityLoop[i]->Update(EngineStatics::GetDeltaTime());
 	}
 }
-
-std::vector<Entity*> LevelData::GetEntities()
-{
-	return entityLoop;
-}

@@ -67,6 +67,7 @@
     <ClCompile Include="LevelLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIBase.h">
@@ -136,6 +137,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EntityTypes.h" />
+    <ClInclude Include="GameManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

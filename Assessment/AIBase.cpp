@@ -1,15 +1,28 @@
 #include "Source/Entity.h"
 #include "Vector2.h"
+#include "Source/Player.h"
+#include "GameManager.h"
 #include "Renderer.h"
 #include "AIBase.h"
+
+AIBase::AIBase(Entity* owner)
+{
+	parentEntity = owner;
+	currentPath.push_back(Vector2(20, 10));
+}
 
 void AIBase::Update(float deltaTime)
 {
 	if (currentPath.size() > 0)
 	{
-		Vector2 direction = (currentPath[0] * Renderer::GetBlockSize()) - Vector2{ parentEntity->x, parentEntity->y };
-		parentEntity->x += direction.x * deltaTime;
-		parentEntity->y += direction.y * deltaTime;
+		//Vector2 direction = (currentPath[0] - parentEntity->GetPositionInTileMap(Vector2(parentEntity->x, parentEntity->y))).Normalised();
+		Vector2 dst = Vector2(GameManager::instance().player->GetX(), GameManager::instance().player->GetY());
+		Vector2 direction = (dst - parentEntity->GetPositionInTileMap(Vector2(parentEntity->x, parentEntity->y))).Normalised();
+
+		parentEntity->x += direction.x * parentEntity->speed * deltaTime;
+		parentEntity->y += direction.y * parentEntity->speed * deltaTime;
+
+		parentEntity->sprite->setPos(Vector2(parentEntity->x, parentEntity->y));
 	}
 	else if (targetEntity != nullptr)
 	{

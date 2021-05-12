@@ -75,4 +75,20 @@ EntityTypes Entity::GetEntityType()
 	return entityType;
 }
 
+Vector2 Entity::GetPositionInTileMap(Vector2 position)
+{
+	int blockSize = Renderer::GetBlockSize();
 
+	int xIndex = floor((position.x + (blockSize / 2)) / blockSize);
+	int yIndex = floor((position.y + (blockSize * 1.5)) / blockSize);
+
+	return Vector2(yIndex, xIndex);
+}
+
+Vector2 Entity::GetPositionInPixelSpace(Vector2 position)
+{
+	int blockSize = Renderer::GetBlockSize();
+	int xIndex = position.x * blockSize;
+	int yIndex = position.y * blockSize;
+	return Vector2(xIndex, yIndex);
+}

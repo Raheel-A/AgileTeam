@@ -15,6 +15,7 @@
 #include "HUD.h"
 #include "SoundManager.h"
 #include "Menus.h"
+#include "GameManager.h"
 
 #include "ImageLoader.h"
 #include "Sprite.h"
@@ -132,11 +133,12 @@ int main()
 
 
 	// Create a player and an enemy with a sprite
-	Player* player = new Player(320, 320, 10, 10);
+	Player* player = new Player(320, 320, 32, 32);
 	player->LoadSprite(imageloader);
 	player->LoadLevelData(&loadedLevel);
+	GameManager::instance().player = player;
 
-	Enemy* enemy = new Enemy(200, 200, 10, 10);
+	Enemy* enemy = new Enemy(200, 200, 32, 32);
 	enemy->LoadSprite(imageloader);
 	
 	loadedLevel.AddEntity(player);
@@ -150,9 +152,11 @@ int main()
 	while (gState != GameState::GAMESTATE_QUIT)
 	{
 		LAST = NOW;
-		NOW = SDL_GetPerformanceCounter();
+		//NOW = SDL_GetPerformanceCounter();
+		NOW = SDL_GetTicks();
 
-		deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+		//deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+		deltaTime = (double)(NOW - LAST) / 1000;
 
 		i->UpdateInstance();
 
