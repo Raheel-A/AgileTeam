@@ -3,6 +3,14 @@
 #include <SDL.h>
 #include "../Sprite.h"
 #include "../ImageLoader.h"
+#include "../LevelData.h"
+
+enum EntityTypes
+{
+	Player,
+	Enemy,
+	Coin
+};
 
 /// <summary>
 /// Base class that any entity in the game derives from
@@ -27,6 +35,12 @@ public:
 	int GetX();
 	int GetY();
 
+	void LoadLevelData(LevelData* levelDataToLoad);
+
+	
+
+	EntityTypes GetEntityType();
+
 protected:
 	float x, y, z;
 	float width, height;
@@ -41,6 +55,10 @@ protected:
 	float speed;
 
 	bool collidable = true;
+
+	LevelData* levelData;
+
+	EntityTypes entityType;
 
 private:
 	void UpdateCollisionBox();

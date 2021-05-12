@@ -63,6 +63,9 @@ public:
 	void setViewPortY(float viewporty);
 	float viewportX = 0.0f;
 	float viewportY = 0.0f;
+
+	static int GetBlockSize();
+
 protected:
 
 	SDL_Window* window;
@@ -71,7 +74,7 @@ protected:
 	SDL_Rect destinationRect{ NULL };
 	char tileToDraw = ' ';
 	//stores the size of the tile based on level layout
-	const int blockSize = 32;
+	static const int blockSize = 32;
 	
 	Vector2 positionHolder;
 };

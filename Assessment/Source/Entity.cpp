@@ -12,6 +12,11 @@ Entity::Entity(float x, float y, float width, float height)
 
 Entity::~Entity()
 {
+	if (levelData != nullptr) 
+	{
+		delete levelData;
+		levelData = nullptr;
+	}
 }
 
 void Entity::UpdateCollisionBox()
@@ -57,6 +62,16 @@ int Entity::GetX()
 int Entity::GetY()
 {
 	return y;
+}
+
+void Entity::LoadLevelData(LevelData* levelDataToLoad)
+{
+	levelData = levelDataToLoad;
+}
+
+EntityTypes Entity::GetEntityType()
+{
+	return entityType;
 }
 
 

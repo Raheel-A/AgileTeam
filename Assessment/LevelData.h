@@ -1,8 +1,11 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Source/Entity.h"
+//#include "Source/Entity.h"
 #include "EngineStatics.h"
+#include "Vector2.h"
+
+class Entity;
 
 struct LevelData
 {
@@ -36,6 +39,7 @@ public:
 	/// <param name="y"> Tile's Y Position </param>
 	/// <returns> tile as char </returns>
 	char GetTile(int x, int y);
+	char GetTile(Vector2 vector2);
 
 	/// <summary>
 	/// Gets Name Of Level
@@ -48,6 +52,8 @@ public:
 	std::vector<std::vector<char>> GetLevelTiles();
 
 	void Update();
+
+	std::vector<Entity*> GetEntities();
 
 };
 

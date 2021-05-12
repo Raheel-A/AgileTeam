@@ -281,3 +281,8 @@ void Renderer::setViewPortY(float viewporty)
 	viewport.y = viewportY;
 	SDL_RenderSetViewport(renderer, &viewport);
 }
+
+int Renderer::GetBlockSize()
+{
+	return blockSize;
+}
