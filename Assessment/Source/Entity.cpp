@@ -1,5 +1,6 @@
 #include "Entity.h"
 
+
 Entity::Entity(float x, float y, float width, float height)
 {
 	this->x = x;

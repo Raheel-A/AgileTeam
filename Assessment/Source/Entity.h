@@ -4,13 +4,7 @@
 #include "../Sprite.h"
 #include "../ImageLoader.h"
 #include "../LevelData.h"
-
-enum EntityTypes
-{
-	Player,
-	Enemy,
-	Coin
-};
+#include "../EntityTypes.h"
 
 /// <summary>
 /// Base class that any entity in the game derives from
@@ -58,7 +52,7 @@ protected:
 
 	LevelData* levelData;
 
-	EntityTypes entityType;
+	EntityTypes entityType = EntityTypes::NONE;
 
 private:
 	void UpdateCollisionBox();

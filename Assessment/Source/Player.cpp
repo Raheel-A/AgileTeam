@@ -17,7 +17,7 @@ Player::Player(float x, float y, float width, float height) : Entity(x, y, width
 	attackRangeCollisionBox.w = width + (attackRange + attackRange);
 	attackRangeCollisionBox.h = height + (attackRange + attackRange);
 
-	entityType = EntityTypes::Player;
+	entityType = EntityTypes::PLAYER;
 }
 
 Player::~Player()
@@ -65,10 +65,12 @@ void Player::Update(float delta)
 		TILES::PIT == charToCheck || 
 		TILES::POT == charToCheck ||
 		TILES::TREES == charToCheck ||
-		TILES::WALL == charToCheck) {
+		TILES::WALL == charToCheck) 
+	{
 		//There has been a collision with a tile
 	}
-	else {
+	else 
+	{
 		this->x = newPosition.x;
 		this->y = newPosition.y;
 	}
@@ -77,11 +79,12 @@ void Player::Update(float delta)
 
 	for (int i = 0; i < entities.size(); i++)
 	{
-		if (CheckCollision(this, entities[i])) {
+		if (CheckCollision(this, entities[i])) 
+		{
 			//There has been a collision between two entities
 			switch (entities[i]->GetEntityType())
 			{
-			case EntityTypes::Enemy:
+			case EntityTypes::ENEMY:
 				std::cout << "We collided with an enemy" << std::endl;
 				break;
 			default:
@@ -90,7 +93,6 @@ void Player::Update(float delta)
 		}
 				
 	}
-		
 
 	sprite->setPos(Vector2(x, y));
 

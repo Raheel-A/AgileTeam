@@ -135,6 +135,7 @@
     <ClInclude Include="LevelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EntityTypes.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

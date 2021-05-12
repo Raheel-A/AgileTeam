@@ -136,7 +136,7 @@ int main()
 	player->LoadSprite(imageloader);
 	player->LoadLevelData(&loadedLevel);
 
-	Enemy* enemy = new Enemy(160, 160, 10, 10);
+	Enemy* enemy = new Enemy(200, 200, 10, 10);
 	enemy->LoadSprite(imageloader);
 	
 	vector<Entity*> entities;
