@@ -16,6 +16,8 @@ Player::Player(float x, float y, float width, float height) : Entity(x, y, width
 	attackRangeCollisionBox.y = y - attackRange;
 	attackRangeCollisionBox.w = width + (attackRange + attackRange);
 	attackRangeCollisionBox.h = height + (attackRange + attackRange);
+
+	entityType = EntityTypes::PLAYER;
 }
 
 Player::~Player()
@@ -28,26 +30,70 @@ void Player::Init()
 
 void Player::Update(float delta)
 {
+	Vector2 oldPosition = Vector2(this->x, this->y);
+	Vector2 newPosition = oldPosition;
+
 	if (Input::KeyHeld(KEY_UP))
 	{
-		y -= speed * delta;
+		//y -= speed * delta;
+		newPosition.y -= speed * delta;
 	}
 
 	if (Input::KeyHeld(KEY_LEFT))
 	{
-		x -= speed * delta;
-		sprite->FlipMode = SDL_FLIP_HORIZONTAL; // intellisense is a lie
+		//x -= speed * delta;
+		newPosition.x -= speed * delta;
+		sprite->FlipMode = SDL_FLIP_HORIZONTAL;
 	}
 
 	if (Input::KeyHeld(KEY_DOWN))
 	{
-		y += speed * delta;
+		//y += speed * delta;
+		newPosition.y += speed * delta;
 	}
 
 	if (Input::KeyHeld(KEY_RIGHT))
 	{
-		x += speed * delta;
+		//x += speed * delta;
+		newPosition.x += speed * delta;
 		sprite->FlipMode = SDL_FLIP_NONE;
+	}
+
+	//Check new position for collision with the tilemap
+	char charToCheck = levelData->GetTile(GetPlayerPositionInTileMap(newPosition));
+	if (TILES::MOUNTAIN == charToCheck || 
+		TILES::DOOR == charToCheck || 
+		TILES::FENCE == charToCheck || 
+		TILES::PIT == charToCheck || 
+		TILES::POT == charToCheck ||
+		TILES::TREES == charToCheck ||
+		TILES::WALL == charToCheck) 
+	{
+		//There has been a collision with a tile
+	}
+	else 
+	{
+		this->x = newPosition.x;
+		this->y = newPosition.y;
+	}
+
+	std::vector<Entity*> entities = levelData->GetEntities();
+
+	for (int i = 0; i < entities.size(); i++)
+	{
+		if (CheckCollision(this, entities[i])) 
+		{
+			//There has been a collision between two entities
+			switch (entities[i]->GetEntityType())
+			{
+			case EntityTypes::ENEMY:
+				std::cout << "We collided with an enemy" << std::endl;
+				break;
+			default:
+				break;
+			}
+		}
+				
 	}
 
 	sprite->setPos(Vector2(x, y));
@@ -129,6 +175,8 @@ void Player::PlayerAttack()
 	//Also do we damage all enemies in range?  Or a single target?  How do we decide what target that is?
 	//Furthermore do we have an attack speed?
 
+
+	/*
 	//Temp holder until decision made over how we store enemy list
 	Enemy enemy;
 	
@@ -137,7 +185,7 @@ void Player::PlayerAttack()
 		enemy.LoseHealth(attackPoints);
 	}
 
-
+	*/
 }
 
 void Player::PlayerDeath()
@@ -151,4 +199,15 @@ void Player::UpdateAttackRangeCollider()
 	//Update the attack range collider (JW)
 	attackRangeCollisionBox.x = x - attackRange;
 	attackRangeCollisionBox.y = y - attackRange;
+}
+
+Vector2 Player::GetPlayerPositionInTileMap(Vector2 position)
+{
+	int blockSize = Renderer::GetBlockSize();
+
+	int xIndex = floor((position.x + (blockSize / 2)) / blockSize);
+	int yIndex = floor((position.y + (blockSize * 1.5)) / blockSize);
+
+	return Vector2(yIndex, xIndex);
+
 }

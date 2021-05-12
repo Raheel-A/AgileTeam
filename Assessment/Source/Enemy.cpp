@@ -8,6 +8,7 @@ Enemy::Enemy() : Enemy(0, 0, 10, 10)
 
 Enemy::Enemy(float x, float y, float width, float height) : Entity(x, y, width, height)
 {
+	entityType = EntityTypes::ENEMY;
 	ai = new AIMelee();
 }
 

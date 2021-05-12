@@ -21,8 +21,10 @@ const int SCREENHEIGHT = 640;
 
 using namespace std;
 class Sprite;
+class Entity;
 class Player;
-class LevelData;
+struct LevelData;
+
 enum TILES
 {
 	/*GRASS = 'A',

@@ -173,6 +173,7 @@
     <ClCompile Include="Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EntityTypes.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="AIBase.h" />
     <ClInclude Include="AIMelee.h" />
