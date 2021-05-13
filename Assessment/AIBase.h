@@ -26,5 +26,7 @@ protected:
 	Entity* targetEntity = nullptr;
 	float playerDetectionRange = 150;
 	float playerLostRange = 300;
+
+	float pathfindingTimer = 0;
 };
 

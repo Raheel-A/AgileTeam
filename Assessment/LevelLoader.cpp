@@ -19,7 +19,7 @@ LevelData LevelLoader::LoadLevel(string levelName)
 		tiles.push_back(currentRow);
 	}
 
-	LevelData levelData{levelName, (int)LevelArray.size(), (int)LevelArray[0].size(), tiles};
+	LevelData levelData{levelName, (int)LevelArray[0].size(), (int)LevelArray.size(), tiles};
 	return levelData;
 }
 

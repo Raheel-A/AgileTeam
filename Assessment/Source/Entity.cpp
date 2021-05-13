@@ -82,7 +82,7 @@ Vector2 Entity::GetPositionInTileMap(Vector2 position)
 	int xIndex = floor((position.x + (blockSize / 2)) / blockSize);
 	int yIndex = floor((position.y + (blockSize * 1.5)) / blockSize);
 
-	return Vector2(yIndex, xIndex);
+	return Vector2(xIndex, yIndex);
 }
 
 Vector2 Entity::GetPositionInPixelSpace(Vector2 position)

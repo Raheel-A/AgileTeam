@@ -2,31 +2,44 @@
 #include "Vector2.h"
 #include "Source/Player.h"
 #include "GameManager.h"
+#include "Pathfinder.h"
 #include "Renderer.h"
 #include "AIBase.h"
 
 AIBase::AIBase(Entity* owner)
 {
 	parentEntity = owner;
-	currentPath.push_back(Vector2(10, 10));
+	targetEntity = GameManager::instance().player;
 }
 
 void AIBase::Update(float deltaTime)
 {
+	if (pathfindingTimer > 0)
+	{
+		pathfindingTimer -= deltaTime;
+	}
+
 	if (currentPath.size() > 0)
 	{
-		//Vector2 direction = (currentPath[0] - parentEntity->GetPositionInTileMap(Vector2(parentEntity->x, parentEntity->y))).Normalised();
-		Vector2 dst = Vector2(GameManager::instance().player->GetX(), GameManager::instance().player->GetY());
-		Vector2 direction = (dst - parentEntity->GetPositionInTileMap(Vector2(parentEntity->x, parentEntity->y))).Normalised();
+		Vector2 direction = (currentPath[0] + Vector2{0.5f, 0.5f} - parentEntity->GetPositionInTileMap(Vector2(parentEntity->x, parentEntity->y))).Normalised();
 
 		parentEntity->x += direction.x * parentEntity->speed * deltaTime;
 		parentEntity->y += direction.y * parentEntity->speed * deltaTime;
 
 		parentEntity->sprite->setPos(Vector2(parentEntity->x, parentEntity->y));
+
+		Vector2 selfPos = parentEntity->GetPositionInTileMap(Vector2(parentEntity->x, parentEntity->y));
+		if (selfPos.Distance(currentPath[0] + Vector2{0.5f, 0.5f}) < 0.01f)
+		{
+			currentPath.erase(currentPath.begin());
+		}
 	}
 	else if (targetEntity != nullptr)
 	{
-		GoTo(Vector2{ targetEntity->x, targetEntity->y });
+		if (pathfindingTimer <= 0)
+		{
+			GoTo(targetEntity->GetPositionInTileMap(Vector2{ targetEntity->x-30,targetEntity->y-30 }));
+		}
 	}
 }
 
@@ -37,7 +50,9 @@ void AIBase::SetParentLevel(LevelData* level)
 
 void AIBase::GoTo(Vector2 destination)
 {
-	//currentPath = parentLevel.GetPathfinder().FindPath(parentEntity.position, destination)
+	Vector2 selfPos = parentEntity->GetPositionInTileMap(Vector2{ parentEntity->x,parentEntity->y });
+	currentPath = GameManager::instance().pathfinder->FindPath(selfPos, destination);
+	pathfindingTimer = 0.5f;
 }
 
 void AIBase::Stop(Vector2 destination)

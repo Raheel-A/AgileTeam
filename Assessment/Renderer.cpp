@@ -166,8 +166,8 @@ void Renderer::DrawCurrentLevel(LevelData* level, Player* player)
 	//Represents the min amount of rows and columns to cycle through, presumed to be 0
 	int minimumValue = 0; 
 	//these need to be seperate incase the level is not square, this is for max rows/columns that need to be cycled through
-	int rowSizeMax = level->GetWidth(); 
-	int columnSizeMax = level->GetHeight();
+	int rowSizeMax = level->GetHeight(); 
+	int columnSizeMax = level->GetWidth();
 	vector<vector<char>> levelTiles = level->GetLevelTiles();
 	
 	//cycle through vector to assign each tile

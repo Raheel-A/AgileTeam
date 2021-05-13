@@ -26,3 +26,14 @@ Vector2 Vector2::Normalised()
 	float mag = sqrt(x * x + y * y);
 	return Vector2(x / mag, y / mag);
 }
+
+float Vector2::Distance(Vector2 to)
+{
+	Vector2 delta = { to.x - x, to.y - y };
+	return delta.Magnitude();
+}
+
+float Vector2::Magnitude()
+{
+	return sqrt((x* x) + (y * y));
+}

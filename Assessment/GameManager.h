@@ -3,6 +3,7 @@
 
 class Player;
 class LevelData;
+class Pathfinder;
 
 class GameManager
 {
@@ -17,7 +18,10 @@ public:
         return INSTANCE;
     }
 
+    void UpdatePathfinder();
+
     Player* player = nullptr;
     LevelData* level = nullptr;
+    Pathfinder* pathfinder = nullptr;
 };
 

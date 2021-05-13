@@ -15,12 +15,12 @@ LevelData::~LevelData()
 
 char LevelData::GetTile(int x, int y)
 {
-	return backgroundTiles[x][y];
+	return backgroundTiles[y][x];
 }
 
 char LevelData::GetTile(Vector2 vector2)
 {
-	return backgroundTiles[vector2.x][vector2.y];
+	return backgroundTiles[vector2.y][vector2.x];
 }
 
 std::string LevelData::GetLevelName()

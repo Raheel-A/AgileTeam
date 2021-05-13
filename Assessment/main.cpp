@@ -129,6 +129,8 @@ int main()
 	LevelLoader levelLoader;
 	LevelData loadedLevel = levelLoader.LoadLevel("Level");
 	GameManager::instance().level = &loadedLevel;
+	GameManager::instance().pathfinder = new Pathfinder(loadedLevel.GetWidth(), loadedLevel.GetHeight());
+	GameManager::instance().UpdatePathfinder();
 
 	bool _isMenu = true;
 
