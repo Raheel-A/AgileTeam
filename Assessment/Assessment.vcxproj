@@ -148,7 +148,9 @@
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="LevelNode.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MeleeEnemy.cpp" />
     <ClCompile Include="Pathfinder.cpp" />
+    <ClCompile Include="RangedEnemy.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
@@ -161,7 +163,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LevelNode.h" />
+    <ClInclude Include="MeleeEnemy.h" />
     <ClInclude Include="Pathfinder.h" />
+    <ClInclude Include="RangedEnemy.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector2Int.h" />

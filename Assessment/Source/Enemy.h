@@ -27,7 +27,7 @@ public:
 
 	void Init();
 	void Update(float delta);
-	void Draw();
+	void Draw();	
 
 	void OnCollision(Entity* collider);
 
