@@ -53,6 +53,18 @@ void LevelData::AddEntity(Entity* e)
 	entityLoop.push_back(e);
 }
 
+void LevelData::RemoveEntity(Entity* entity)
+{
+	for (int i = 0; i < entityLoop.size(); i++)
+	{
+		if (entity == entityLoop[i]) 
+		{
+			entityLoop.erase(entityLoop.begin() + i);
+			break;
+		}
+	}
+}
+
 void LevelData::Update()
 {
 	for (int i = 0; i < entityLoop.size(); i++)

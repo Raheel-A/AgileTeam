@@ -34,7 +34,7 @@ public:
 
 	void LoadLevelData(LevelData* levelDataToLoad);
 
-	
+	void LoseHealth(int healthAmount);
 
 	EntityTypes GetEntityType();
 
@@ -55,6 +55,8 @@ protected:
 	LevelData* levelData;
 
 	EntityTypes entityType = EntityTypes::NONE;
+
+	void EntityDeath();
 
 	void UpdateCollisionBox();
 	Vector2 GetPositionInTileMap(Vector2 position);

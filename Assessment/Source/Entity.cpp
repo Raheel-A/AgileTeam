@@ -20,6 +20,10 @@ Entity::~Entity()
 	}
 }
 
+void Entity::EntityDeath()
+{
+}
+
 void Entity::UpdateCollisionBox()
 {
 	collisionBox.x = x;
@@ -91,4 +95,18 @@ Vector2 Entity::GetPositionInPixelSpace(Vector2 position)
 	int xIndex = position.x * blockSize;
 	int yIndex = position.y * blockSize;
 	return Vector2(xIndex, yIndex);
+}
+
+void Entity::LoseHealth(int healthAmount)
+{
+	//after losing health, the enemy won't die
+	if (healthPoints - healthAmount >= 0)
+	{
+		healthPoints -= healthAmount;
+	}
+	else //if the damage the enemy takes makes their health points be 0 or lower, they have died
+	{
+		healthPoints = 0;
+		EntityDeath();
+	}
 }

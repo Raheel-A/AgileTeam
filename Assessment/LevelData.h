@@ -52,6 +52,7 @@ public:
 	std::vector<std::vector<char>> GetLevelTiles();
 	std::vector<Entity*> GetEntities();
 	void AddEntity(Entity* e);
+	void RemoveEntity(Entity* entity);
 
 	void Update();
 

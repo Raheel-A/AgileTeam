@@ -15,13 +15,14 @@ Sprite::Sprite(SDL_Texture* text)
 
 
 //Animation
-Sprite::Sprite(SDL_Texture* text, bool isAnimated)
+Sprite::Sprite(SDL_Texture* text, bool isAnimated, int width, int height)
 {
 	animated = isAnimated;
 	SourceRect.x = SourceRect.y = 0;
-	SourceRect.w = 16;
-	SourceRect.h = 32;
-	DestRect.w = DestRect.h = 128;
+	SourceRect.w = width;
+	SourceRect.h = height;
+	DestRect.w = 128;
+	DestRect.h = 128;
 
 	//Creating Animations
 	Animation Idle = Animation(0, 3, 100);// columns, row, speed
@@ -65,7 +66,7 @@ void Sprite::PlayAnimation(const char* AnimName)
 	AnimIndex = anims[AnimName].Index;
 	speed = anims[AnimName].Speed;
 }
-void Sprite::SpriteUpdate(int cameraX, int cameraY)
+void Sprite::SpriteUpdate(int cameraX, int cameraY, int width, int height)
 {
 	if (animated)
 	{
@@ -76,8 +77,8 @@ void Sprite::SpriteUpdate(int cameraX, int cameraY)
 	SourceRect.y = AnimIndex * SourceRect.h; //when not animated , animation index is zero
 	DestRect.x = pos.x - cameraX;//200; //PLAYERS POSITION x
 	DestRect.y = pos.y - cameraY;//200; //Players Position y
-	DestRect.w = 16 * 2;//width * Scale; //
-	DestRect.h = 32 * 2;//heigh * Scale; //
+	DestRect.w = width;//width * Scale; //
+	DestRect.h = height;//heigh * Scale; //
 
 }
 

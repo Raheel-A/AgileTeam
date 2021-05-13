@@ -30,7 +30,7 @@ public:
 
 	void OnCollision(Entity* collider);
 
-	void LoseHealth(int healthAmount);
+	
 
 	void AttackPlayer(int damageAmount);
 

@@ -21,6 +21,7 @@
 #include "Sprite.h"
 
 #include "LevelLoader.h"
+#include "Coin.h"
 
 #undef main
 
@@ -137,10 +138,35 @@ int main()
 	Player* player = new Player(320, 320, 32, 32);
 	player->LoadSprite(imageloader);
 	player->LoadLevelData(&loadedLevel);
+	player->LoadUI(UI, sManager);
 	GameManager::instance().player = player;
 
 	Enemy* enemy = new Enemy(200, 200, 32, 32);
 	enemy->LoadSprite(imageloader);
+
+	const int numberOfCoins = 10;
+	Vector2 coinLocations[numberOfCoins] = 
+		{ 
+		Vector2(256, 280), 
+		Vector2(288, 280), 
+		Vector2(320, 280), 
+		Vector2(352, 280), 
+		Vector2(384, 280), 
+		Vector2(416, 280), 
+		Vector2(448, 280), 
+		Vector2(480, 280), 
+		Vector2(512, 280), 
+		Vector2(544, 280) 
+		};
+
+
+	for (int i = 0; i < numberOfCoins; i++)
+	{
+		Coin* fancyCoin1 = new Coin(coinLocations[i].x, coinLocations[i].y, 32, 32);
+		fancyCoin1->LoadSprite(imageloader);
+		loadedLevel.AddEntity(fancyCoin1);
+	}
+	
 	
 	loadedLevel.AddEntity(player);
 	loadedLevel.AddEntity(enemy);
@@ -240,7 +266,6 @@ int main()
 		UI->DisplayMenu();
 		renderer->GameDraw();
 	}
-	// Seb smells like fish
 	SDL_Quit();
 	return 0;
 }

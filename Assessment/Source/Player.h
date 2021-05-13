@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Enemy.h"
+#include "../Menus.h"
 
 /// <summary>
 /// Entity that is controlled by the player and stores the health
@@ -37,13 +38,16 @@ public:
 
 	int GetLives();
 
-	//void PlayerAttack(int damageAmount, Enemy* enemy);
+	void PlayerAttack(int damageAmount, Entity* enemy);
 
 	void PlayerDeath();
+	void LoadUI(Menus* menuToLoad, SoundManager* soundManager);
 	
 private:
 	int attackRange;
 	SDL_Rect attackRangeCollisionBox;
+	Menus* menu;
+	SoundManager* soundManager;
 
 	void UpdateAttackRangeCollider();
 };

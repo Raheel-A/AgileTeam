@@ -6,6 +6,7 @@ class Coin :
     public Entity
 {
 public:
+    Coin(float x, float y, float width, float height);
     void Init();
     void Update(float delta);
     void Draw(int cameraX, int cameraY);
