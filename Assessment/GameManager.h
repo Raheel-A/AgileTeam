@@ -2,6 +2,7 @@
 
 
 class Player;
+class LevelData;
 
 class GameManager
 {
@@ -17,5 +18,6 @@ public:
     }
 
     Player* player = nullptr;
+    LevelData* level = nullptr;
 };
 

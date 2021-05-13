@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 
-#include "Entity.h";
-#include "Player.h";
+#include "Entity.h"
+#include "Player.h"
 
 class AIMelee;
 

@@ -8,7 +8,7 @@
 AIBase::AIBase(Entity* owner)
 {
 	parentEntity = owner;
-	currentPath.push_back(Vector2(20, 10));
+	currentPath.push_back(Vector2(10, 10));
 }
 
 void AIBase::Update(float deltaTime)

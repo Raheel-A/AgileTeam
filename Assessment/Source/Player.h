@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h";
+#include "Entity.h"
 #include "Enemy.h"
 
 /// <summary>
@@ -13,7 +13,7 @@ public:
 	~Player();
 
 	//classes
-	Enemy* enemy;
+	//Enemy* enemy;
 
 	//stats
 	unsigned int m_healthPoints{ 100 };
@@ -37,7 +37,7 @@ public:
 
 	int GetLives();
 
-	void PlayerAttack(int damageAmount, Enemy* enemy);
+	//void PlayerAttack(int damageAmount, Enemy* enemy);
 
 	void PlayerDeath();
 	

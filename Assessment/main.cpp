@@ -128,6 +128,7 @@ int main()
 
 	LevelLoader levelLoader;
 	LevelData loadedLevel = levelLoader.LoadLevel("Level");
+	GameManager::instance().level = &loadedLevel;
 
 	bool _isMenu = true;
 

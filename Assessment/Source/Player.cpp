@@ -138,6 +138,11 @@ void Player::OnCollision(Entity* collider)
 	std::cout << "We collided with an enemy" << std::endl;
 }
 
+int Player::GetLives()
+{
+	return m_healthPoints;
+}
+
 void Player::LoadSprite(ImageLoader* imageLoader)
 {
 	sprite = new Sprite(imageLoader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
@@ -171,25 +176,25 @@ void Player::GainHealth(int healthAmount)
 	}
 }
 
-void Player::PlayerAttack(int damageAmount, Enemy* enemy)
-{
-	//Attack method
-	//If enemy in range statement - How do we Get Enemies?  Once this is decided then, 'for' loop enemies into an array
-	//Also do we damage all enemies in range?  Or a single target?  How do we decide what target that is?
-	//Furthermore do we have an attack speed?
-
-
-	/*
-	//Temp holder until decision made over how we store enemy list
-	Enemy enemy;
-	
-	//Check if enemy is in range
-	if (CheckCollision(&enemy, attackRangeCollisionBox)) {
-		enemy.LoseHealth(attackPoints);
-	}
-
-	*/
-}
+//void Player::PlayerAttack(int damageAmount, Enemy* enemy)
+//{
+//	//Attack method
+//	//If enemy in range statement - How do we Get Enemies?  Once this is decided then, 'for' loop enemies into an array
+//	//Also do we damage all enemies in range?  Or a single target?  How do we decide what target that is?
+//	//Furthermore do we have an attack speed?
+//
+//
+//	/*
+//	//Temp holder until decision made over how we store enemy list
+//	Enemy enemy;
+//	
+//	//Check if enemy is in range
+//	if (CheckCollision(&enemy, attackRangeCollisionBox)) {
+//		enemy.LoseHealth(attackPoints);
+//	}
+//
+//	*/
+//}
 
 void Player::PlayerDeath()
 {
