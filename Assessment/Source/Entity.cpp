@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Player.h"
 
 
 Entity::Entity(float x, float y, float width, float height)
@@ -108,5 +109,15 @@ void Entity::LoseHealth(int healthAmount)
 	{
 		healthPoints = 0;
 		EntityDeath();
+	}
+}
+void Entity::AttackPlayer(int damageAmount, Player* player, Menus* menu, SoundManager* Smanager)
+{
+	if (!attacked)
+	{
+		//call Player's lose health, among others
+		menu->hud->ChangeHealth(Smanager, -1);
+		player->LoseHealth(damageAmount);
+		attacked = true;
 	}
 }

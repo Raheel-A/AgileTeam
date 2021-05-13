@@ -5,6 +5,8 @@
 #include "../ImageLoader.h"
 #include "../LevelData.h"
 #include "../EntityTypes.h"
+#include "../SoundManager.h"
+#include "../Menus.h"
 
 /// <summary>
 /// Base class that any entity in the game derives from
@@ -36,8 +38,10 @@ public:
 
 	void LoseHealth(int healthAmount);
 
-	EntityTypes GetEntityType();
+	void AttackPlayer(int damageAmount, Player* player, Menus* menu, SoundManager* Smanager);
 
+	EntityTypes GetEntityType();
+	bool attacked = false;
 protected:
 	float x, y, z;
 	float width, height;

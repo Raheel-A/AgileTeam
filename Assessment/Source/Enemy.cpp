@@ -44,14 +44,6 @@ void Enemy::OnCollision(Entity* collider)
 {	
 }
 
-
-
-void Enemy::AttackPlayer(int damageAmount)
-{
-	//call Player's lose health, among others
-	player->LoseHealth(damageAmount);
-}
-
 void Enemy::EnemyDeath()
 {
 	//death method

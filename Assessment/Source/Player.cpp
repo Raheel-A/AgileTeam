@@ -89,7 +89,7 @@ void Player::Update(float delta)
 			{
 			case EntityTypes::ENEMY:
 				//Do enemy stuff
-				menu->hud->ChangeHealth(soundManager, -1);
+				entities[i]->AttackPlayer(1, this, menu, soundManager);
 				break;
 			case EntityTypes::COIN:
 				menu->hud->ChangeGold(soundManager, 1);
@@ -100,12 +100,16 @@ void Player::Update(float delta)
 			}
 		}
 
-		if (entities[i]->GetEntityType() == EntityTypes::ENEMY && CheckCollision(entities[i], this->attackRangeCollisionBox)) {
-			
-			levelData->RemoveEntity(entities[i]);
-			//PlayerAttack(attackPoints, entities[i]);
+		if (entities[i]->GetEntityType() == EntityTypes::ENEMY && CheckCollision(entities[i], this->attackRangeCollisionBox)) 
+		{
+			canAttack = true;
+			currentTarget = entities[i];
 		}
-				
+		else
+		{
+			canAttack = false;
+			currentTarget = nullptr;
+		}
 	}
 
 	sprite->setPos(Vector2(x, y));
@@ -163,13 +167,13 @@ void Player::LoadSprite(ImageLoader* imageLoader)
 void Player::LoseHealth(int healthAmount)
 {
 	//after losing health, the player won't die
-	if (healthPoints - healthAmount >= 0)
+	if (m_healthPoints - healthAmount > 0)
 	{
-		healthPoints -= healthAmount;
+		m_healthPoints -= healthAmount;
 	}
 	else //if the damage the player takes makes their health points be 0 or lower, they have died
 	{
-		healthPoints = 0;
+		m_healthPoints = 0;
 		PlayerDeath();
 	}
 }

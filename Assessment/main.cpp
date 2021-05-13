@@ -135,7 +135,7 @@ int main()
 
 
 	// Create a player and an enemy with a sprite
-	Player* player = new Player(320, 320, 32, 32);
+	Player* player = new Player(320, 320, 16, 23);// 32, 32);
 	player->LoadSprite(imageloader);
 	player->LoadLevelData(&loadedLevel);
 	player->LoadUI(UI, sManager);
@@ -216,6 +216,22 @@ int main()
 		else if (gState == GameState::GAMESTATE_INGAME)
 		{
 			renderer->DrawCurrentLevel(&loadedLevel, player);
+
+			if (player->GetHasDied()) gState = GameState::GAMESTATE_QUIT;
+
+			//player attacking
+			if (player->CanAttack() && i->KeyPressed(KEY_E))
+			{
+				for (int i = 0; i < loadedLevel.GetEntities().size(); i++)
+				{
+					if (player->currentTarget == loadedLevel.GetEntities()[i])
+					{
+						loadedLevel.RemoveEntity(entities[i]);
+						break;
+					}
+				}
+
+			}
 
 			// Update all entities
 			for (int i = 0; i < entities.size(); i++)
