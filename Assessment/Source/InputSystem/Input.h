@@ -1,5 +1,5 @@
 #pragma once
-#include "../../SDL/include/SDL.h"
+#include "SDL.h"
 
 enum KEY_LIST {
 	KEY_ESC,
@@ -9,6 +9,8 @@ enum KEY_LIST {
 	KEY_RIGHT,
 	KEY_SPACE,
 	KEY_LSHIFT,
+	KEY_ENTER,
+	KEY_P,
 	SIZEOF_KEY_LIST
 };
 class Input
@@ -16,10 +18,14 @@ class Input
 public:
 	Input();
 	~Input();
-	void Update();
-	bool KeyIsDown(KEY_LIST key);
+	void UpdateInstance();
+	static void Update();
+	static bool KeyPressed(KEY_LIST key);
+	static bool KeyHeld(KEY_LIST key);
+	static void SetKeyHold();
 private:
-	SDL_Event inputEvent;
-	bool keysPressed[SIZEOF_KEY_LIST];
+	static SDL_Event inputEvent;
+	static bool keysPressed[SIZEOF_KEY_LIST];
+	static bool keysHeld[SIZEOF_KEY_LIST];
 };
 

@@ -4,21 +4,19 @@
 #include "Entity.h";
 #include "Player.h";
 
-using namespace std;
+class AIMelee;
 
+using namespace std;
 class Enemy : public Entity
 {
+protected:
+	friend class AIMelee;
 public:
 	//classes
 	Player* player;
 
 	//data
-	string m_enemyType;
-
-	//stats
-	unsigned int m_healthPoints{ 100 };
-	unsigned int m_attackPoints{ 100 };
-	float m_movementSpeed{ 3.5f };
+	string enemyType;
 
 	//methods
 	Enemy();
@@ -27,7 +25,8 @@ public:
 
 	void Init();
 	void Update(float delta);
-	void Draw();	
+	void Draw(int cameraX, int cameraY);
+	void LoadSprite(ImageLoader* imageLoader);
 
 	void OnCollision(Entity* collider);
 
@@ -39,6 +38,6 @@ public:
 
 
 private:
-
+	AIMelee* ai;
 };
 

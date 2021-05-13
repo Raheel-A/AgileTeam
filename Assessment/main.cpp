@@ -12,6 +12,15 @@
 #include "EngineStatics.h"
 #include "Source/Player.h"
 #include "Source/InputSystem/Input.h"
+#include "HUD.h"
+#include "SoundManager.h"
+#include "Menus.h"
+#include "GameManager.h"
+
+#include "ImageLoader.h"
+#include "Sprite.h"
+
+#include "LevelLoader.h"
 
 #undef main
 
@@ -37,11 +46,24 @@ void PathfinderTest()
 	cout << endl;
 }
 
-int main(void) 
+void CollisionTest()
 {
-	PathfinderTest();
+	Player* p1 = new Player(0, 0, 10, 10);
+	Player* p2 = new Player(5, 5, 10, 10);
+	if (p1->CheckCollision(p1, p2))
+	{
+		cout << "Collision occured" << endl;
+	}
+	else
+	{
+		cout << "No collision" << endl;
+	}
+}
 
+int main() 
+{
 	bool running = true;
+	GameState gState = GameState::GAMESTATE_START;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -64,54 +86,160 @@ int main(void)
 		running = false;
 	}
 
-	// Collision test
-	Player* p1 = new Player(0, 0, 10, 10);
-	Player* p2 = new Player(5, 5, 10, 10);
+	Renderer* renderer = new Renderer;
+	renderer->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREENWIDTH, SCREENHEIGHT, false);
 
-	if (p1->CheckCollision(p1, p2))
-	{
-		cout << "Collision occured" << endl;
-	}
-	else
-	{
-		cout << "No collision" << endl;
-	}
-
-	Renderer* a = new Renderer;
-	a->CreateWindow("GameWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 	// Input test
 	Input* i = new Input;
+
+	Menus* UI = new Menus(renderer);
+
+	SoundManager* sManager = new SoundManager();
+	sManager->LoadMusic(music::Menu, "Assets/music.wav");
+	sManager->LoadMusic(music::BGM, "Assets/Music2.wav");
+	sManager->LoadSFXs(SFXList::Walk, "Assets/Walk.wav");
+	sManager->LoadSFXs(SFXList::Shoot, "Assets/shoot.wav");
+	sManager->LoadSFXs(SFXList::UIpositive, "Assets/UIPositive.wav");
+	sManager->LoadSFXs(SFXList::UInegative, "Assets/UIpop.wav");
+	sManager->LoadSFXs(SFXList::MenuPop, "Assets/MenuPop.wav");
+	sManager->LoadSFXs(SFXList::Die, "Assets/Die.wav");
+	sManager->LoadSFXs(SFXList::Life, "Assets/Life.wav");
+	sManager->LoadSFXs(SFXList::Damage, "Assets/Damage.wav");
+	sManager->LoadSFXs(SFXList::Score, "Assets/Score.wav");
+	//sManager->PlayBGM(music::Menu,-1);
+	//sManager->PlayBGM(music::BGM,-1); 
+
 	bool quit = false;
-	while (!quit && running)
+
+	//Create a new image loader
+	ImageLoader* imageloader = new ImageLoader(renderer->renderer);
+
+	//Load sprites into the sprite-list for level loading
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/path.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/moutainwithgrass.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/grass.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/tree2.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/Stone-wall.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/Stone-Floor.bmp")));
+	renderer->spriteList.push_back(new Sprite(imageloader->LoadeImage("Assets/pit.bmp")));
+
+	//Create a seperate sprite for the player/enemy
+	//Sprite* animExample = new Sprite(imageloader->LoadeImage("Assets/pumpkin_dude.bmp"), true);
+
+	LevelLoader levelLoader;
+	LevelData loadedLevel = levelLoader.LoadLevel("Level");
+
+	bool _isMenu = true;
+
+
+	// Create a player and an enemy with a sprite
+	Player* player = new Player(320, 320, 32, 32);
+	player->LoadSprite(imageloader);
+	player->LoadLevelData(&loadedLevel);
+	GameManager::instance().player = player;
+
+	Enemy* enemy = new Enemy(200, 200, 32, 32);
+	enemy->LoadSprite(imageloader);
+	
+	loadedLevel.AddEntity(player);
+	loadedLevel.AddEntity(enemy);
+
+	Uint64 NOW = SDL_GetPerformanceCounter();
+	Uint64 LAST = 0;
+	double deltaTime = 0;
+
+	//main loop
+	while (gState != GameState::GAMESTATE_QUIT)
 	{
-		i->Update();
-		quit = i->KeyIsDown(KEY_ESC) ? true : false;
+		LAST = NOW;
+		//NOW = SDL_GetPerformanceCounter();
+		NOW = SDL_GetTicks();
 
-		//Check input and move accordingly 
-		if (i->KeyIsDown(KEY_UP))
+		//deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
+		deltaTime = (double)(NOW - LAST) / 1000;
+
+		i->UpdateInstance();
+
+		quit = i->KeyPressed(KEY_ESC);
+	
+		vector<Entity*> entities = loadedLevel.GetEntities();
+
+		if (gState == GameState::GAMESTATE_START)
 		{
-			p1->Move(1);
+			//Check input and move accordingly 
+			//Rendering team addition: Take the keypress and move the camera accordingly (up, move the camera up the screen for example)
+			if (i->KeyPressed(KEY_UP))
+			{
+				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_PLAY);
+				sManager->PlaySFX(SFXList::UInegative);
+			}
+
+			if (i->KeyPressed(KEY_DOWN))
+			{
+				UI->ChangeStartSelection(StartScreenSelected::STARTSCREEN_QUIT);
+				sManager->PlaySFX(SFXList::UInegative);
+			}
+
+			if (i->KeyPressed(KEY_ENTER))
+			{
+				UI->SelectButton(gState);
+				sManager->PlaySFX(SFXList::UIpositive);
+			}
+		}
+		else if (gState == GameState::GAMESTATE_INGAME)
+		{
+			renderer->DrawCurrentLevel(&loadedLevel, player);
+
+			// Update all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Update(deltaTime);
+			}
+
+			//Draw the level, draw the animations and update them, then render everything else
+			//renderer->DrawCurrentLevel();
+
+			// Draw all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Draw(renderer->viewportX, renderer->viewportY);
+			}
+
+			if (i->KeyPressed(KEY_P))
+			{
+				UI->PauseGame(gState);
+			}
+		}
+		else if (gState == GameState::GAMESTATE_PAUSED)
+		{
+			renderer->DrawCurrentLevel(&loadedLevel, player);
+
+			// Draw all entities
+			for (int i = 0; i < entities.size(); i++)
+			{
+				entities[i]->Draw(renderer->viewportX, renderer->viewportY);
+			}
+
+			if (i->KeyPressed(KEY_UP))
+			{
+				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_RESUME);
+			}
+
+			if (i->KeyPressed(KEY_DOWN))
+			{
+				UI->ChangePauseSelected(PauseScreenSelected::PAUSE_QUIT);
+			}
+
+			if (i->KeyPressed(KEY_ENTER))
+			{
+				UI->SelectButton(gState);
+			}
 		}
 
-		if (i->KeyIsDown(KEY_LEFT))
-		{
-			p1->Move(2);
-		}
-
-		if (i->KeyIsDown(KEY_DOWN))
-		{
-			p1->Move(3);
-		}
-
-		if (i->KeyIsDown(KEY_RIGHT))
-		{
-			p1->Move(4);
-		}
-
+		UI->DisplayMenu();
+		renderer->GameDraw();
 	}
-
-
-
-	getchar();
+	// Seb smells like fish
 	SDL_Quit();
+	return 0;
 }

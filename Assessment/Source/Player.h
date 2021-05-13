@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h";
-#include "Enemy.h";
+#include "Enemy.h"
 
 /// <summary>
 /// Entity that is controlled by the player and stores the health
@@ -29,8 +29,9 @@ public:
 
 	void Init();
 	void Update(float delta);
-	void Draw();
+	void Draw(int cameraX, int cameraY);
 	void Move(int direct);
+	void LoadSprite(ImageLoader* imageLoader);
 
 	void OnCollision(Entity* collider);
 
@@ -41,5 +42,8 @@ public:
 	void PlayerDeath();
 	
 private:
-	int lives = 10;
+	int attackRange;
+	SDL_Rect attackRangeCollisionBox;
+
+	void UpdateAttackRangeCollider();
 };

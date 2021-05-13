@@ -144,10 +144,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIBase.cpp" />
+    <ClCompile Include="AIMelee.cpp" />
     <ClCompile Include="EngineStatics.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelNode.cpp" />
+    <ClCompile Include="LevelData.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menus.cpp" />
     <ClCompile Include="MeleeEnemy.cpp" />
     <ClCompile Include="Pathfinder.cpp" />
     <ClCompile Include="RangedEnemy.cpp" />
@@ -158,15 +165,37 @@
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="ThreadManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Vector2Int.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EntityTypes.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="HUD.h" />
+    <ClInclude Include="AIBase.h" />
+    <ClInclude Include="AIMelee.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelNode.h" />
+    <ClInclude Include="LevelData.h" />
+    <ClInclude Include="Menus.h" />
     <ClInclude Include="MeleeEnemy.h" />
     <ClInclude Include="Pathfinder.h" />
     <ClInclude Include="RangedEnemy.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="ThreadManager.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector2Int.h" />
   </ItemGroup>
