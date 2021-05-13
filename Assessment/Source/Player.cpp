@@ -89,7 +89,7 @@ void Player::Update(float delta)
 			{
 			case EntityTypes::ENEMY:
 				//Do enemy stuff
-				std::cout << "Enemy collision" << std::endl;
+				menu->hud->ChangeHealth(soundManager, -1);
 				break;
 			case EntityTypes::COIN:
 				menu->hud->ChangeGold(soundManager, 1);
@@ -101,7 +101,7 @@ void Player::Update(float delta)
 		}
 
 		if (entities[i]->GetEntityType() == EntityTypes::ENEMY && CheckCollision(entities[i], this->attackRangeCollisionBox)) {
-			std::cout << "Enemy within attack range" << std::endl;
+			
 			levelData->RemoveEntity(entities[i]);
 			//PlayerAttack(attackPoints, entities[i]);
 		}
