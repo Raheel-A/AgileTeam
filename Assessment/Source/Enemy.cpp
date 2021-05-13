@@ -44,26 +44,6 @@ void Enemy::OnCollision(Entity* collider)
 {	
 }
 
-void Enemy::LoseHealth(int healthAmount)
-{
-	//after losing health, the enemy won't die
-	if (healthPoints - healthAmount >= 0)
-	{
-		healthPoints -= healthAmount;
-	}
-	else //if the damage the enemy takes makes their health points be 0 or lower, they have died
-	{
-		healthPoints = 0;
-		EnemyDeath();
-	}
-}
-
-void Enemy::AttackPlayer(int damageAmount)
-{
-	//call Player's lose health, among others
-	player->LoseHealth(damageAmount);
-}
-
 void Enemy::EnemyDeath()
 {
 	//death method

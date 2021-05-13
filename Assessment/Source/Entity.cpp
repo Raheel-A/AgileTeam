@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Player.h"
 
 
 Entity::Entity(float x, float y, float width, float height)
@@ -18,6 +19,10 @@ Entity::~Entity()
 		delete levelData;
 		levelData = nullptr;
 	}
+}
+
+void Entity::EntityDeath()
+{
 }
 
 void Entity::UpdateCollisionBox()
@@ -91,4 +96,28 @@ Vector2 Entity::GetPositionInPixelSpace(Vector2 position)
 	int xIndex = position.x * blockSize;
 	int yIndex = position.y * blockSize;
 	return Vector2(xIndex, yIndex);
+}
+
+void Entity::LoseHealth(int healthAmount)
+{
+	//after losing health, the enemy won't die
+	if (healthPoints - healthAmount >= 0)
+	{
+		healthPoints -= healthAmount;
+	}
+	else //if the damage the enemy takes makes their health points be 0 or lower, they have died
+	{
+		healthPoints = 0;
+		EntityDeath();
+	}
+}
+void Entity::AttackPlayer(int damageAmount, Player* player, Menus* menu, SoundManager* Smanager)
+{
+	if (!attacked)
+	{
+		//call Player's lose health, among others
+		menu->hud->ChangeHealth(Smanager, -1);
+		player->LoseHealth(damageAmount);
+		attacked = true;
+	}
 }

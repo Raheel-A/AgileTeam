@@ -19,6 +19,7 @@ class Sprite
 public:
 	Sprite();
 	Sprite(SDL_Texture* text);
+	Sprite(SDL_Texture* text, bool isAnimated, int width = 16, int height = 32);
 	Vector2 getPos();
 	void setPos(Vector2 newPos);
 
@@ -26,9 +27,9 @@ public:
 	SDL_Texture* GetSprite();
 
 	//Animation
-	Sprite(SDL_Texture* text, bool isAnimated);
+	
 	void PlayAnimation(const char* AnimName);
-	void SpriteUpdate(int cameraX, int cameraY);
+	void SpriteUpdate(int cameraX, int cameraY, int width = 32, int height = 64);
 	void Draw();
 	SDL_RendererFlip FlipMode = SDL_FLIP_NONE;
 	bool animated = false;

@@ -12,8 +12,6 @@ class Enemy : public Entity
 protected:
 	friend class AIMelee;
 public:
-	//classes
-	Player* player;
 
 	//data
 	string enemyType;
@@ -29,10 +27,6 @@ public:
 	void LoadSprite(ImageLoader* imageLoader);
 
 	void OnCollision(Entity* collider);
-
-	void LoseHealth(int healthAmount);
-
-	void AttackPlayer(int damageAmount);
 
 	void EnemyDeath();
 

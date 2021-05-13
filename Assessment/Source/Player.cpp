@@ -88,13 +88,28 @@ void Player::Update(float delta)
 			switch (entities[i]->GetEntityType())
 			{
 			case EntityTypes::ENEMY:
-				OnCollision(entities[i]);
+				//Do enemy stuff
+				entities[i]->AttackPlayer(1, this, menu, soundManager);
+				break;
+			case EntityTypes::COIN:
+				menu->hud->ChangeGold(soundManager, 1);
+				levelData->RemoveEntity(entities[i]);
 				break;
 			default:
 				break;
 			}
 		}
-				
+
+		if (entities[i]->GetEntityType() == EntityTypes::ENEMY && CheckCollision(entities[i], this->attackRangeCollisionBox)) 
+		{
+			canAttack = true;
+			currentTarget = entities[i];
+		}
+		else
+		{
+			canAttack = false;
+			currentTarget = nullptr;
+		}
 	}
 
 	sprite->setPos(Vector2(x, y));
@@ -135,7 +150,7 @@ void Player::Move(int direct)
 
 void Player::OnCollision(Entity* collider)
 {
-	std::cout << "We collided with an enemy" << std::endl;
+	
 }
 
 int Player::GetLives()
@@ -152,13 +167,13 @@ void Player::LoadSprite(ImageLoader* imageLoader)
 void Player::LoseHealth(int healthAmount)
 {
 	//after losing health, the player won't die
-	if (healthPoints - healthAmount >= 0)
+	if (m_healthPoints - healthAmount > 0)
 	{
-		healthPoints -= healthAmount;
+		m_healthPoints -= healthAmount;
 	}
 	else //if the damage the player takes makes their health points be 0 or lower, they have died
 	{
-		healthPoints = 0;
+		m_healthPoints = 0;
 		PlayerDeath();
 	}
 }
@@ -176,30 +191,21 @@ void Player::GainHealth(int healthAmount)
 	}
 }
 
-//void Player::PlayerAttack(int damageAmount, Enemy* enemy)
-//{
-//	//Attack method
-//	//If enemy in range statement - How do we Get Enemies?  Once this is decided then, 'for' loop enemies into an array
-//	//Also do we damage all enemies in range?  Or a single target?  How do we decide what target that is?
-//	//Furthermore do we have an attack speed?
-//
-//
-//	/*
-//	//Temp holder until decision made over how we store enemy list
-//	Enemy enemy;
-//	
-//	//Check if enemy is in range
-//	if (CheckCollision(&enemy, attackRangeCollisionBox)) {
-//		enemy.LoseHealth(attackPoints);
-//	}
-//
-//	*/
-//}
+void Player::PlayerAttack(int damageAmount, Entity* enemy)
+{
+	enemy->LoseHealth(damageAmount);
+}
 
 void Player::PlayerDeath()
 {
 	//death method
 	hasDied = true;
+}
+
+void Player::LoadUI(Menus* menuToLoad, SoundManager* soundManager)
+{
+	this->menu = menuToLoad;
+	this->soundManager = soundManager;
 }
 
 void Player::UpdateAttackRangeCollider()
