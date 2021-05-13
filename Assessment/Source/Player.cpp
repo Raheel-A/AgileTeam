@@ -80,6 +80,9 @@ void Player::Update(float delta)
 
 	std::vector<Entity*> entities = levelData->GetEntities();
 
+	canAttack = false;
+	currentTargets = {};
+
 	for (int i = 0; i < entities.size(); i++)
 	{
 		if (CheckCollision(this, entities[i])) 
@@ -103,12 +106,7 @@ void Player::Update(float delta)
 		if (entities[i]->GetEntityType() == EntityTypes::ENEMY && CheckCollision(entities[i], this->attackRangeCollisionBox)) 
 		{
 			canAttack = true;
-			currentTarget = entities[i];
-		}
-		else
-		{
-			canAttack = false;
-			currentTarget = nullptr;
+			currentTargets.push_back(entities[i]);
 		}
 	}
 

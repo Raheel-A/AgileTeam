@@ -145,6 +145,10 @@ int main()
 
 	Enemy* enemy = new Enemy(200, 200, 32, 32);
 	enemy->LoadSprite(imageloader);
+	Enemy* enemy2 = new Enemy(350, 200, 32, 32);
+	enemy2->LoadSprite(imageloader);
+	Enemy* enemy3 = new Enemy(5000, 300, 32, 32);
+	enemy3->LoadSprite(imageloader);
 
 	const int numberOfCoins = 10;
 	Vector2 coinLocations[numberOfCoins] = 
@@ -172,6 +176,8 @@ int main()
 	
 	loadedLevel.AddEntity(player);
 	loadedLevel.AddEntity(enemy);
+	loadedLevel.AddEntity(enemy2);
+	loadedLevel.AddEntity(enemy3);
 
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
@@ -221,25 +227,28 @@ int main()
 
 			if (player->GetHasDied()) gState = GameState::GAMESTATE_QUIT;
 
-			//player attacking
-			if (player->CanAttack() && i->KeyPressed(KEY_E))
-			{
-				for (int i = 0; i < loadedLevel.GetEntities().size(); i++)
-				{
-					if (player->currentTarget == loadedLevel.GetEntities()[i])
-					{
-						loadedLevel.RemoveEntity(entities[i]);
-						break;
-					}
-				}
-
-			}
-
 			// Update all entities
 			for (int i = 0; i < entities.size(); i++)
 			{
 				entities[i]->Update(deltaTime);
 			}
+
+			//player attacking
+			if (player->CanAttack() && i->KeyPressed(KEY_E))
+			{
+				for (int i = 0; i < player->currentTargets.size(); i++)
+				{
+					for (int j = 0; j < loadedLevel.GetEntities().size(); j++)
+					{
+						if (player->currentTargets[i] == loadedLevel.GetEntities()[j])
+						{
+							loadedLevel.RemoveEntity(entities[j]);
+							break;
+						}
+					}
+				}
+			}
+
 
 			//Draw the level, draw the animations and update them, then render everything else
 			//renderer->DrawCurrentLevel();

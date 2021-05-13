@@ -45,7 +45,8 @@ public:
 
 	bool CanAttack() { return canAttack; }
 	bool attackedOnce = false;
-	Entity* currentTarget;
+	//Entity* currentTarget;
+	vector<Entity*> currentTargets;
 
 private:
 	int attackRange;
