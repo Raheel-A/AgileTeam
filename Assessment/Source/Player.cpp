@@ -123,7 +123,7 @@ void Player::Draw(int cameraX, int cameraY)
 	// TODO: This can probably moved to the Entity class
 	if(sprite != nullptr)
 	{ 
-		sprite->SpriteUpdate(cameraX, cameraY);
+		sprite->SpriteUpdate(cameraX, cameraY, 32, 32 * 1.44);
 		sprite->Draw();
 	}
 }

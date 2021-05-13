@@ -137,7 +137,7 @@ int main()
 
 
 	// Create a player and an enemy with a sprite
-	Player* player = new Player(320, 320, 16, 23);// 32, 32);
+	Player* player = new Player(320, 320, 32, 23);
 	player->LoadSprite(imageloader);
 	player->LoadLevelData(&loadedLevel);
 	player->LoadUI(UI, sManager);
