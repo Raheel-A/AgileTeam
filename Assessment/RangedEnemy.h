@@ -1,8 +1,9 @@
 #pragma once
-#include "Enemy.h";
+#include "Enemy.h"
 
 class RangedEnemy : public Enemy
 {
+public:
 	RangedEnemy();
 	~RangedEnemy();
 };
